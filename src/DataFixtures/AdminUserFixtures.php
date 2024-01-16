@@ -33,7 +33,6 @@ class AdminUserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach($this::ADMIN_USER as $e) {
-            dump($e);
 
             $temp = new AdminUser();
             $temp->setLogin($e["login"]);

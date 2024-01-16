@@ -7,14 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 #[ORM\Entity(repositoryClass: AdminUserRepository::class)]
-class AdminUser
+class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 255)]
     private ?string $login = null;
 
@@ -30,23 +33,18 @@ class AdminUser
     #[ORM\OneToMany(mappedBy: 'user_login', targetEntity: AdminAccessLog::class)]
     private Collection $accesslogs;
 
-    #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'user_login')]
-    private Collection $blogArticles;
-
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdminUserRole $role = null;
+
+    #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'blogArticles')]
+    private Collection $blogArticles;
 
     public function __construct()
     {
         $this->logs = new ArrayCollection();
         $this->accesslogs = new ArrayCollection();
         $this->blogArticles = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getLogin(): ?string
@@ -194,5 +192,21 @@ class AdminUser
         $this->role = $role;
 
         return $this;
+    }
+
+    // User interface
+
+    public function getRoles(): array
+    {
+        return array($this->role->getId());
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->login;
+    }
+    public function eraseCredentials(): void
+    {
+
     }
 }

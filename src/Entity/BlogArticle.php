@@ -25,9 +25,6 @@ class BlogArticle
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\ManyToMany(targetEntity: AdminUser::class, inversedBy: 'blogArticles')]
-    private Collection $user_login;
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
@@ -45,11 +42,15 @@ class BlogArticle
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: BlogCommentaire::class, orphanRemoval: true)]
     private Collection $blogCommentaires;
 
+    #[ORM\ManyToMany(targetEntity: AdminUser::class, inversedBy: "blogArticles")]
+    private Collection $users;
+
     public function __construct()
     {
         $this->user_login = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->blogCommentaires = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +211,30 @@ class BlogArticle
                 $blogCommentaire->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdminUser>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(AdminUser $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(AdminUser $user): static
+    {
+        $this->users->removeElement($user);
 
         return $this;
     }

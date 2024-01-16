@@ -25,7 +25,7 @@ class BlogCommentaire
 
     #[ORM\ManyToOne(inversedBy: 'blogCommentaires')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?blogarticle $article = null;
+    private ?BlogArticle $article = null;
 
     public function getId(): ?int
     {
@@ -75,12 +75,12 @@ class BlogCommentaire
         return $this;
     }
 
-    public function getArticle(): ?blogarticle
+    public function getArticle(): ?BlogArticle
     {
         return $this->article;
     }
 
-    public function setArticle(?blogarticle $article): static
+    public function setArticle(?BlogArticle $article): static
     {
         $this->article = $article;
 

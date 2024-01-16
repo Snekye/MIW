@@ -30,14 +30,14 @@ class BlogArticle
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?image $image = null;
+    private ?Image $image = null;
 
-    #[ORM\ManyToMany(targetEntity: tag::class, inversedBy: 'blogArticles')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'blogArticles')]
     private Collection $tags;
 
-    #[ORM\ManyToOne(inversedBy: 'blogarticles')]
+    #[ORM\ManyToOne(inversedBy: 'BlogArticles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?blogtheme $theme = null;
+    private ?BlogTheme $theme = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: BlogCommentaire::class, orphanRemoval: true)]
     private Collection $blogCommentaires;
@@ -137,12 +137,12 @@ class BlogArticle
         return $this;
     }
 
-    public function getImage(): ?image
+    public function getImage(): ?Image
     {
         return $this->image;
     }
 
-    public function setImage(?image $image): static
+    public function setImage(?Image $image): static
     {
         $this->image = $image;
 
@@ -157,7 +157,7 @@ class BlogArticle
         return $this->tags;
     }
 
-    public function addTag(tag $tag): static
+    public function addTag(Tag $tag): static
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
@@ -166,19 +166,19 @@ class BlogArticle
         return $this;
     }
 
-    public function removeTag(tag $tag): static
+    public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
 
         return $this;
     }
 
-    public function getTheme(): ?blogtheme
+    public function getTheme(): ?BlogTheme
     {
         return $this->theme;
     }
 
-    public function setTheme(?blogtheme $theme): static
+    public function setTheme(?BlogTheme $theme): static
     {
         $this->theme = $theme;
 

@@ -18,12 +18,12 @@ class BlogTheme
     #[ORM\Column(length: 255)]
     private ?string $lib = null;
 
-    #[ORM\OneToMany(mappedBy: 'theme', targetEntity: Blogarticle::class)]
-    private Collection $blogarticles;
+    #[ORM\OneToMany(mappedBy: 'theme', targetEntity: BlogArticle::class)]
+    private Collection $BlogArticles;
 
     public function __construct()
     {
-        $this->blogarticles = new ArrayCollection();
+        $this->BlogArticles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,29 +51,29 @@ class BlogTheme
     }
 
     /**
-     * @return Collection<int, Blogarticle>
+     * @return Collection<int, BlogArticle>
      */
-    public function getBlogarticles(): Collection
+    public function getBlogArticles(): Collection
     {
-        return $this->blogarticles;
+        return $this->BlogArticles;
     }
 
-    public function addBlogarticle(Blogarticle $blogarticle): static
+    public function addBlogArticle(BlogArticle $BlogArticle): static
     {
-        if (!$this->blogarticles->contains($blogarticle)) {
-            $this->blogarticles->add($blogarticle);
-            $blogarticle->setTheme($this);
+        if (!$this->BlogArticles->contains($BlogArticle)) {
+            $this->BlogArticles->add($BlogArticle);
+            $BlogArticle->setTheme($this);
         }
 
         return $this;
     }
 
-    public function removeBlogarticle(Blogarticle $blogarticle): static
+    public function removeBlogArticle(BlogArticle $BlogArticle): static
     {
-        if ($this->blogarticles->removeElement($blogarticle)) {
+        if ($this->BlogArticles->removeElement($BlogArticle)) {
             // set the owning side to null (unless already changed)
-            if ($blogarticle->getTheme() === $this) {
-                $blogarticle->setTheme(null);
+            if ($BlogArticle->getTheme() === $this) {
+                $BlogArticle->setTheme(null);
             }
         }
 

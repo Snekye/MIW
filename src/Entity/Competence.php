@@ -25,7 +25,7 @@ class Competence
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?image $image = null;
+    private ?Image $image = null;
 
     public function getId(): ?int
     {
@@ -75,12 +75,12 @@ class Competence
         return $this;
     }
 
-    public function getImage(): ?image
+    public function getImage(): ?Image
     {
         return $this->image;
     }
 
-    public function setImage(?image $image): static
+    public function setImage(?Image $image): static
     {
         $this->image = $image;
 

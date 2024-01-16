@@ -16,7 +16,7 @@ class AdminLog
 
     #[ORM\ManyToOne(inversedBy: 'logs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?adminuser $user_login = null;
+    private ?AdminUser $user_login = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -42,12 +42,12 @@ class AdminLog
         return $this;
     }
 
-    public function getUserLogin(): ?adminuser
+    public function getUserLogin(): ?AdminUser
     {
         return $this->user_login;
     }
 
-    public function setUserLogin(?adminuser $user_login): static
+    public function setUserLogin(?AdminUser $user_login): static
     {
         $this->user_login = $user_login;
 

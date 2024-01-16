@@ -138,7 +138,7 @@ class Projet
         return $this->images;
     }
 
-    public function addImage(image $image): static
+    public function addImage(Image $image): static
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
@@ -147,7 +147,7 @@ class Projet
         return $this;
     }
 
-    public function removeImage(image $image): static
+    public function removeImage(Image $image): static
     {
         $this->images->removeElement($image);
 
@@ -162,7 +162,7 @@ class Projet
         return $this->tags;
     }
 
-    public function addTag(tag $tag): static
+    public function addTag(Tag $tag): static
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
@@ -171,7 +171,7 @@ class Projet
         return $this;
     }
 
-    public function removeTag(tag $tag): static
+    public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
 

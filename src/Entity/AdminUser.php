@@ -17,7 +17,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-    
+
     #[ORM\Column(length: 255)]
     private ?string $login = null;
 
@@ -47,6 +47,17 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
         $this->blogArticles = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
     public function getLogin(): ?string
     {
         return $this->login;

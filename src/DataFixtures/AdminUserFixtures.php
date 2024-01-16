@@ -4,12 +4,13 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 use App\Entity\AdminUser;
 
-class AdminUserFixtures extends Fixture
+class AdminUserFixtures extends Fixture implements DependentFixtureInterface
 {
     private $hasher;
 
@@ -19,35 +20,39 @@ class AdminUserFixtures extends Fixture
     }
     public const ADMIN_USER = [
 
-        // Niveau : 1 -> éditeur ; 2 -> admin ; 3 -> superadmin
-        // éditeur : ajout/suppression/modif de contenus
-        // admin : ^ + accès au logs + accès config
-        // superadmin : ^ + ajout/suppression/modif d'admins
-
         ["login" => "Dimitri",
             "password" => "Dimitri",
             "email" => "dimitrigranit22@gmail.com",
-            "niveau" => 3],
+            "role" => "ROLE_SUPERADMIN"],
+
         ["login" => "Rodolphe",
             "password" => "Rodolphe",
             "email" => "rodolphe@maxinfoweb.com",
-            "niveau" => 2],
+            "role" => "ROLE_ADMIN"],
     ];
     public function load(ObjectManager $manager): void
     {
         foreach($this::ADMIN_USER as $e) {
+            dump($e);
+
             $temp = new AdminUser();
             $temp->setLogin($e["login"]);
+            $temp->setEmail($e["email"]);
 
             $hashedPassword = $this->hasher->hash($e["password"]);
-
             $temp->setPassword($hashedPassword);
-            $temp->setEmail($e["email"]);
-            $temp->setNiveau($e["niveau"]);
+
+            $temp->setRole($this->getReference($e["role"]));
 
             $manager->persist($temp);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies() {
+        return array(
+            AdminUserRoleFixtures::class
+        );
     }
 }

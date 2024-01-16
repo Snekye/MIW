@@ -24,9 +24,6 @@ class AdminUser
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $niveau = null;
-
     #[ORM\OneToMany(mappedBy: 'user_login', targetEntity: AdminLog::class)]
     private Collection $logs;
 
@@ -35,6 +32,10 @@ class AdminUser
 
     #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'user_login')]
     private Collection $blogArticles;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?AdminUserRole $role = null;
 
     public function __construct()
     {
@@ -179,6 +180,18 @@ class AdminUser
         if ($this->blogArticles->removeElement($blogArticle)) {
             $blogArticle->removeUserLogin($this);
         }
+
+        return $this;
+    }
+
+    public function getRole(): ?AdminUserRole
+    {
+        return $this->role;
+    }
+
+    public function setRole(?AdminUserRole $role): static
+    {
+        $this->role = $role;
 
         return $this;
     }

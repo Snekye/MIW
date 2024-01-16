@@ -1,0 +1,16 @@
+security:
+
+  password_hashers:
+    soft:
+      algorithm: bcrypt
+      cost: 4
+    hard:
+      algorithm: bcrypt
+      cost: 13
+
+    
+
+  firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false

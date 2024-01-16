@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\GlobalInfoConfigRepository;
+use App\Repository\InfoConfigRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GlobalInfoConfigRepository::class)]
+#[ORM\Entity(repositoryClass: InfoConfigRepository::class)]
 class InfoConfig
 {
     #[ORM\Id]
@@ -14,28 +14,10 @@ class InfoConfig
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $agence_adresse = null;
+    private ?string $lib = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $agence_tel = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $siege_adresse = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $siege_tel = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $horaires = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $site_titre = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $site_metadescription = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $site_visibilite = null;
+    private ?string $valeur = null;
 
     public function getId(): ?int
     {
@@ -49,98 +31,26 @@ class InfoConfig
         return $this;
     }
 
-    public function getAgenceAdresse(): ?string
+    public function getLib(): ?string
     {
-        return $this->agence_adresse;
+        return $this->lib;
     }
 
-    public function setAgenceAdresse(string $agence_adresse): static
+    public function setLib(string $lib): static
     {
-        $this->agence_adresse = $agence_adresse;
+        $this->lib = $lib;
 
         return $this;
     }
 
-    public function getAgenceTel(): ?string
+    public function getValeur(): ?string
     {
-        return $this->agence_tel;
+        return $this->valeur;
     }
 
-    public function setAgenceTel(string $agence_tel): static
+    public function setValeur(string $valeur): static
     {
-        $this->agence_tel = $agence_tel;
-
-        return $this;
-    }
-
-    public function getSiegeAdresse(): ?string
-    {
-        return $this->siege_adresse;
-    }
-
-    public function setSiegeAdresse(string $siege_adresse): static
-    {
-        $this->siege_adresse = $siege_adresse;
-
-        return $this;
-    }
-
-    public function getSiegeTel(): ?string
-    {
-        return $this->siege_tel;
-    }
-
-    public function setSiegeTel(string $siege_tel): static
-    {
-        $this->siege_tel = $siege_tel;
-
-        return $this;
-    }
-
-    public function getHoraires(): ?string
-    {
-        return $this->horaires;
-    }
-
-    public function setHoraires(string $horaires): static
-    {
-        $this->horaires = $horaires;
-
-        return $this;
-    }
-
-    public function getSiteTitre(): ?string
-    {
-        return $this->site_titre;
-    }
-
-    public function setSiteTitre(string $site_titre): static
-    {
-        $this->site_titre = $site_titre;
-
-        return $this;
-    }
-
-    public function getSiteMetadescription(): ?string
-    {
-        return $this->site_metadescription;
-    }
-
-    public function setSiteMetadescription(string $site_metadescription): static
-    {
-        $this->site_metadescription = $site_metadescription;
-
-        return $this;
-    }
-
-    public function getSiteVisibilite(): ?string
-    {
-        return $this->site_visibilite;
-    }
-
-    public function setSiteVisibilite(string $site_visibilite): static
-    {
-        $this->site_visibilite = $site_visibilite;
+        $this->valeur = $valeur;
 
         return $this;
     }

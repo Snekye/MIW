@@ -27,21 +27,16 @@ class InfoConfigFixtures extends Fixture
     ];
     public function load(ObjectManager $manager): void
     {
-        $e = $this::INFO_CONFIG;
+        foreach ($this::INFO_CONFIG as $k => $e)
+        {
+            $temp = new InfoConfig();
 
-        $temp = new InfoConfig();
+            $temp->setLib($k);
+            $temp->setValeur($e);
 
-        $temp->setAgenceAdresse($e["agence_adresse"]);
-        $temp->setAgenceTel($e["agence_tel"]);
-        $temp->setSiegeAdresse($e["siege_adresse"]);
-        $temp->setSiegeTel($e["siege_tel"]);
-        $temp->setHoraires($e["horaires"]);
-        $temp->setSiteTitre($e["site_titre"]);
-        $temp->setSiteMetadescription($e["site_metadescription"]);
-        $temp->setSiteVisibilite($e["site_visibilite"]);
+            $manager->persist($temp);
 
-        $manager->persist($temp);
-
-        $manager->flush();
+            $manager->flush();
+        }
     }
 }

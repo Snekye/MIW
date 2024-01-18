@@ -28,6 +28,8 @@ class PresentationPartenaireCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('partenaire')
             ->setEntityLabelInPlural('partenaires')
+
+            ->setSearchFields(['nom'])
         ;
     }
     public function configureFields(string $pageName): iterable

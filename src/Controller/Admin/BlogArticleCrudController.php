@@ -28,6 +28,8 @@ class BlogArticleCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('article')
             ->setEntityLabelInPlural('articles')
+
+            ->setSearchFields(['titre','titre_slug','theme.lib'])
         ;
     }
     public function configureFields(string $pageName): iterable

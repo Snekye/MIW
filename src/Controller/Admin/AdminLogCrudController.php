@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
@@ -26,7 +28,7 @@ class AdminLogCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('log')
             ->setEntityLabelInPlural('logs')
 
-            ->setDateTimeFormat('EEE d MMM y HH:mm');
+            ->setSearchFields(['user_login.login'])
         ;
     }
 
@@ -34,8 +36,16 @@ class AdminLogCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            'date',
-            'action',
+            DateField::new('date')
+                ->setFormat('EEE d MMM y HH:mm')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            ChoiceField::new('action')
+                ->setChoices([
+                    "Ajout" => "Ajout",
+                    "Modification" => "Modification",
+                    "Suppression" => "Suppression"
+                ]),
             'cible_table',
             'cible_id',
             AssociationField::new('user_login')

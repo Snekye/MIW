@@ -28,6 +28,8 @@ class AdminUserCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('utilisateur')
             ->setEntityLabelInPlural('utilisateurs')
+
+            ->setSearchFields(['login'])
         ;
     }
     public function configureFields(string $pageName): iterable

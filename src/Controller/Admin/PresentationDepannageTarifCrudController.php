@@ -27,6 +27,8 @@ class PresentationDepannageTarifCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('tarif')
             ->setEntityLabelInPlural('tarifs')
+
+            ->setSearchFields(['lib','tarif'])
         ;
     }
 }

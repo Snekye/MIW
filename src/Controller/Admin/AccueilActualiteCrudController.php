@@ -29,6 +29,8 @@ class AccueilActualiteCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('actualité')
             ->setEntityLabelInPlural('actualités')
+
+            ->setSearchFields(['titre', 'titre_slug'])
         ;
     }
     public function configureFields(string $pageName): iterable

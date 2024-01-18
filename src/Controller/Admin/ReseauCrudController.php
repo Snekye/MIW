@@ -28,6 +28,8 @@ class ReseauCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('réseau')
             ->setEntityLabelInPlural('réseaux')
+
+            ->setSearchFields(['lib'])
         ;
     }
     public function configureFields(string $pageName): iterable

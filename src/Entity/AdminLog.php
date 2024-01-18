@@ -30,6 +30,11 @@ class AdminLog
     #[ORM\Column(length: 255)]
     private ?string $action = null;
 
+    public function __construct() 
+    {
+        $this->date = new \DateTime('now');
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

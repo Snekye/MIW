@@ -27,6 +27,8 @@ class CompetenceCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('compétence')
             ->setEntityLabelInPlural('compétences')
+
+            ->setSearchFields(['titre','titre_slug'])
         ;
     }
 

@@ -26,6 +26,8 @@ class ContactCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('message')
             ->setEntityLabelInPlural('messages')
+
+            ->setSearchFields(['nom','prenom','email','entreprise'])
         ;
     }
 

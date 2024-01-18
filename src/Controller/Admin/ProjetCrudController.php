@@ -28,6 +28,8 @@ class ProjetCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('projet')
             ->setEntityLabelInPlural('projets')
+
+            ->setSearchFields(['titre','titre_slug'])
         ;
     }
     public function configureFields(string $pageName): iterable

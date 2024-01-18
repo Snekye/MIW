@@ -27,6 +27,8 @@ class TagCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('tag')
             ->setEntityLabelInPlural('tags')
+
+            ->setSearchFields(['lib'])
         ;
     }
 }

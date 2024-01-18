@@ -27,6 +27,8 @@ class PresentationRecrutementPosteCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('offre')
             ->setEntityLabelInPlural('offres')
+
+            ->setSearchFields(['lib'])
         ;
     }
 }

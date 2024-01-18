@@ -27,6 +27,8 @@ class BlogThemeCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('thème')
             ->setEntityLabelInPlural('thèmes')
+
+            ->setSearchFields(['lib'])
         ;
     }
 }

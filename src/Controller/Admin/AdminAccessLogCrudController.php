@@ -26,6 +26,8 @@ class AdminAccessLogCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('log')
             ->setEntityLabelInPlural('logs')
+
+            ->setSearchFields(['user_login.login'])
         ;
     }
 
@@ -35,7 +37,9 @@ class AdminAccessLogCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             DateField::new('date')
-                ->setFormat('EEE d MMM y HH:mm'),
+                ->setFormat('EEE d MMM y HH:mm')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
             'success',
             AssociationField::new('user_login')
                 ->autocomplete(),

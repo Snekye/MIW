@@ -23,6 +23,11 @@ class AdminAccessLog
     #[ORM\Column]
     private ?bool $success = null;
 
+    public function __construct() 
+    {
+        $this->date = new \DateTime('now');
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

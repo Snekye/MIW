@@ -27,6 +27,8 @@ class InfoConfigCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('valeur')
             ->setEntityLabelInPlural('valeurs')
+
+            ->setSearchFields(['lib','valeur'])
         ;
     }
 }

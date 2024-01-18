@@ -26,6 +26,8 @@ class BlogCommentaireCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('commentaire')
             ->setEntityLabelInPlural('commentaires')
+
+            ->setSearchFields(['nom','email','article.titre','article.titre_slug'])
         ;
     }
     public function configureFields(string $pageName): iterable

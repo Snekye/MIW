@@ -27,6 +27,8 @@ class AdminUserRoleCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('rôle')
             ->setEntityLabelInPlural('rôles')
+
+            ->setSearchFields(['lib'])
         ;
     }
 }

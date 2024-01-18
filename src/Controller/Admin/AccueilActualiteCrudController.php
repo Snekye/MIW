@@ -29,8 +29,6 @@ class AccueilActualiteCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('actualité')
             ->setEntityLabelInPlural('actualités')
-
-            //->setDateTimeFormat('EEE d MMM y');
         ;
     }
     public function configureFields(string $pageName): iterable
@@ -44,7 +42,7 @@ class AccueilActualiteCrudController extends AbstractCrudController
             TextField::new('titre_slug')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            TextField::new('contenu'),
+            TextEditorField::new('contenu'),
             AssociationField::new('image')
         ];
     }

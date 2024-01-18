@@ -5,8 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\AdminAccessLog;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Text;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -25,16 +26,16 @@ class AdminAccessLogCrudController extends AbstractCrudController
 
             ->setEntityLabelInSingular('log')
             ->setEntityLabelInPlural('logs')
-
-            ->setDateTimeFormat('EEE d MMM y HH:mm');
         ;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            'date',
+            IdField::new('id')
+                ->hideOnForm(),
+            DateField::new('date')
+                ->setFormat('EEE d MMM y HH:mm'),
             'success',
             AssociationField::new('user_login')
                 ->autocomplete(),

@@ -41,7 +41,7 @@ class BlogArticleCrudController extends AbstractCrudController
             TextField::new('titre_slug')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            TextField::new('contenu'),
+            TextEditorField::new('contenu'),
             AssociationField::new('theme'),
             AssociationField::new('image')
         ];

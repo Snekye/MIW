@@ -79,4 +79,12 @@ class BlogTheme
 
         return $this;
     }
+
+
+
+
+    public function __toString(): string
+    {
+        return $this->lib;
+    }
 }

@@ -6,6 +6,8 @@ use App\Repository\CompetenceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Cocur\Slugify\Slugify;
+
 #[ORM\Entity(repositoryClass: CompetenceRepository::class)]
 class Competence
 {
@@ -46,8 +48,10 @@ class Competence
 
     public function setTitre(string $titre): static
     {
-        $this->titre = $titre;
+        $slugify = new Slugify();
 
+        $this->titre = $titre;
+        $this->titre_slug = $slugify->slugify($titre);
         return $this;
     }
 

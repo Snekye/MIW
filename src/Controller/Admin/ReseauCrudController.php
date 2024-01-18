@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\AdminLog;
+use App\Entity\Reseau;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -11,35 +11,31 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-class AdminLogCrudController extends AbstractCrudController
+class ReseauCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return AdminLog::class;
+        return Reseau::class;
     }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index',"Logs d'action")
-            ->setPageTitle('detail',"Log")
+            ->setPageTitle('index','Réseaux sociaux')
+            ->setPageTitle('new',"Ajout d'un réseau")
+            ->setPageTitle('edit',"Modification de réseau")
+            ->setPageTitle('detail',"Détail du réseau")
 
-            ->setEntityLabelInSingular('log')
-            ->setEntityLabelInPlural('logs')
-
-            ->setDateTimeFormat('EEE d MMM y HH:mm');
+            ->setEntityLabelInSingular('réseau')
+            ->setEntityLabelInPlural('réseaux')
         ;
     }
-
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            'date',
-            'action',
-            'cible_table',
-            'cible_id',
-            AssociationField::new('user_login')
-                ->autocomplete(),
+            TextField::new('lib'),
+            TextField::new('lien'),
+            AssociationField::new('image')
         ];
     }
 }

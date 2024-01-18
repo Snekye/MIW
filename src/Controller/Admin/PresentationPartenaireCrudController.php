@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\AdminLog;
+use App\Entity\PresentationPartenaire;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -11,35 +11,30 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-class AdminLogCrudController extends AbstractCrudController
+class PresentationPartenaireCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return AdminLog::class;
+        return PresentationPartenaire::class;
     }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index',"Logs d'action")
-            ->setPageTitle('detail',"Log")
+            ->setPageTitle('index','Partenaires')
+            ->setPageTitle('new',"Ajout d'un partenaire")
+            ->setPageTitle('edit',"Modification de partenaire")
+            ->setPageTitle('detail',"Détail du partenaire")
 
-            ->setEntityLabelInSingular('log')
-            ->setEntityLabelInPlural('logs')
-
-            ->setDateTimeFormat('EEE d MMM y HH:mm');
+            ->setEntityLabelInSingular('partenaire')
+            ->setEntityLabelInPlural('partenaires')
         ;
     }
-
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            'date',
-            'action',
-            'cible_table',
-            'cible_id',
-            AssociationField::new('user_login')
-                ->autocomplete(),
+            TextField::new('nom'),
+            AssociationField::new('image')
         ];
     }
 }

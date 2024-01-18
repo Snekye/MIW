@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\BlogCommentaire;
+use App\Entity\Tag;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -10,21 +10,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-class BlogCommentaireCrudController extends AbstractCrudController
+class TagCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return BlogCommentaire::class;
+        return Tag::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','Commentaires de blog')
-            ->setPageTitle('detail',"Détail du commentaire")
+            ->setPageTitle('index','Tags')
+            ->setPageTitle('new',"Ajout d'un tag")
+            ->setPageTitle('edit',"Modification de tag")
+            ->setPageTitle('detail',"Détail du tag")
 
-            ->setEntityLabelInSingular('commentaire')
-            ->setEntityLabelInPlural('commentaires')
+            ->setEntityLabelInSingular('tag')
+            ->setEntityLabelInPlural('tags')
         ;
     }
 }

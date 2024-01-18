@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
 class BlogThemeCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -15,14 +17,16 @@ class BlogThemeCrudController extends AbstractCrudController
         return BlogTheme::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud
+            ->setPageTitle('index','Thèmes de blog')
+            ->setPageTitle('new',"Ajout d'un thème")
+            ->setPageTitle('edit',"Modification d'un thème")
+            ->setPageTitle('detail',"Détail du thème")
+
+            ->setEntityLabelInSingular('thème')
+            ->setEntityLabelInPlural('thèmes')
+        ;
     }
-    */
 }

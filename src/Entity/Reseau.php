@@ -19,6 +19,10 @@ class Reseau
     #[ORM\Column(length: 255)]
     private ?string $lien = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Image $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +55,18 @@ class Reseau
     public function setLien(string $lien): static
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

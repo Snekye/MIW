@@ -6,6 +6,8 @@ use App\Repository\AccueilActualiteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Cocur\Slugify\Slugify;
+
 #[ORM\Entity(repositoryClass: AccueilActualiteRepository::class)]
 class AccueilActualite
 {
@@ -30,6 +32,13 @@ class AccueilActualite
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $image = null;
 
+    public function __construct() 
+    {
+        $this->date = new \DateTime('now');
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -49,8 +58,10 @@ class AccueilActualite
 
     public function setTitre(string $titre): static
     {
-        $this->titre = $titre;
+        $slugify = new Slugify();
 
+        $this->titre = $titre;
+        $this->titre_slug = $slugify->slugify($titre);
         return $this;
     }
 
@@ -101,4 +112,5 @@ class AccueilActualite
 
         return $this;
     }
+
 }

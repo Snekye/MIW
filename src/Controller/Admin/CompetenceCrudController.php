@@ -2,48 +2,43 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\BlogArticle;
+use App\Entity\Competence;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-class BlogArticleCrudController extends AbstractCrudController
+class CompetenceCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return BlogArticle::class;
+        return Competence::class;
     }
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','Articles de blog')
-            ->setPageTitle('new',"Ajout d'article")
-            ->setPageTitle('edit',"Modification d'article")
-            ->setPageTitle('detail',"Détail de l'article")
+            ->setPageTitle('index','Compétences')
+            ->setPageTitle('new',"Ajout d'une compétence")
+            ->setPageTitle('edit',"Modification de compétence")
+            ->setPageTitle('detail',"Détail de la compétence")
 
-            ->setEntityLabelInSingular('article')
-            ->setEntityLabelInPlural('articles')
+            ->setEntityLabelInSingular('compétence')
+            ->setEntityLabelInPlural('compétences')
         ;
     }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateField::new('date')
-                ->hideWhenCreating()
-                ->hideWhenUpdating()
-                ->setFormat('EEE d MMM y'),
             TextField::new('titre'),
             TextField::new('titre_slug')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             TextField::new('contenu'),
-            AssociationField::new('theme'),
-            AssociationField::new('image')
+            AssociationField::new('image'),
         ];
     }
 }

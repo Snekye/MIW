@@ -220,4 +220,8 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     {
 
     }
+    public function __toString(): string
+    {
+        return $this->login.' - '.$this->role;
+    }
 }

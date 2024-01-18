@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Cocur\Slugify\Slugify;
+
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
 {
@@ -34,10 +36,10 @@ class Projet
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\ManyToMany(targetEntity: image::class)]
+    #[ORM\ManyToMany(targetEntity: Image::class)]
     private Collection $images;
 
-    #[ORM\ManyToMany(targetEntity: tag::class, inversedBy: 'projets')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'projets')]
     private Collection $tags;
 
     public function __construct()
@@ -65,8 +67,10 @@ class Projet
 
     public function setTitre(string $titre): static
     {
-        $this->titre = $titre;
+        $slugify = new Slugify();
 
+        $this->titre = $titre;
+        $this->titre_slug = $slugify->slugify($titre);
         return $this;
     }
 
@@ -131,7 +135,7 @@ class Projet
     }
 
     /**
-     * @return Collection<int, image>
+     * @return Collection<int, Image>
      */
     public function getImages(): Collection
     {

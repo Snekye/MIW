@@ -94,4 +94,8 @@ class AdminUserRole
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->lib.' ('.$this->niveau.')';
+    }
 }

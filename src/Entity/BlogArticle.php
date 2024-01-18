@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Cocur\Slugify\Slugify;
+
 #[ORM\Entity(repositoryClass: BlogArticleRepository::class)]
 class BlogArticle
 {
@@ -51,6 +53,9 @@ class BlogArticle
         $this->tags = new ArrayCollection();
         $this->blogCommentaires = new ArrayCollection();
         $this->users = new ArrayCollection();
+
+        $this->date = new \DateTime('now');
+    
     }
 
     public function getId(): ?int
@@ -72,8 +77,10 @@ class BlogArticle
 
     public function setTitre(string $titre): static
     {
-        $this->titre = $titre;
+        $slugify = new Slugify();
 
+        $this->titre = $titre;
+        $this->titre_slug = $slugify->slugify($titre);
         return $this;
     }
 
@@ -150,7 +157,7 @@ class BlogArticle
     }
 
     /**
-     * @return Collection<int, tag>
+     * @return Collection<int, Tag>
      */
     public function getTags(): Collection
     {

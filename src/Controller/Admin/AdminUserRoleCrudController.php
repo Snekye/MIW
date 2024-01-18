@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
 class AdminUserRoleCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -15,14 +17,16 @@ class AdminUserRoleCrudController extends AbstractCrudController
         return AdminUserRole::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud
+            ->setPageTitle('index','Rôles utilisateur')
+            ->setPageTitle('new',"Ajout d'un rôle")
+            ->setPageTitle('edit',"Modification d'un rôle")
+            ->setPageTitle('detail',"Détail du rôle")
+
+            ->setEntityLabelInSingular('rôle')
+            ->setEntityLabelInPlural('rôles')
+        ;
     }
-    */
 }

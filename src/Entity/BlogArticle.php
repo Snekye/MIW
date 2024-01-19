@@ -30,7 +30,7 @@ class BlogArticle
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $image = null;
 
@@ -149,9 +149,10 @@ class BlogArticle
         return $this->image;
     }
 
-    public function setImage(?Image $image): static
+    public function setImage(string $image): static
     {
-        $this->image = $image;
+        $this->image = new Image();
+        $this->image->setLien('img/upload/BlogArticle/'.$image);
 
         return $this;
     }

@@ -34,6 +34,7 @@ class AdminUserRoleFixtures extends Fixture
         foreach($this::ADMIN_USER_ROLES as $k => $e) {
             $temp = new AdminUserRole();
             $temp->setLib($e["lib"]);
+            $temp->setCode($k);
             $temp->setNiveau($e["niveau"]);
 
             $this->addReference($k,$temp);

@@ -7,7 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
@@ -40,7 +40,9 @@ class CompetenceCrudController extends AbstractCrudController
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             TextField::new('contenu'),
-            AssociationField::new('image'),
+            ImageField::new('image')
+                ->setUploadDir('public/img/upload/Competence')
+                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
         ];
     }
 }

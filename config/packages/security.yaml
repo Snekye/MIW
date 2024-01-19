@@ -1,4 +1,9 @@
 security:
+  providers: 
+    user:
+      entity: 
+        class: App\Entity\AdminUser
+        property: login
 
   password_hashers:
     soft:
@@ -7,12 +12,23 @@ security:
     hard:
       algorithm: bcrypt
       cost: 13
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'soft'
 
   firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      lazy: true
+      form_login:
+        default_target_path: /
+        login_path: login
+        check_path: login
+      provider: user
 
-  access_control:
-        # change '/admin' by the URL used by your Dashboard
-        - { path: ^/admin, roles: ROLE_ADMIN }
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_EDITEUR
+    ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+#  access_control:
+#        - { path: ^/admin, roles: ROLE_SUPERADMIN }

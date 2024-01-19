@@ -4,11 +4,13 @@ namespace App\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\LocaleDto;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\AccueilActualite;
 use App\Entity\AdminUser;
@@ -31,7 +33,7 @@ use App\Entity\Tag;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin/{_locale}', name: 'admin')]
+    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         return $this->render("admin/admin.html.twig");
@@ -64,13 +66,14 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Rôles', 'fa fa-pen', AdminUserRole::class),
             MenuItem::linkToCrud("Infos et config", 'fa fa-gear', InfoConfig::class),
 
+            MenuItem::section(),
             MenuItem::subMenu('Messages & Logs', 'fa fa-folder')->setSubItems([
                 MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class),
                 MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
                 MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class),
             ]),
         
-            MenuItem::subMenu('Public', 'fa fa-paper-plane')->setSubItems([
+            MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
                 MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
                 MenuItem::linkToCrud("Compétences", 'fa fa-bolt', Competence::class),
                 MenuItem::linkToCrud("Tarifs dépannages", 'fa fa-wrench', PresentationDepannageTarif::class),
@@ -88,5 +91,16 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud("Thèmes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
             ]),
         ];
+    }
+
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        return parent::configureUserMenu($user)
+            ->addMenuItems([
+                MenuItem::linkToRoute('Profil', 'fa fa-id-card', '...', ['...' => '...']),
+                MenuItem::linkToRoute('Paramètres', 'fa fa-user-cog', '...', ['...' => '...']),
+                MenuItem::section(),
+                MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
+            ]);
     }
 }

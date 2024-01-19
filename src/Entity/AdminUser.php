@@ -209,7 +209,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return array($this->role->getId());
+        return array($this->role->getCode());
     }
 
     public function getUserIdentifier(): string

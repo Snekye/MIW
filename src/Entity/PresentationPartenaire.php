@@ -16,7 +16,7 @@ class PresentationPartenaire
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $image = null;
 
@@ -49,10 +49,12 @@ class PresentationPartenaire
         return $this->image;
     }
 
-    public function setImage(?Image $image): static
+    public function setImage(string $image): static
     {
-        $this->image = $image;
+        $this->image = new Image();
+        $this->image->setLien('img/upload/PresentationPartenaire'.$image);
 
         return $this;
     }
+
 }

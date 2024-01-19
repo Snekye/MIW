@@ -18,6 +18,9 @@ class AdminUserRole
     #[ORM\Column(length: 255)]
     private ?string $lib = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $code = null;
+
     #[ORM\Column]
     private ?int $niveau = null;
 
@@ -49,6 +52,18 @@ class AdminUserRole
     public function setLib(string $lib): static
     {
         $this->lib = $lib;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): static
+    {
+        $this->code = $code;
 
         return $this;
     }

@@ -37,7 +37,7 @@ class AdminLogCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             DateField::new('date')
-                ->setFormat('EEE d MMM y HH:mm')
+                ->setFormat('EEE d MMM y HH:mm:ss')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             ChoiceField::new('action')

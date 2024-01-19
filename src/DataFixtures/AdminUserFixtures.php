@@ -20,6 +20,11 @@ class AdminUserFixtures extends Fixture implements DependentFixtureInterface
     }
     public const ADMIN_USER = [
 
+        ["login" => "admin",
+            "password" => "admin",
+            "email" => "",
+            "role" => "ROLE_SUPERADMIN"],
+
         ["login" => "Dimitri",
             "password" => "Dimitri",
             "email" => "dimitrigranit22@gmail.com",

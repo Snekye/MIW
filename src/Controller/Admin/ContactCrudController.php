@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 class ContactCrudController extends AbstractCrudController
 {
@@ -46,5 +48,11 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('tel'),
             TextEditorField::new('contenu'),
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->remove(Crud::PAGE_INDEX,Action::NEW)
+        ;
     }
 }

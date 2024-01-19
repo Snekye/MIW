@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 class AdminAccessLogCrudController extends AbstractCrudController
 {
@@ -44,5 +46,11 @@ class AdminAccessLogCrudController extends AbstractCrudController
             AssociationField::new('user_login')
                 ->autocomplete(),
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->remove(Crud::PAGE_INDEX,Action::NEW)
+        ;
     }
 }

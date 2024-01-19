@@ -38,6 +38,7 @@ class PresentationPartenaireCrudController extends AbstractCrudController
             TextField::new('nom'),
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/PresentationPartenaire')
+                ->setBasePath('img/upload/PresentationPartenaire')
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
         ];
     }

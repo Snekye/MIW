@@ -48,6 +48,7 @@ class BlogArticleCrudController extends AbstractCrudController
             AssociationField::new('theme'),
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/BlogArticle')
+                ->setBasePath('img/upload/BlogArticle')
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
         ];
     }

@@ -67,7 +67,7 @@ class Reseau
     public function setImage(string $image): static
     {
         $this->image = new Image();
-        $this->image->setLien('img/upload/Reseau/'.$image);
+        $this->image->setLien($image);
 
         return $this;
     }

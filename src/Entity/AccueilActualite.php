@@ -101,15 +101,16 @@ class AccueilActualite
         return $this;
     }
 
-    public function getImage(): ?Image
+    public function getImage(): string
     {
+        //dd($this->image);
         return $this->image;
     }
 
     public function setImage(string $image): static
     {
         $this->image = new Image();
-        $this->image->setLien('img/upload/AccueilActualite/'.$image);
+        $this->image->setLien($image);
 
         return $this;
     }

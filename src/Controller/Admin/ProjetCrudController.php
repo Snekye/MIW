@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
@@ -40,13 +41,16 @@ class ProjetCrudController extends AbstractCrudController
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             TextField::new('sous_titre'),
-            TextEditorField::new('description_courte'),
-            TextEditorField::new('description'),
+            AssociationField::new('tags')
+                ->setCrudController(TagCrudController::class)
+                ->autocomplete(),
             ChoiceField::new('type')
                 ->setChoices([
                     "Projet web" => "web",
                     "Projet print" => "print",
                 ]),
+            TextEditorField::new('description_courte'),
+            TextEditorField::new('description'),
         ];
     }
 }

@@ -87,7 +87,7 @@ class Competence
     public function setImage(string $image): static
     {
         $this->image = new Image();
-        $this->image->setLien('img/upload/Competence'.$image);
+        $this->image->setLien($image);
 
         return $this;
     }

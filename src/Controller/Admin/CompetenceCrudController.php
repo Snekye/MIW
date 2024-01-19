@@ -42,6 +42,7 @@ class CompetenceCrudController extends AbstractCrudController
             TextField::new('contenu'),
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/Competence')
+                ->setBasePath('img/upload/Competence')
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
         ];
     }

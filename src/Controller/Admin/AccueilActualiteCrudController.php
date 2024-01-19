@@ -47,7 +47,8 @@ class AccueilActualiteCrudController extends AbstractCrudController
             TextEditorField::new('contenu'),
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/AccueilActualite')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
+                ->setBasePath('img/upload/AccueilActualite')
+                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
         ];
     }
     

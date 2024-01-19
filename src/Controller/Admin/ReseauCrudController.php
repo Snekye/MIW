@@ -39,6 +39,7 @@ class ReseauCrudController extends AbstractCrudController
             TextField::new('lien'),
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/Reseau')
+                ->setBasePath('img/upload/Reseau')
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
         ];
     }

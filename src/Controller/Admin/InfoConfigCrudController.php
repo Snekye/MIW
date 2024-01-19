@@ -31,4 +31,11 @@ class InfoConfigCrudController extends AbstractCrudController
             ->setSearchFields(['lib','valeur'])
         ;
     }
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            TextField::new('lib'),
+            TextField::new('valeur')
+        ];
+    }
 }

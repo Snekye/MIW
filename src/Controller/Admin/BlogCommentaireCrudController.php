@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 class BlogCommentaireCrudController extends AbstractCrudController
 {
@@ -38,5 +40,11 @@ class BlogCommentaireCrudController extends AbstractCrudController
             TextEditorField::new('contenu'),
             AssociationField::new('article'),
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->remove(Crud::PAGE_INDEX,Action::NEW)
+        ;
     }
 }

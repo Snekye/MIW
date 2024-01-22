@@ -15,17 +15,14 @@ class AdminLog
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'logs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?AdminUser $user_login = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $cible_table = null;
-
-    #[ORM\Column]
-    private ?int $cible_id = null;
+    private ?string $message = null;
 
     #[ORM\Column(length: 255)]
     private ?string $action = null;
@@ -71,26 +68,14 @@ class AdminLog
         return $this;
     }
 
-    public function getCibleTable(): ?string
+    public function getMessage(): ?string
     {
-        return $this->cible_table;
+        return $this->message;
     }
 
-    public function setCibleTable(string $cible_table): static
+    public function setMessage(string $message): static
     {
-        $this->cible_table = $cible_table;
-
-        return $this;
-    }
-
-    public function getCibleId(): ?int
-    {
-        return $this->cible_id;
-    }
-
-    public function setCibleId(int $cible_id): static
-    {
-        $this->cible_id = $cible_id;
+        $this->message = $message;
 
         return $this;
     }
@@ -105,5 +90,10 @@ class AdminLog
         $this->action = $action;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->date->format("d/m/Y H:i:s") .' ; '.$this->user_login;
     }
 }

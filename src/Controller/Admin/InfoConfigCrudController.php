@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\InfoConfig;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -35,7 +35,14 @@ class InfoConfigCrudController extends AbstractCrudController
     {
         return [
             TextField::new('lib'),
-            TextField::new('valeur')
+            TextField::new('valeur'),
+
+            AssociationField::new('_created')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            AssociationField::new('_updated')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
         ];
     }
 }

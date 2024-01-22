@@ -51,6 +51,13 @@ class ProjetCrudController extends AbstractCrudController
                 ]),
             TextEditorField::new('description_courte'),
             TextEditorField::new('description'),
+
+            AssociationField::new('_created')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            AssociationField::new('_updated')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
         ];
     }
 }

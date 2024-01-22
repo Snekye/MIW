@@ -44,12 +44,11 @@ class AdminLogCrudController extends AbstractCrudController
                 ->hideWhenUpdating(),
             ChoiceField::new('action')
                 ->setChoices([
-                    "Ajout" => "Ajout",
-                    "Modification" => "Modification",
-                    "Suppression" => "Suppression"
+                    "Create" => "Create",
+                    "Update" => "Update",
+                    "Delete" => "Delete"
                 ]),
-            'cible_table',
-            'cible_id',
+            'message',
             AssociationField::new('user_login')
                 ->autocomplete(),
         ];
@@ -58,6 +57,8 @@ class AdminLogCrudController extends AbstractCrudController
     {
         return $actions
             ->remove(Crud::PAGE_INDEX,Action::NEW)
+            ->remove(Crud::PAGE_INDEX,Action::EDIT)
+            ->remove(Crud::PAGE_INDEX,Action::DELETE)
         ;
     }
 }

@@ -34,11 +34,17 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $accesslogs;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?AdminUserRole $role = null;
 
-    #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'blogArticles')]
+    #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'users')]
     private Collection $blogArticles;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?AdminLog $_created = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?AdminLog $_updated = null;
 
     public function __construct()
     {
@@ -205,6 +211,36 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->login.' - '.$this->role;
+    }
+
+
+    public function getCreated(): ?AdminLog
+    {
+        return $this->_created;
+    }
+
+    public function setCreated(?AdminLog $_created): static
+    {
+        $this->_created = $_created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?AdminLog
+    {
+        return $this->_updated;
+    }
+
+    public function setUpdated(?AdminLog $_updated): static
+    {
+        $this->_updated = $_updated;
+
+        return $this;
+    }
+
     // User interface
 
     public function getRoles(): array
@@ -220,8 +256,8 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     {
 
     }
-    public function __toString(): string
+    public function getSalt():?string 
     {
-        return $this->login.' - '.$this->role;
+        return null;
     }
 }

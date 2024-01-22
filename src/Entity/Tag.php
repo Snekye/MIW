@@ -24,6 +24,13 @@ class Tag
     #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'tags')]
     private Collection $blogArticles;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?AdminLog $_created = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?AdminLog $_updated = null;
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();
@@ -111,5 +118,29 @@ class Tag
     public function __toString(): string
     {
         return $this->lib;
+    }
+
+    public function getCreated(): ?AdminLog
+    {
+        return $this->_created;
+    }
+
+    public function setCreated(AdminLog $_created): static
+    {
+        $this->_created = $_created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?AdminLog
+    {
+        return $this->_updated;
+    }
+
+    public function setUpdated(?AdminLog $_updated): static
+    {
+        $this->_updated = $_updated;
+
+        return $this;
     }
 }

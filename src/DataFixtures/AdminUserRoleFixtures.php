@@ -4,10 +4,12 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 use App\Entity\AdminUserRole;
+use App\Entity\AdminLog;
 
-class AdminUserRoleFixtures extends Fixture
+class AdminUserRoleFixtures extends Fixture implements DependentFixtureInterface
 {
     public const ADMIN_USER_ROLES = [
 
@@ -37,11 +39,24 @@ class AdminUserRoleFixtures extends Fixture
             $temp->setCode($k);
             $temp->setNiveau($e["niveau"]);
 
+            $log = new AdminLog();
+            $log->setUserLogin($this->getReference("miw"));
+            $log->setAction("Create");
+            $log->setMessage("[MIW] à créé le rôle utilisateur [".$e["lib"]."]");
+
+            $temp->setCreated($log);
+
             $this->addReference($k,$temp);
 
             $manager->persist($temp);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies() {
+        return array(
+            _MIWFixtures::class
+        );
     }
 }

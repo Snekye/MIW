@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\AccueilActualite;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -48,7 +48,14 @@ class AccueilActualiteCrudController extends AbstractCrudController
             ImageField::new('image')
                 ->setUploadDir('public/img/upload/AccueilActualite')
                 ->setBasePath('img/upload/AccueilActualite')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
+                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
+
+            AssociationField::new('_created')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            AssociationField::new('_updated')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
         ];
     }
     

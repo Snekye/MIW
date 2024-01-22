@@ -7,8 +7,9 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 use App\Entity\InfoConfig;
+use App\Entity\AdminLog;
 
-class InfoConfigFixtures extends Fixture
+class InfoConfigFixtures extends Fixture implements DependentFixtureInterface
 {
     public const INFO_CONFIG = [
 
@@ -34,9 +35,22 @@ class InfoConfigFixtures extends Fixture
             $temp->setLib($k);
             $temp->setValeur($e);
 
+            $log = new AdminLog();
+            $log->setUserLogin($this->getReference("miw"));
+            $log->setAction("Create");
+            $log->setMessage("[MIW] à créé la configuration [".$k."]");
+
+            $temp->setCreated($log);
+
             $manager->persist($temp);
 
             $manager->flush();
         }
+    }
+
+    public function getDependencies() {
+        return array(
+            _MIWFixtures::class
+        );
     }
 }

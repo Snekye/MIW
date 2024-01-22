@@ -65,14 +65,13 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-circle-user', AdminUser::class),
             MenuItem::linkToCrud('Rôles', 'fa fa-pen', AdminUserRole::class),
             MenuItem::linkToCrud("Infos et config", 'fa fa-gear', InfoConfig::class),
-
-            MenuItem::section(),
             MenuItem::subMenu('Messages & Logs', 'fa fa-folder')->setSubItems([
                 MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class),
                 MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
                 MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class),
             ]),
         
+            MenuItem::section(),
             MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
                 MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
                 MenuItem::linkToCrud("Compétences", 'fa fa-bolt', Competence::class),

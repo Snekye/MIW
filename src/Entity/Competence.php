@@ -26,8 +26,15 @@ class Competence
     private ?string $contenu = null;
 
     #[ORM\ManyToOne(cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Image $image = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?AdminLog $_created = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?AdminLog $_updated = null;
 
     public function getId(): ?int
     {
@@ -79,7 +86,7 @@ class Competence
         return $this;
     }
 
-    public function getImage(): ?Image
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -90,6 +97,38 @@ class Competence
         $this->image->setLien($image);
 
         return $this;
+    }
+
+    public function getCreated(): ?AdminLog
+    {
+        return $this->_created;
+    }
+
+    public function setCreated(AdminLog $_created): static
+    {
+        $this->_created = $_created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?AdminLog
+    {
+        return $this->_updated;
+    }
+
+    public function setUpdated(?AdminLog $_updated): static
+    {
+        $this->_updated = $_updated;
+
+        return $this;
+    }
+
+
+
+
+    public function __toString(): string
+    {
+        return $this->titre;
     }
 
 }

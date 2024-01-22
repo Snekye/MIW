@@ -145,4 +145,10 @@ class Contact
 
         return $this;
     }
+
+
+    public function __toString(): string
+    {
+        return substr($this->contenu,0,20).'...';
+    }
 }

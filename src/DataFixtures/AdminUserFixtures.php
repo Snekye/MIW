@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 use App\Entity\AdminUser;
+use App\Entity\AdminLog;
 
 class AdminUserFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -19,11 +20,6 @@ class AdminUserFixtures extends Fixture implements DependentFixtureInterface
         $this->hasher = $factory->getPasswordHasher('soft');
     }
     public const ADMIN_USER = [
-
-        ["login" => "admin",
-            "password" => "admin",
-            "email" => "",
-            "role" => "ROLE_SUPERADMIN"],
 
         ["login" => "Dimitri",
             "password" => "Dimitri",
@@ -42,11 +38,17 @@ class AdminUserFixtures extends Fixture implements DependentFixtureInterface
             $temp = new AdminUser();
             $temp->setLogin($e["login"]);
             $temp->setEmail($e["email"]);
-
             $hashedPassword = $this->hasher->hash($e["password"]);
             $temp->setPassword($hashedPassword);
 
             $temp->setRole($this->getReference($e["role"]));
+
+            $log = new AdminLog();
+            $log->setUserLogin($this->getReference("miw"));
+            $log->setAction("Create");
+            $log->setMessage("[MIW] à créé l'utilisateur [".$e["login"]."]");
+
+            $temp->setCreated($log);
 
             $manager->persist($temp);
         }
@@ -56,7 +58,8 @@ class AdminUserFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies() {
         return array(
-            AdminUserRoleFixtures::class
+            AdminUserRoleFixtures::class,
+            _MIWFixtures::class
         );
     }
 }

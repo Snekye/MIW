@@ -3,6 +3,10 @@ security:
         soft:
             algorithm: bcrypt
             cost: 4
+        hard:
+            algorithm: bcrypt
+            cost: 13
+        App\Entity\AdminUser: auto
 
     providers:
         app_user_provider:

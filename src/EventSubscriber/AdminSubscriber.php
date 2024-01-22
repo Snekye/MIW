@@ -6,9 +6,13 @@ use App\Entity\AdminLog;
 use App\Entity\AdminUser;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
+
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class AdminSubscriber implements EventSubscriberInterface
 {
@@ -16,14 +20,19 @@ class AdminSubscriber implements EventSubscriberInterface
     {
         return [
             BeforeEntityPersistedEvent::class => ['createLog'],
-            BeforeEntityUpdatedEvent::class => ['updateLog']
+            BeforeEntityUpdatedEvent::class => ['updateLog'],
+            BeforeEntityDeletedEvent::class => ['deleteLog']
         ];
     }
     private $hasher;
+    private $tokenStorage;
+    private $manager;
 
-    public function __construct(PasswordHasherFactoryInterface $factory) 
+    public function __construct(PasswordHasherFactoryInterface $factory, TokenStorageInterface $tokenStorage, ObjectManager $manager) 
     {
         $this->hasher = $factory->getPasswordHasher('soft');
+        $this->tokenStorage = $tokenStorage;
+        $this->manager = $manager;
     }
 
     public function createLog(BeforeEntityPersistedEvent $event)
@@ -35,11 +44,12 @@ class AdminSubscriber implements EventSubscriberInterface
         }
 
         if (method_exists($entity::class,'setCreated')) {
-            $entity = $event->getEntityInstance();
+            $user = $this->tokenStorage->getToken()->getUser();
 
             $log = new AdminLog();
             $log->setAction('Create');
-            $log->setMessage('[] à créé le <'. $entity::class.'> ['.$entity.']');
+            $log->setUserLogin($user);
+            $log->setMessage('['.$user->getLogin().'] à créé le <'. $entity::class.'> ['.$entity.']');
 
             $entity->setCreated($log);
         }
@@ -52,14 +62,27 @@ class AdminSubscriber implements EventSubscriberInterface
 
         $entity = $event->getEntityInstance();
         if (method_exists($entity::class,'setUpdated')) {
-            $entity = $event->getEntityInstance();
+            $user = $this->tokenStorage->getToken()->getUser();
 
             $log = new AdminLog();
             $log->setAction('Update');
-            $log->setMessage('[] à MAJ le <'. $entity::class.'> ['.$entity.']');
+            $log->setUserLogin($user);
+            $log->setMessage('['.$user->getLogin().'] à MAJ le <'. $entity::class.'> ['.$entity.']');
 
             $entity->setUpdated($log);
         }
+    }
+    public function deleteLog(BeforeEntityDeletedEvent $event)
+    {
+        $entity = $event->getEntityInstance();
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        $log = new AdminLog();
+        $log->setAction('Delete');
+        $log->setUserLogin($user);
+        $log->setMessage('['.$user->getLogin().'] à supprimé le <'. $entity::class.'> ['.$entity.']');
+
+        $this->manager->persist($log);
     }
 
     public function hashPassword(AdminUser $adminUser) {

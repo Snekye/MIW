@@ -40,10 +40,10 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: BlogArticle::class, mappedBy: 'users')]
     private Collection $blogArticles;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_created = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_updated = null;
 
     public function __construct()

@@ -29,11 +29,11 @@ class Competence
     #[ORM\JoinColumn(nullable: true)]
     private ?Image $image = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdminLog $_created = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_updated = null;
 
     public function getId(): ?int

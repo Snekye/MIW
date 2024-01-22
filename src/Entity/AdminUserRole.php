@@ -27,11 +27,11 @@ class AdminUserRole
     #[ORM\OneToMany(mappedBy: 'role', targetEntity: AdminUser::class)]
     private Collection $users;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdminLog $_created = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_updated = null;
 
     public function __construct()

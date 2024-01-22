@@ -36,7 +36,9 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        return $this->render("admin/admin.html.twig");
+        return $this->render("admin/admin.html.twig", [
+            'user' => $this->getUser(),
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -57,8 +59,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        return [
-            MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home'),
+        /*
+        $menuAdmin = [
             MenuItem::linkToDashboard('Menu admin', 'fa fa-star'),
 
             MenuItem::section('Administration'),
@@ -69,8 +71,8 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class),
                 MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
                 MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class),
-            ]),
-        
+        ])];
+        $menuEditeur = [
             MenuItem::section(),
             MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
                 MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
@@ -89,6 +91,65 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud("Commentaires", 'fa fa-comments', BlogCommentaire::class),
                 MenuItem::linkToCrud("Thèmes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
             ]),
+        ];*/
+
+        if ($this->getUser()->getRole()->getNiveau() >= 2) {
+            return [
+                MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home'),
+                MenuItem::linkToDashboard('Menu admin', 'fa fa-star'),
+
+                MenuItem::section('Administration'),
+                MenuItem::linkToCrud('Utilisateurs', 'fa fa-circle-user', AdminUser::class),
+                MenuItem::linkToCrud('Rôles', 'fa fa-pen', AdminUserRole::class),
+                MenuItem::linkToCrud("Infos et config", 'fa fa-gear', InfoConfig::class),
+                MenuItem::subMenu('Messages & Logs', 'fa fa-folder')->setSubItems([
+                    MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class),
+                    MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
+                    MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class),
+                ]),
+                
+                MenuItem::section(),
+                MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
+                    MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
+                    MenuItem::linkToCrud("Compétences", 'fa fa-bolt', Competence::class),
+                    MenuItem::linkToCrud("Tarifs dépannages", 'fa fa-wrench', PresentationDepannageTarif::class),
+                    MenuItem::linkToCrud("Tarifs déplacement", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),
+                    MenuItem::linkToCrud("Partenaires", 'fa fa-paperclip', PresentationPartenaire::class),
+                    MenuItem::linkToCrud("Recrutement", 'fa fa-user', PresentationRecrutementPoste::class),
+                    MenuItem::linkToCrud("Projets", 'fa fa-clipboard', Projet::class),
+                    MenuItem::linkToCrud("Réseaux", 'fa-brands fa-facebook', Reseau::class),
+                    MenuItem::linkToCrud("Tags", 'fa fa-tags', Tag::class),
+                ]),
+
+                MenuItem::subMenu('Blog', 'fa fa-cloud')->setSubItems([
+                    MenuItem::linkToCrud("Articles", 'fa fa-blog', BlogArticle::class),
+                    MenuItem::linkToCrud("Commentaires", 'fa fa-comments', BlogCommentaire::class),
+                    MenuItem::linkToCrud("Thèmes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
+                ]),
+            ];
+        }
+        return [
+            MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home'),
+            MenuItem::linkToDashboard('Menu admin', 'fa fa-star'),
+
+            MenuItem::section(),
+            MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
+                MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
+                MenuItem::linkToCrud("Compétences", 'fa fa-bolt', Competence::class),
+                MenuItem::linkToCrud("Tarifs dépannages", 'fa fa-wrench', PresentationDepannageTarif::class),
+                MenuItem::linkToCrud("Tarifs déplacement", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),
+                MenuItem::linkToCrud("Partenaires", 'fa fa-paperclip', PresentationPartenaire::class),
+                MenuItem::linkToCrud("Recrutement", 'fa fa-user', PresentationRecrutementPoste::class),
+                MenuItem::linkToCrud("Projets", 'fa fa-clipboard', Projet::class),
+                MenuItem::linkToCrud("Réseaux", 'fa-brands fa-facebook', Reseau::class),
+                MenuItem::linkToCrud("Tags", 'fa fa-tags', Tag::class),
+            ]),
+
+            MenuItem::subMenu('Blog', 'fa fa-cloud')->setSubItems([
+                MenuItem::linkToCrud("Articles", 'fa fa-blog', BlogArticle::class),
+                MenuItem::linkToCrud("Commentaires", 'fa fa-comments', BlogCommentaire::class),
+                MenuItem::linkToCrud("Thèmes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
+            ])
         ];
     }
 

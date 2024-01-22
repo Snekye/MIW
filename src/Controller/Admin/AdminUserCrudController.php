@@ -38,6 +38,7 @@ class AdminUserCrudController extends AbstractCrudController
             TextField::new('login'),
             TextField::new('password')
                 ->hideOnIndex()
+                ->hideOnDetail()
                 ->hideWhenUpdating(),
             TextField::new('email'),
             AssociationField::new('role')

@@ -56,6 +56,8 @@ class AdminSubscriber implements EventSubscriberInterface
     }
     public function updateLog(BeforeEntityUpdatedEvent $event)
     {
+        $entity = $event->getEntityInstance();
+        
         if ($entity::class === AdminUser::class) { 
             $entity = $this::hashPassword($entity); 
         }

@@ -59,6 +59,8 @@ class AdminLogCrudController extends AbstractCrudController
             ->remove(Crud::PAGE_INDEX,Action::NEW)
             ->remove(Crud::PAGE_INDEX,Action::EDIT)
             ->remove(Crud::PAGE_INDEX,Action::DELETE)
+
+            ->setPermission('index','ROLE_ADMIN')
         ;
     }
 }

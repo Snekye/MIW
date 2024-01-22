@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 class AdminUserCrudController extends AbstractCrudController
 {
@@ -51,5 +53,15 @@ class AdminUserCrudController extends AbstractCrudController
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->setPermission('index','ROLE_ADMIN')
+
+            ->setPermission('new','ROLE_SUPERADMIN')
+            ->setPermission('edit','ROLE_SUPERADMIN')
+            ->setPermission('delete','ROLE_SUPERADMIN')
+        ;
     }
 }

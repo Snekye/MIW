@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\LocaleDto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\AccueilActualite;
 use App\Entity\AdminUser;
@@ -41,6 +42,12 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
+    private $manager;
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->manager = $entityManager;
+    }
+
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -59,6 +66,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        $msgNotifs = count($this->manager->getRepository(Contact::class)->findBy(['_read' => false]));
+        $msgNotifs = $msgNotifs == 0 ? null : $msgNotifs;
         return [
             MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home'),
             MenuItem::linkToDashboard('Menu admin', 'fa fa-star'),
@@ -72,10 +81,12 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud("Infos et config", 'fa fa-gear', InfoConfig::class)
                 ->setPermission('ROLE_ADMIN'),
             MenuItem::subMenu('Messages & Logs', 'fa fa-folder')->setSubItems([
-                MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class),
+                MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class)
+                    ->setBadge($msgNotifs,'danger'),
                 MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
                 MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class)
                 ])
+                ->setBadge($msgNotifs,'danger')
                 ->setPermission('ROLE_ADMIN'),
             
             MenuItem::section(),
@@ -102,11 +113,9 @@ class DashboardController extends AbstractDashboardController
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
+            ->displayUserAvatar(false)
             ->addMenuItems([
                 MenuItem::linkToRoute('Profil', 'fa fa-id-card', '...', ['...' => '...']),
-                MenuItem::linkToRoute('Paramètres', 'fa fa-user-cog', '...', ['...' => '...']),
-                MenuItem::section(),
-                MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
             ]);
     }
 }

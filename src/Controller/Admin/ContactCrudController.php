@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -47,6 +48,7 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('email'),
             TextField::new('tel'),
             TextEditorField::new('contenu'),
+            BooleanField::new('_read'),
         ];
     }
     public function configureActions(Actions $actions): Actions

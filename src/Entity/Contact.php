@@ -38,6 +38,9 @@ class Contact
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
+    #[ORM\Column]
+    private ?bool $_read = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,5 +153,17 @@ class Contact
     public function __toString(): string
     {
         return substr($this->contenu,0,20).'...';
+    }
+
+    public function isRead(): ?bool
+    {
+        return $this->_read;
+    }
+
+    public function setRead(bool $_read): static
+    {
+        $this->_read = $_read;
+
+        return $this;
     }
 }

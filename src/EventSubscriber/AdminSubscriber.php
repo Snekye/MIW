@@ -2,17 +2,17 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\AdminLog;
-use App\Entity\AdminUser;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
-
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Persistence\ObjectManager;
+
+use App\Entity\AdminLog;
+use App\Entity\AdminUser;
 
 class AdminSubscriber implements EventSubscriberInterface
 {
@@ -63,7 +63,8 @@ class AdminSubscriber implements EventSubscriberInterface
         }
 
         $entity = $event->getEntityInstance();
-        if (method_exists($entity::class,'setUpdated')) {
+        if (method_exists($entity::class,'setUpdated')) 
+        {
             $user = $this->tokenStorage->getToken()->getUser();
 
             $log = new AdminLog();

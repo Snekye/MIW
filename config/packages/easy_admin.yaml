@@ -1,4 +1,4 @@
 easy_admin:
     design:
-        default_language: 'en'
-        languages: ['en', 'fr']
+        translations:
+            default_domain: 'admin'

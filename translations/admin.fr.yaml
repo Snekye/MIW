@@ -1,0 +1,50 @@
+ea:
+    dashboard:
+        home: "Retour au site principal"
+        admin: "Menu admin"
+        admin_section: "Administration"
+        users: "Utilisateurs"
+        roles: "Rôles"
+        config: "Infos & config"
+        messages:
+            list: "Messages & Logs"
+            contact: "Messagerie"
+            access_logs: "Logs d'accès"
+            logs: "Logs d'action"
+        edit_section: "Édition"
+        content:
+            list: "Contenu"
+            news: "Actualités"
+            skills: "Compétences"
+            service_fees: "Tarifs dépannages"
+            shift_fees: "Tarifs déplacement"
+            partners: "Partenaires"
+            hiring: "Recrutement"
+            projects: "Projets"
+            socials: "Réseaux"
+            tags: "Tags"
+        blog:
+            list: "Blog"
+            articles: "Articles"
+            comments: "Commentaires"
+            themes: "Thèmes"
+        welcome: "Bienvenue, %name%"
+        profile: "Profil"
+    
+    adminuser:
+        title:
+            index: "Utilisateurs"
+            new: "Ajout d'utilisateur"
+            edit: "Modification d'utilisateur"
+            detail: "Détail de l'utilisateur"
+        entity:
+            singular: "utilisateur"
+            plural: "utilisateurs"
+        label:
+            login: "Login"
+            password: "Mot de passe"
+            email: "E-mail"
+            role: "Rôle"
+            created: "Créé"
+            updated: "Mis à jour"
+        

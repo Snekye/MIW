@@ -34,7 +34,7 @@ use App\Entity\Tag;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin/{_locale}', name: 'admin')]
     public function index(): Response
     {
         return $this->render("admin/admin.html.twig", [
@@ -57,6 +57,7 @@ class DashboardController extends AbstractDashboardController
 
             ->renderContentMaximized()
 
+            ->setTranslationDomain('admin')
             ->setLocales([
                 'fr' => 'French 🇫🇷',
                 'en' => 'English 🇬🇧',
@@ -69,43 +70,43 @@ class DashboardController extends AbstractDashboardController
         $msgNotifs = count($this->manager->getRepository(Contact::class)->findBy(['_read' => false]));
         $msgNotifs = $msgNotifs == 0 ? null : $msgNotifs;
         return [
-            MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home'),
-            MenuItem::linkToDashboard('Menu admin', 'fa fa-star'),
+            MenuItem::linkToRoute('ea.dashboard.home', 'fa fa-home', 'home'),
+            MenuItem::linkToDashboard('ea.dashboard.admin', 'fa fa-star'),
 
-            MenuItem::section('Administration')
+            MenuItem::section('ea.dashboard.admin_section')
                 ->setPermission('ROLE_ADMIN'),
-            MenuItem::linkToCrud('Utilisateurs', 'fa fa-circle-user', AdminUser::class)
+            MenuItem::linkToCrud('ea.dashboard.users', 'fa fa-circle-user', AdminUser::class)
                 ->setPermission('ROLE_ADMIN'),
-            MenuItem::linkToCrud('Rôles', 'fa fa-pen', AdminUserRole::class)
+            MenuItem::linkToCrud('ea.dashboard.roles', 'fa fa-pen', AdminUserRole::class)
                 ->setPermission('ROLE_ADMIN'),
-            MenuItem::linkToCrud("Infos et config", 'fa fa-gear', InfoConfig::class)
+            MenuItem::linkToCrud("ea.dashboard.config", 'fa fa-gear', InfoConfig::class)
                 ->setPermission('ROLE_ADMIN'),
-            MenuItem::subMenu('Messages & Logs', 'fa fa-folder')->setSubItems([
-                MenuItem::linkToCrud("Messagerie", 'fa fa-comment', Contact::class)
+            MenuItem::subMenu('ea.dashboard.messages.list', 'fa fa-folder')->setSubItems([
+                MenuItem::linkToCrud("ea.dashboard.messages.contact", 'fa fa-comment', Contact::class)
                     ->setBadge($msgNotifs,'danger'),
-                MenuItem::linkToCrud("Logs d'accès", 'fa fa-folder', AdminAccessLog::class),
-                MenuItem::linkToCrud("Logs d'actions", 'fa fa-folder', AdminLog::class)
+                MenuItem::linkToCrud("ea.dashboard.messages.access_logs", 'fa fa-folder', AdminAccessLog::class),
+                MenuItem::linkToCrud("ea.dashboard.messages.logs", 'fa fa-folder', AdminLog::class)
                 ])
                 ->setBadge($msgNotifs,'danger')
                 ->setPermission('ROLE_ADMIN'),
             
-            MenuItem::section(),
-            MenuItem::subMenu('Contenu', 'fa fa-paper-plane')->setSubItems([
-                MenuItem::linkToCrud("Actualités", 'fa fa-newspaper', AccueilActualite::class),
-                MenuItem::linkToCrud("Compétences", 'fa fa-bolt', Competence::class),
-                MenuItem::linkToCrud("Tarifs dépannages", 'fa fa-wrench', PresentationDepannageTarif::class),
-                MenuItem::linkToCrud("Tarifs déplacement", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),
-                MenuItem::linkToCrud("Partenaires", 'fa fa-paperclip', PresentationPartenaire::class),
-                MenuItem::linkToCrud("Recrutement", 'fa fa-user', PresentationRecrutementPoste::class),
-                MenuItem::linkToCrud("Projets", 'fa fa-clipboard', Projet::class),
-                MenuItem::linkToCrud("Réseaux", 'fa-brands fa-facebook', Reseau::class),
-                MenuItem::linkToCrud("Tags", 'fa fa-tags', Tag::class),
+            MenuItem::section('ea.dashboard.edit_section'),
+            MenuItem::subMenu('ea.dashboard.content.list', 'fa fa-paper-plane')->setSubItems([
+                MenuItem::linkToCrud("ea.dashboard.content.news", 'fa fa-newspaper', AccueilActualite::class),
+                MenuItem::linkToCrud("ea.dashboard.content.skills", 'fa fa-bolt', Competence::class),
+                MenuItem::linkToCrud("ea.dashboard.content.service_fees", 'fa fa-wrench', PresentationDepannageTarif::class),
+                MenuItem::linkToCrud("ea.dashboard.content.shift_fees", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),
+                MenuItem::linkToCrud("ea.dashboard.content.partners", 'fa fa-paperclip', PresentationPartenaire::class),
+                MenuItem::linkToCrud("ea.dashboard.content.hiring", 'fa fa-user', PresentationRecrutementPoste::class),
+                MenuItem::linkToCrud("ea.dashboard.content.projects", 'fa fa-clipboard', Projet::class),
+                MenuItem::linkToCrud("ea.dashboard.content.socials", 'fa-brands fa-facebook', Reseau::class),
+                MenuItem::linkToCrud("ea.dashboard.content.tags", 'fa fa-tags', Tag::class),
                 ]),
 
-            MenuItem::subMenu('Blog', 'fa fa-cloud')->setSubItems([
-                MenuItem::linkToCrud("Articles", 'fa fa-blog', BlogArticle::class),
-                MenuItem::linkToCrud("Commentaires", 'fa fa-comments', BlogCommentaire::class),
-                MenuItem::linkToCrud("Thèmes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
+            MenuItem::subMenu('ea.dashboard.blog.list', 'fa fa-cloud')->setSubItems([
+                MenuItem::linkToCrud("ea.dashboard.blog.articles", 'fa fa-blog', BlogArticle::class),
+                MenuItem::linkToCrud("ea.dashboard.blog.comments", 'fa fa-comments', BlogCommentaire::class),
+                MenuItem::linkToCrud("ea.dashboard.blog.themes", 'fa fa-wand-magic-sparkles', BlogTheme::class),
                 ]),
         ];
     }
@@ -115,7 +116,7 @@ class DashboardController extends AbstractDashboardController
         return parent::configureUserMenu($user)
             ->displayUserAvatar(false)
             ->addMenuItems([
-                MenuItem::linkToRoute('Profil', 'fa fa-id-card', '...', ['...' => '...']),
+                MenuItem::linkToRoute('ea.dashboard.profile', 'fa fa-id-card', '...', ['...' => '...']),
             ]);
     }
 }

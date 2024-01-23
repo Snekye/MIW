@@ -1,9 +1,8 @@
 {% extends '@EasyAdmin/layout.html.twig' %}
+{% trans_default_domain 'admin' %}
 
 {% block content_title %}MIW-Admin{% endblock %}
 
 {% block main %}
-
-<h1>Bienvenue, {{ user.getLogin() }}</h2>
-
+    <h1>{{ 'ea.dashboard.welcome'|trans({'%name%': user.getLogin()}) }}</h1>
 {% endblock %}

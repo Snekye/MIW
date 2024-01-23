@@ -1,0 +1,51 @@
+ea:
+    dashboard:
+        home: "Back to main site"
+        admin: "Admin menu"
+        admin_section: "Administration"
+        users: "Users"
+        roles: "Roles"
+        config: "Infos & config"
+        messages:
+            list: "Messages & Logs"
+            contact: "Messages"
+            access_logs: "Access logs"
+            logs: "Logs"
+        edit_section: "Editing"
+        content:
+            list: "Content"
+            news: "News"
+            skills: "Skills"
+            service_fees: "Service fees"
+            shift_fees: "Shift fees"
+            partners: "Partners"
+            hiring: "Hiring"
+            projects: "Projects"
+            socials: "Socials"
+            tags: "Tags"
+        blog:
+            list: "Blog"
+            articles: "Articles"
+            comments: "Comments"
+            themes: "Themes"
+        welcome: "Welcome, %name%"
+        profile: "Profile"
+
+    adminuser:
+        title:
+            index: "Users"
+            new: "Add user"
+            edit: "Edit user"
+            detail: "User detail"
+        entity:
+            singular: "user"
+            plural: "users"
+        label:
+            login: "Login"
+            password: "Password"
+            email: "Email"
+            role: "Role"
+            created: "Created"
+            updated: "Updated"
+
+        

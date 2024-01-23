@@ -23,13 +23,13 @@ class AdminUserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','Utilisateurs')
-            ->setPageTitle('new',"Ajout d'utilisateur")
-            ->setPageTitle('edit',"Modification d'utilisateur")
-            ->setPageTitle('detail',"Détail de l'utilisateur")
+            ->setPageTitle('index','ea.adminuser.title.index')
+            ->setPageTitle('new','ea.adminuser.title.new')
+            ->setPageTitle('edit','ea.adminuser.title.edit')
+            ->setPageTitle('detail','ea.adminuser.title.detail')
 
-            ->setEntityLabelInSingular('utilisateur')
-            ->setEntityLabelInPlural('utilisateurs')
+            ->setEntityLabelInSingular('ea.adminuser.entity.singular')
+            ->setEntityLabelInPlural('ea.adminuser.entity.plural')
 
             ->setSearchFields(['login'])
         ;
@@ -37,19 +37,19 @@ class AdminUserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('login'),
-            TextField::new('password')
+            TextField::new('login','ea.adminuser.label.login'),
+            TextField::new('password','ea.adminuser.label.password')
                 ->hideOnIndex()
                 ->hideOnDetail()
                 ->hideWhenUpdating(),
-            TextField::new('email'),
-            AssociationField::new('role')
+            TextField::new('email','ea.adminuser.label.email'),
+            AssociationField::new('role','ea.adminuser.label.role')
                 ->autocomplete(),
 
-            AssociationField::new('_created')
+            AssociationField::new('_created','ea.adminuser.label.created')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            AssociationField::new('_updated')
+            AssociationField::new('_updated','ea.adminuser.label.updated')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
         ];

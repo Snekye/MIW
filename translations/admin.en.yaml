@@ -31,6 +31,10 @@ ea:
         welcome: "Welcome, %name%"
         profile: "Profile"
 
+    common:
+        created: "Created"
+        updated: "Updated"
+
     adminuser:
         title:
             index: "Users"
@@ -45,7 +49,45 @@ ea:
             password: "Password"
             email: "Email"
             role: "Role"
-            created: "Created"
-            updated: "Updated"
 
-        
+    adminuserrole:
+        title:
+            index: "User roles"
+            new: "Add role"
+            edit: "Edit role"
+            detail: "Role detail"
+        entity:
+            singular: "role"
+            plural: "roles"
+        label:
+            label: "Label"
+            code: "Code"
+            level: "Level"
+
+    infoconfig:
+        title:
+            index: "General information and configuration"
+            new: "Add config value"
+            edit: "Edit config value"
+            detail: "Value detail"
+        entity:
+            singular: "value"
+            plural: "values"
+        label:
+            label: "Label"
+            value: "Value"
+
+    contact:
+        title:
+            index: "Messages"
+            detail: "Message detail"
+        label:
+            date: "Date"
+            lastname: "Last name"
+            firstname: "First name"
+            company: "Company"
+            city: "City"
+            email: "Email"
+            phone: "Phone"
+            content: "Content"
+            read: "Read"

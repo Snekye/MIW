@@ -8,10 +8,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AdminUserCrudController extends AbstractCrudController
 {
@@ -20,13 +23,19 @@ class AdminUserCrudController extends AbstractCrudController
         return AdminUser::class;
     }
 
+    private $t;
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->t = $translator;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','ea.adminuser.title.index')
-            ->setPageTitle('new','ea.adminuser.title.new')
-            ->setPageTitle('edit','ea.adminuser.title.edit')
-            ->setPageTitle('detail','ea.adminuser.title.detail')
+            ->setPageTitle('index',$this->t->trans('ea.adminuser.title.index', domain: 'admin'))
+            ->setPageTitle('new',$this->t->trans('ea.adminuser.title.new', domain: 'admin'))
+            ->setPageTitle('edit',$this->t->trans('ea.adminuser.title.edit', domain: 'admin'))
+            ->setPageTitle('detail',$this->t->trans('ea.adminuser.title.detail', domain: 'admin'))
 
             ->setEntityLabelInSingular('ea.adminuser.entity.singular')
             ->setEntityLabelInPlural('ea.adminuser.entity.plural')
@@ -46,10 +55,10 @@ class AdminUserCrudController extends AbstractCrudController
             AssociationField::new('role','ea.adminuser.label.role')
                 ->autocomplete(),
 
-            AssociationField::new('_created','ea.adminuser.label.created')
+            AssociationField::new('_created','ea.common.created')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            AssociationField::new('_updated','ea.adminuser.label.updated')
+            AssociationField::new('_updated','ea.common.updated')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
         ];

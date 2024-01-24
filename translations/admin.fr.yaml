@@ -30,7 +30,11 @@ ea:
             themes: "Thèmes"
         welcome: "Bienvenue, %name%"
         profile: "Profil"
-    
+
+    common:
+        created: "Créé"
+        updated: "Mis à jour"
+
     adminuser:
         title:
             index: "Utilisateurs"
@@ -45,6 +49,46 @@ ea:
             password: "Mot de passe"
             email: "E-mail"
             role: "Rôle"
-            created: "Créé"
-            updated: "Mis à jour"
+
+    adminuserrole:
+        title:
+            index: "Rôle utilisateur"
+            new: "Ajouter un rôle"
+            edit: "Modifier le rôle"
+            detail: "Détail du rôle"
+        entity:
+            singular: "rôle"
+            plural: "rôles"
+        label:
+            label: "Libellé"
+            code: "Code"
+            level: "Niveau"
+
+    infoconfig:
+        title:
+            index: "Informations générales et configuration"
+            new: "Ajouter une valeur"
+            edit: "Modifier une valeur"
+            detail: "Détail de la valeur"
+        entity:
+            singular: "valeur"
+            plural: "valeurs"
+        label:
+            label: "Libellé"
+            value: "Valeur"
+            
+    contact:
+        title:
+            index: "Messages"
+            detail: "Détail du message"
+        label:
+            date: "Date"
+            lastname: "Nom"
+            firstname: "Prénom"
+            company: "Entreprise"
+            city: "Ville"
+            email: "E-mail"
+            phone: "Téléphone"
+            content: "Contenu"
+            read: "Lu"
         

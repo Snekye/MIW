@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 class ContactCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -21,14 +23,17 @@ class ContactCrudController extends AbstractCrudController
         return Contact::class;
     }
 
+    private $t;
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->t = $translator;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','Messages')
-            ->setPageTitle('detail',"Message")
-
-            ->setEntityLabelInSingular('message')
-            ->setEntityLabelInPlural('messages')
+            ->setPageTitle('index',$this->t->trans('ea.contact.title.index', domain: 'admin'))
+            ->setPageTitle('detail',$this->t->trans('ea.contact.title.index', domain: 'admin'))
 
             ->setSearchFields(['nom','prenom','email','entreprise'])
         ;
@@ -37,18 +42,18 @@ class ContactCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateField::new('date')
+            DateField::new('date','ea.contact.label.date')
                 ->hideWhenCreating()
                 ->hideWhenUpdating()
                 ->setFormat('EEE d MMM y HH:mm'),
-            TextField::new('nom'),
-            TextField::new('prenom'),
-            TextField::new('entreprise'),
-            TextField::new('ville'),
-            TextField::new('email'),
-            TextField::new('tel'),
-            TextEditorField::new('contenu'),
-            BooleanField::new('_read'),
+            TextField::new('nom','ea.contact.label.lastname'),
+            TextField::new('prenom','ea.contact.label.firstname'),
+            TextField::new('entreprise','ea.contact.label.company'),
+            TextField::new('ville','ea.contact.label.city'),
+            TextField::new('email','ea.contact.label.email'),
+            TextField::new('tel','ea.contact.label.phone'),
+            TextEditorField::new('contenu','ea.contact.label.content'),
+            BooleanField::new('_read','ea.contact.label.read'),
         ];
     }
     public function configureActions(Actions $actions): Actions

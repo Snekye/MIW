@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Reseau;
+use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Reseau>
+ * @extends ServiceEntityRepository<Image>
  *
- * @method Reseau|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reseau|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reseau[]    findAll()
- * @method Reseau[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Image|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Image|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Image[]    findAll()
+ * @method Image[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GlobalReseauRepository extends ServiceEntityRepository
+class ImageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Reseau::class);
+        parent::__construct($registry, Image::class);
     }
 
 //    /**
-//     * @return Reseau[] Returns an array of Reseau objects
+//     * @return Image[] Returns an array of Image objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class GlobalReseauRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Reseau
+//    public function findOneBySomeField($value): ?Image
 //    {
 //        return $this->createQueryBuilder('g')
 //            ->andWhere('g.exampleField = :val')

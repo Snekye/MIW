@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\GlobalReseauRepository;
+use App\Repository\ReseauRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GlobalReseauRepository::class)]
+#[ORM\Entity(repositoryClass: ReseauRepository::class)]
 class Reseau
 {
     #[ORM\Id]

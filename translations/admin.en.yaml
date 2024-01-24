@@ -91,3 +91,15 @@ ea:
             phone: "Phone"
             content: "Content"
             read: "Read"
+
+    adminlog:
+        title: 
+            index: "Logs"
+            detail: "Log detail"
+        entity:
+            singular: "log"
+            plural: "logs"
+        label:
+            date: "Date"
+            action: "Action"
+            userlogin: "User"

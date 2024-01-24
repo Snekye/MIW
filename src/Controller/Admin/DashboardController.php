@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -64,7 +65,7 @@ class DashboardController extends AbstractDashboardController
             ])
         ;
     }
-
+    
     public function configureMenuItems(): iterable
     {
         $msgNotifs = count($this->manager->getRepository(Contact::class)->findBy(['_read' => false]));
@@ -86,6 +87,7 @@ class DashboardController extends AbstractDashboardController
                     ->setBadge($msgNotifs,'danger'),
                 MenuItem::linkToCrud("ea.dashboard.messages.access_logs", 'fa fa-folder', AdminAccessLog::class),
                 MenuItem::linkToCrud("ea.dashboard.messages.logs", 'fa fa-folder', AdminLog::class)
+                    ->setDefaultSort(["id" => "DESC"]),
                 ])
                 ->setBadge($msgNotifs,'danger')
                 ->setPermission('ROLE_ADMIN'),
@@ -116,7 +118,10 @@ class DashboardController extends AbstractDashboardController
         return parent::configureUserMenu($user)
             ->displayUserAvatar(false)
             ->addMenuItems([
-                MenuItem::linkToRoute('ea.dashboard.profile', 'fa fa-id-card', '...', ['...' => '...']),
+                MenuItem::linkToCrud('ea.dashboard.profile', 'fa fa-id-card', AdminUser::class)
+                    ->setController(AdminUserProfileController::class)
+                    ->setAction('edit')
+                    ->setEntityId($user->getId()),
             ]);
     }
 }

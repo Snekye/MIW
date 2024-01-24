@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\InfoConfig;
+use App\Entity\Reseau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<InfoConfig>
+ * @extends ServiceEntityRepository<Reseau>
  *
- * @method InfoConfig|null find($id, $lockMode = null, $lockVersion = null)
- * @method InfoConfig|null findOneBy(array $criteria, array $orderBy = null)
- * @method InfoConfig[]    findAll()
- * @method InfoConfig[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Reseau|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reseau|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reseau[]    findAll()
+ * @method Reseau[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GlobalInfoConfigRepository extends ServiceEntityRepository
+class ReseauRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, InfoConfig::class);
+        parent::__construct($registry, Reseau::class);
     }
 
 //    /**
-//     * @return InfoConfig[] Returns an array of InfoConfig objects
+//     * @return Reseau[] Returns an array of Reseau objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class GlobalInfoConfigRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?InfoConfig
+//    public function findOneBySomeField($value): ?Reseau
 //    {
 //        return $this->createQueryBuilder('g')
 //            ->andWhere('g.exampleField = :val')

@@ -91,4 +91,16 @@ ea:
             phone: "Téléphone"
             content: "Contenu"
             read: "Lu"
+
+    adminlog:
+        title: 
+            index: "Logs d'action"
+            detail: "Détail du log"
+        entity:
+            singular: "log"
+            plural: "logs"
+        label:
+            date: "Date"
+            action: "Action"
+            userlogin: "Utilisateur"
         

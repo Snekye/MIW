@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\GlobalImageRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GlobalImageRepository::class)]
+#[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
 {
     #[ORM\Id]

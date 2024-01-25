@@ -21,7 +21,7 @@ class LoginController extends AbstractController
         ]);
     }
 
-    #[Route('/logout', name: 'logout')]
+    //#[Route('/logout', name: 'logout')]
     public function logout(): void
     {
         $this->redirectToRoute('login');

@@ -31,6 +31,9 @@ ea:
         welcome: "Welcome, %name%"
         profile: "Profile"
 
+    profile:
+        title: "Edit your profile"
+
     common:
         created: "Created"
         updated: "Updated"

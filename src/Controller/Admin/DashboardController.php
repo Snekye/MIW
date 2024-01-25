@@ -77,7 +77,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::section('ea.dashboard.admin_section')
                 ->setPermission('ROLE_ADMIN'),
             MenuItem::linkToCrud('ea.dashboard.users', 'fa fa-circle-user', AdminUser::class)
-                ->setPermission('ROLE_ADMIN'),
+                ->setPermission('ROLE_ADMIN')
+                ->setController(AdminUserCrudController::class),
             MenuItem::linkToCrud('ea.dashboard.roles', 'fa fa-pen', AdminUserRole::class)
                 ->setPermission('ROLE_ADMIN'),
             MenuItem::linkToCrud("ea.dashboard.config", 'fa fa-gear', InfoConfig::class)

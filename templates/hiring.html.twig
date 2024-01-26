@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/home.css')}}">
+<link rel="stylesheet" href="{{asset('css/component/job.css')}}">
+{% endblock %}
+
+{% block body %}
+    <h2>Postes</h2>
+    <div class="jobs">
+        {% for j in jobs %}
+        <div class="component-job">
+            <p>{{j.lib}}</p>
+            {% if j.open %}
+                <p style='color:green;'>Ouvert</p>
+            {% else %}
+                <p style='color:red;'>Fermé</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

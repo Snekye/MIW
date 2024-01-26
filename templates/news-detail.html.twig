@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/component/news.css')}}">
+{% endblock %}
+
+{% block body %}
+<a href="../news">Voir toutes les actualités</a>
+    {% set n = news.0 %}
+    <div class="component-news">
+        <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
+        <a href="news/{{ n.titreslug }}">Voir</a>
+    </div>
+{% endblock %}

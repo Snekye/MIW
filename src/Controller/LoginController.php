@@ -15,15 +15,10 @@ class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('@EasyAdmin/page/login.html.twig', [
+        return $this->render('bundles/EasyAdminBundle/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
+            'site_key' => '0x4AAAAAAABdC8TXd1fD-L3V'
         ]);
-    }
-
-    //#[Route('/logout', name: 'logout')]
-    public function logout(): void
-    {
-        $this->redirectToRoute('login');
     }
 }

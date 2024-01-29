@@ -42,6 +42,11 @@ class DashboardController extends AbstractDashboardController
             'user' => $this->getUser(),
         ]);
     }
+    #[Route('/admin', name: 'admin-nolocale')]
+    public function index2(): Response
+    {
+        return $this->redirectToRoute('admin', ['_locale' => 'fr']);
+    }
 
     private $manager;
     public function __construct(EntityManagerInterface $entityManager)

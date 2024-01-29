@@ -14,8 +14,17 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+
 class Authenticator extends AbstractLoginFormAuthenticator
 {
+    public function __construct(private HttpClientInterface $client) 
+    {
+        $this->http = $client;
+    }
+
     public function supports(Request $request): bool
     {
         return (!is_null($request->request->get('_username')));
@@ -27,11 +36,34 @@ class Authenticator extends AbstractLoginFormAuthenticator
         $password = $request->request->get('_password');
         $turnstile = $request->request->get('cf-turnstile-response');
 
-        //check turnstile
-
-        //dd($request);
-
-        return new Passport(new UserBadge($login), new PasswordCredentials($password));
+        $response = $this->http->request(
+            'POST', 
+            'https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+                'body' => [
+                    'secret' => '0x4AAAAAAABdC6xmGG7OJordXQaRAQHJkzg',
+                    'response' => $turnstile
+                ]
+            ]);
+        $code = $response->getStatusCode();
+        $content = json_decode($response->getContent(), true);
+        
+        if ($code == 200) 
+        {
+            if ($content['success'] === true) 
+            {
+                return new Passport(new UserBadge($login), new PasswordCredentials($password));
+            }
+            else
+            {
+                throw new CustomUserMessageAuthenticationException(
+                    'Une erreur est survenue, essayez de recharger la page. [Turnstile 200 - '.implode(";",$content['error-codes']).']');
+            }
+        }
+        else 
+        {
+            throw new CustomUserMessageAuthenticationException(
+                'Une erreur est survenue, essayez de recharger la page. [Turnstile '.$code.']');
+        }
     }
 
     public function getLoginUrl(Request $request): string

@@ -18,11 +18,15 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
+use Doctrine\Persistence\ObjectManager;
+use App\Entity\AdminAccessLog;
+
 class Authenticator extends AbstractLoginFormAuthenticator
 {
-    public function __construct(private HttpClientInterface $client) 
+    public function __construct(private HttpClientInterface $client, ObjectManager $manager) 
     {
         $this->http = $client;
+        $this->manager = $manager;
     }
 
     public function supports(Request $request): bool
@@ -40,7 +44,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
             'POST', 
             'https://challenges.cloudflare.com/turnstile/v0/siteverify', [
                 'body' => [
-                    'secret' => '0x4AAAAAAABdC6xmGG7OJordXQaRAQHJkzg',
+                    'secret' => $_ENV['TURNSTILE_SECRET'],
                     'response' => $turnstile
                 ]
             ]);
@@ -51,16 +55,31 @@ class Authenticator extends AbstractLoginFormAuthenticator
         {
             if ($content['success'] === true) 
             {
+                $log = new AdminAccessLog();
+                $log->setSuccess(true);
+                $log->setMessage("L'utilisateur [".$login."] est connecté.");
+                $this->manager->persist($log);
+                $this->manager->flush();
                 return new Passport(new UserBadge($login), new PasswordCredentials($password));
             }
             else
             {
+                $log = new AdminAccessLog();
+                $log->setSuccess(false);
+                $log->setMessage("L'utilisateur [".$login."] a été refusé. [Turnstile error : 200 - ".implode(";",$content['error-codes']).']');
+                $this->manager->persist($log);
+                $this->manager->flush();
                 throw new CustomUserMessageAuthenticationException(
                     'Une erreur est survenue, essayez de recharger la page. [Turnstile 200 - '.implode(";",$content['error-codes']).']');
             }
         }
         else 
         {
+            $log = new AdminAccessLog();
+            $log->setSuccess(false);
+            $log->setMessage("L'utilisateur [".$login."] a été refusé. [Turnstile error : 200 - ".$code);
+            $this->manager->persist($log);
+            $this->manager->flush();
             throw new CustomUserMessageAuthenticationException(
                 'Une erreur est survenue, essayez de recharger la page. [Turnstile '.$code.']');
         }

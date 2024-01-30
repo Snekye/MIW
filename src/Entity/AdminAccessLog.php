@@ -14,14 +14,14 @@ class AdminAccessLog
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'accesslogs')]
-    private ?AdminUser $user_login = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
     private ?bool $success = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $message = null;
 
     public function __construct() 
     {
@@ -36,18 +36,6 @@ class AdminAccessLog
     public function setId(int $id): static
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function getUserLogin(): ?AdminUser
-    {
-        return $this->user_login;
-    }
-
-    public function setUserLogin(?AdminUser $user_login): static
-    {
-        $this->user_login = $user_login;
 
         return $this;
     }
@@ -72,6 +60,18 @@ class AdminAccessLog
     public function setSuccess(bool $success): static
     {
         $this->success = $success;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): static
+    {
+        $this->message = $message;
 
         return $this;
     }

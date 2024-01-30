@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Text;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -42,9 +42,9 @@ class AdminAccessLogCrudController extends AbstractCrudController
                 ->setFormat('EEE d MMM y HH:mm:ss')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            'success',
-            AssociationField::new('user_login')
-                ->autocomplete(),
+            BooleanField::new('success')
+                ->setFormTypeOption('disabled','disabled'),
+            TextField::new('message'),
         ];
     }
     public function configureActions(Actions $actions): Actions

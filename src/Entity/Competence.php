@@ -5,10 +5,15 @@ namespace App\Entity;
 use App\Repository\CompetenceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use Cocur\Slugify\Slugify;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 #[ORM\Entity(repositoryClass: CompetenceRepository::class)]
+#[Vich\Uploadable]
 class Competence
 {
     #[ORM\Id]
@@ -25,16 +30,27 @@ class Competence
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Image $image = null;
-
     #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdminLog $_created = null;
 
     #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_updated = null;
+
+
+
+    #[Vich\UploadableField(mapping: 'skill', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+
+
+
 
     public function getId(): ?int
     {
@@ -125,7 +141,45 @@ class Competence
 
 
 
+public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
 
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+
+
+
+    
     public function __toString(): string
     {
         return $this->titre;

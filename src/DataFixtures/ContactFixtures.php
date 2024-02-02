@@ -33,6 +33,7 @@ class ContactFixtures extends Fixture
             $temp->setTel($e["tel"]);
             $temp->setContenu($e["contenu"]);
             $temp->setDate(new \DateTime('now'));
+            $temp->setRead(false);
 
             $manager->persist($temp);
 

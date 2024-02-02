@@ -106,3 +106,20 @@ ea:
             date: "Date"
             action: "Action"
             userlogin: "User"
+
+    news:
+        title:
+            index: "News"
+            new: "Add news"
+            edit: "Edit news"
+            detail: "News detail"
+        entity:
+            singular: "news"
+            plural: "news"
+        label:
+            date: "Date"
+            title: "Title"
+            titleslug: "Title slug"
+            content: "Content"
+
+    

@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Postes</h2>
+    <h2>Partenaires</h2>
     <div class="partners">
         {% for p in partners %}
         <div class="component-job">
-            <img class= "partner-img" src="img/upload/PresentationPartenaire/{{ p.image }}">
+            <img class= "partner-img" src="{{ vich_uploader_asset(p, 'imageFile') }}" alt="{{ p.imageName }}"">
         </div>
         {% endfor %}
     </div>

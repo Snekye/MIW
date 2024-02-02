@@ -14,7 +14,7 @@ class _UploadFolderFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        array_map('unlink', glob("public/img/upload/AccueilActualite/*"));
+        array_map('unlink', glob("public/img/upload/News/*"));
         array_map('unlink', glob("public/img/upload/BlogArticle/*"));
         array_map('unlink', glob("public/img/upload/Competence/*"));
         array_map('unlink', glob("public/img/upload/PresentationPartenaire/*"));

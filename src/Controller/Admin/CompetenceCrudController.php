@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CompetenceCrudController extends AbstractCrudController
 {
@@ -40,11 +41,8 @@ class CompetenceCrudController extends AbstractCrudController
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             TextEditorField::new('contenu'),
-            ImageField::new('image')
-                ->setUploadDir('public/img/upload/Competence')
-                ->setBasePath('img/upload/Competence')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
-
+            TextField::new('imageFile')
+                ->setFormType(VichImageType::class),
             AssociationField::new('_created')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),

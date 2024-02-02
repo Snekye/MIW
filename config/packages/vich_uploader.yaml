@@ -1,11 +1,55 @@
-# vich_uploader:
-#     db_driver: orm
+vich_uploader:
+    db_driver: orm
 
-#     metadata:
-#         type: attribute
+    metadata:
+        type: attribute
 
-#     mappings:
-#         images:
-#             uri_prefix: /img
-#             upload_destination: '%kernel.project_dir%/public/images/products'
-#             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+    mappings:
+        news:
+            uri_prefix: /img/upload/news
+            upload_destination: '%kernel.project_dir%/public/img/upload/News'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        blogarticle:
+            uri_prefix: /img/upload/blogarticle
+            upload_destination: '%kernel.project_dir%/public/img/upload/Blogarticle'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        skill:
+            uri_prefix: /img/upload/skill
+            upload_destination: '%kernel.project_dir%/public/img/upload/Skill'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        partner:
+            uri_prefix: /img/upload/partner
+            upload_destination: '%kernel.project_dir%/public/img/upload/Partner'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        project:
+            uri_prefix: /img/upload/project
+            upload_destination: '%kernel.project_dir%/public/img/upload/Project'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        social:
+            uri_prefix: /img/upload/social
+            upload_destination: '%kernel.project_dir%/public/img/upload/Social'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

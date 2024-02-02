@@ -20,7 +20,7 @@
             <a href="../partners">Partenaires</a>
             <div class="socials">
                 {% for r in reseaux %}
-                <img class= "social-img" src="img/upload/Reseau/{{ r.image }}">
+                <img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') }}" alt="{{ r.imageName }}">
                 {% endfor %}
             </div>
         </section>

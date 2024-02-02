@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\AccueilActualite;
+use App\Entity\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<AccueilActualite>
+ * @extends ServiceEntityRepository<News>
  *
- * @method AccueilActualite|null find($id, $lockMode = null, $lockVersion = null)
- * @method AccueilActualite|null findOneBy(array $criteria, array $orderBy = null)
- * @method AccueilActualite[]    findAll()
- * @method AccueilActualite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method News|null find($id, $lockMode = null, $lockVersion = null)
+ * @method News|null findOneBy(array $criteria, array $orderBy = null)
+ * @method News[]    findAll()
+ * @method News[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AccueilActualiteRepository extends ServiceEntityRepository
+class NewsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, AccueilActualite::class);
+        parent::__construct($registry, News::class);
     }
 
 //    /**
-//     * @return AccueilActualite[] Returns an array of AccueilActualite objects
+//     * @return News[] Returns an array of News objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class AccueilActualiteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?AccueilActualite
+//    public function findOneBySomeField($value): ?News
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')

@@ -7,9 +7,13 @@
 
 {% block body %}
     <h2>Dernière actualité</h2>
-    {% set n = news.0 %}
-    <div class="component-news">
-        <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
-        <a href="news/{{ n.titreslug }}">Voir</a>
-    </div>
+    {% if news is not empty %}
+        {% set n = news.0 %}
+        <div class="component-news">
+            <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
+            <a href="news/{{ n.titreslug }}">Voir</a>
+        </div>
+    {% else %}
+    <p>Aucune actualité.</p>
+    {% endif %}
 {% endblock %}

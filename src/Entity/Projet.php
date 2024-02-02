@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use Cocur\Slugify\Slugify;
 
@@ -36,7 +37,7 @@ class Projet
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\ManyToMany(targetEntity: Image::class)]
+    #[ORM\ManyToMany(targetEntity: ProjetImage::class)]
     private Collection $images;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'projets')]
@@ -142,14 +143,14 @@ class Projet
     }
 
     /**
-     * @return Collection<int, Image>
+     * @return Collection<int, ProjetImage>
      */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    public function addImage(Image $image): static
+    public function addImage(ProjetImage $image): static
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
@@ -158,7 +159,7 @@ class Projet
         return $this;
     }
 
-    public function removeImage(Image $image): static
+    public function removeImage(ProjetImage $image): static
     {
         $this->images->removeElement($image);
 

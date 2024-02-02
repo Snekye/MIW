@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\AccueilActualite;
+use App\Entity\News;
 
 class HomeController extends AbstractController
 {
@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     public function home(EntityManagerInterface $m): Response
     {
         return $this->render('home.html.twig', [
-            'news' => $m->getRepository(AccueilActualite::class)->findBy([],["id" => "DESC"],1,0)
+            'news' => $m->getRepository(News::class)->findBy([],["id" => "DESC"],1,0)
         ] + BaseController::getBase($m));
     }
 }

@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PresentationPartenaireCrudController extends AbstractCrudController
 {
@@ -36,11 +37,8 @@ class PresentationPartenaireCrudController extends AbstractCrudController
     {
         return [
             TextField::new('nom'),
-            ImageField::new('image')
-                ->setUploadDir('public/img/upload/PresentationPartenaire')
-                ->setBasePath('img/upload/PresentationPartenaire')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
-
+            TextField::new('imageFile')
+                ->setFormType(VichImageType::class),
             AssociationField::new('_created')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),

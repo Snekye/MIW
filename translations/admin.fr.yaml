@@ -106,4 +106,18 @@ ea:
             date: "Date"
             action: "Action"
             userlogin: "Utilisateur"
-        
+
+    news:
+        title:
+            index: "Actualités"
+            new: "Ajouter une actualité"
+            edit: "Modifier une actualité"
+            detail: "Détail de l'actualité"
+        entity:
+            singular: "Actualité"
+            plural: "Actualités"
+        label:
+            date: "Date"
+            title: "Titre"
+            titleslug: "Titre slug"
+            content: "Contenu"        

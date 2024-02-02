@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\AccueilActualite;
+use App\Entity\News;
 
 class NewsController extends AbstractController
 {
@@ -16,7 +16,7 @@ class NewsController extends AbstractController
     public function news(EntityManagerInterface $m): Response
     {
         return $this->render('news.html.twig', [
-            'news' => $m->getRepository(AccueilActualite::class)->findBy([],["id" => "DESC"]),
+            'news' => $m->getRepository(News::class)->findBy([],["id" => "DESC"]),
         ] + BaseController::getBase($m));
     }
 
@@ -24,7 +24,7 @@ class NewsController extends AbstractController
     public function news_detail(EntityManagerInterface $m, string $slug): Response
     {
         return $this->render('news-detail.html.twig', [
-            'news' => $m->getRepository(AccueilActualite::class)->findBy(['titre_slug' => $slug], null),
+            'news' => $m->getRepository(News::class)->findBy(['titre_slug' => $slug], null),
         ] + BaseController::getBase($m));
     }
 }

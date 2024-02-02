@@ -2,21 +2,23 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\AccueilActualite;
+use App\Entity\News;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class AccueilActualiteCrudController extends AbstractCrudController
+class NewsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return AccueilActualite::class;
+        return News::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -45,11 +47,8 @@ class AccueilActualiteCrudController extends AbstractCrudController
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
             TextEditorField::new('contenu'),
-            ImageField::new('image')
-                ->setUploadDir('public/img/upload/AccueilActualite')
-                ->setBasePath('img/upload/AccueilActualite')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
-
+            TextField::new('imageFile')
+                ->setFormType(VichImageType::class),
             AssociationField::new('_created')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),

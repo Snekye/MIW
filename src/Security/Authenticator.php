@@ -77,7 +77,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
         {
             $log = new AdminAccessLog();
             $log->setSuccess(false);
-            $log->setMessage("L'utilisateur [".$login."] a été refusé. [Turnstile error : 200 - ".$code);
+            $log->setMessage("L'utilisateur [".$login."] a été refusé. [Turnstile error ".$code);
             $this->manager->persist($log);
             $this->manager->flush();
             throw new CustomUserMessageAuthenticationException(

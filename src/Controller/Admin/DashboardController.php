@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\AccueilActualite;
+use App\Entity\News;
 use App\Entity\AdminUser;
 use App\Entity\AdminUserRole;
 use App\Entity\AdminAccessLog;
@@ -100,7 +100,7 @@ class DashboardController extends AbstractDashboardController
             
             MenuItem::section('ea.dashboard.edit_section'),
             MenuItem::subMenu('ea.dashboard.content.list', 'fa fa-paper-plane')->setSubItems([
-                MenuItem::linkToCrud("ea.dashboard.content.news", 'fa fa-newspaper', AccueilActualite::class),
+                MenuItem::linkToCrud("ea.dashboard.content.news", 'fa fa-newspaper', News::class),
                 MenuItem::linkToCrud("ea.dashboard.content.skills", 'fa fa-bolt', Competence::class),
                 MenuItem::linkToCrud("ea.dashboard.content.service_fees", 'fa fa-wrench', PresentationDepannageTarif::class),
                 MenuItem::linkToCrud("ea.dashboard.content.shift_fees", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),

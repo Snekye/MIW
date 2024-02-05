@@ -10,7 +10,7 @@
     <div class="partners">
         {% for p in partners %}
         <div class="component-job">
-            <img class= "partner-img" src="{{ vich_uploader_asset(p, 'imageFile') }}" alt="{{ p.imageName }}"">
+            <img class= "partner-img" src="{{ vich_uploader_asset(p, 'imageFile') | imagine_filter('partner') }}" alt="{{ p.imageName }}"">
         </div>
         {% endfor %}
     </div>

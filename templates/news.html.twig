@@ -7,6 +7,7 @@
 {% block body %}
     {% for n in news %}
         <div class="component-news">
+            <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('news_tn') }}" alt="{{ n.imageName }}">
             <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
             <a href="news/{{ n.titreslug }}">Voir</a>
         </div>

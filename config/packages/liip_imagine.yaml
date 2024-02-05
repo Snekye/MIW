@@ -1,0 +1,39 @@
+liip_imagine:
+    resolvers:
+        default: 
+            web_path: 
+                web_root: "%env(DOCUMENT_ROOT)%" 
+                cache_prefix: "cache" 
+    loaders: 
+        default: 
+            filesystem: 
+                data_root: "%env(DOCUMENT_ROOT)%"
+
+    filter_sets:
+        cache: ~
+
+        social:
+            quality: 80
+            format: webp
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+
+        partner:
+            quality: 80
+            format: webp
+            filters:
+                relative_resize:
+                    widen: 400
+
+        news:
+            quality: 80
+            format: webp
+            filters:
+                relative_resize:
+                    widen: 400
+        news_tn:
+            quality: 80
+            format: webp
+            filters:
+                relative_resize:
+                    heighten: 50

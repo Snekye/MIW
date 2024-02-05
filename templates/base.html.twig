@@ -20,7 +20,7 @@
             <a href="../partners">Partenaires</a>
             <div class="socials">
                 {% for r in reseaux %}
-                <img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') }}" alt="{{ r.imageName }}">
+                <a href="{{r.lien}}"><img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') | imagine_filter('social') }}" alt="{{ r.imageName }}"></a>
                 {% endfor %}
             </div>
         </section>

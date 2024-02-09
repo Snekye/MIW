@@ -16,7 +16,13 @@ class BaseController extends AbstractController
     public static function getBase(EntityManagerInterface $m): array
     {
         return [
-          'infos' => $m->getRepository(InfoConfig::class)->findAll(),
+          'info' => 
+          array_reduce(
+              array_map(
+                  function ($x) {return [$x->getLib() => $x->getValeur()];}
+                  ,$m->getRepository(InfoConfig::class)->findAll()),
+              'array_merge',[]),
+              
           'reseaux' => $m->getRepository(Reseau::class)->findAll(),
         ];
     }

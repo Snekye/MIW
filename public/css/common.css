@@ -1,0 +1,76 @@
+:root {
+    --cl-orange: #d28774;
+    --cl-blue: #99afbf;
+    --cl-brown: #7f6e6b;
+    --cl-grey: #565656;
+    --cl-lightgrey: #efefef;
+}
+.-cl-orange {color: var(--cl-orange);}
+.-cl-blue {color: var(--cl-blue);}
+.-cl-brown {color: var(--cl-brown);}
+.-cl-grey {color: var(--cl-grey);}
+
+h1 {
+    font-size: 36px;
+    margin: 0;
+}
+h1, h2, h3, h4, h5 {font-weight: normal;}
+.-str {font-weight: bold;}
+.-tac {text-align: center;}
+.-taj {text-align: justify;}
+.-tar {text-align: right;}
+.-fl-r {float: right;}
+.-fl-l {float: left;}
+.-flex-se {
+    display: flex;
+    justify-content: space-evenly;
+}
+.-flex-sa {
+    display: flex;
+    justify-content: space-around;
+}
+.-flex-sb {
+    display: flex;
+    justify-content: space-between;
+}
+.-flex-ce {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.-btn-blue {
+    background-color: var(--cl-blue);
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+}
+.-btn-blue:hover {
+    background-color: var(--cl-orange);
+    transition: .3s;
+}
+.-btn-orange {
+    background-color: var(--cl-orange);
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+}
+.-btn-orange:hover {
+    background-color: var(--cl-blue);
+    transition: .3s;
+}
+.-white-outline {
+    border: 1px solid white;
+}
+.-btn-big {
+    width: 20vw;
+    font-size: 24px;
+    padding: 3% 1%;
+}
+.-btn-wide {
+    width: 20vw;
+    font-size: 20px;
+    padding: 3% 1%;
+}
+.-mrg-btm-3 {margin-bottom: 3%;}

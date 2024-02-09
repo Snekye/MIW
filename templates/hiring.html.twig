@@ -2,11 +2,11 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/home.css')}}">
-<link rel="stylesheet" href="{{asset('css/component/job.css')}}">
+<link rel="stylesheet" href="{{asset('css/hiring.css')}}">
 {% endblock %}
 
 {% block body %}
-    <h2>Postes</h2>
+    <h2 class="-cl-orange">Nous recrutons!</h2>
     <div class="jobs">
         {% for j in jobs %}
         <div class="component-job">

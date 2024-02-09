@@ -2,14 +2,21 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/component/news.css')}}">
+<link rel="stylesheet" href="{{asset('css/news-detail.css')}}">
 {% endblock %}
 
 {% block body %}
-<a href="../news">Voir toutes les actualités</a>
+<a href="../news">Retour aux actualités</a>
+
+{% if news is not empty %}
     {% set n = news.0 %}
+    <h1 class="-cl-orange">{{ n.titre }}</h1>
+    <h2 class="-cl-blue">Publié le {{ n.date|date('d-m-Y') }}</h2>
     <div class="component-news">
-        <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('partner') }}" alt="{{ n.imageName }}">
-        <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
-        <p>{{ n.contenu }}</p>
+        <img class="-fl-l" src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('partner') }}" alt="{{ n.imageName }}">
+        <div class="-cl-brown">{{ n.contenu|raw }}</p>
     </div>
+{% else %}
+<p>Erreur.</p>
+{% endif %}
 {% endblock %}

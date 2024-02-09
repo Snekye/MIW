@@ -1,0 +1,49 @@
+.presentation {
+    padding: 2vw;
+    margin: 0 1%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 11px #b5b5b5;
+}
+
+.presentation-text {
+    width: 55%;
+    margin-right: 5%;
+}
+.actu {
+    margin: 0 0.5%;
+}
+.actu > h2 {
+    font-size: 250%;
+}
+.component-news {
+    margin-bottom: 2%;
+}
+.maintenance {
+    background-color: #efefef;
+}
+.maintenance-right {
+    margin: 2% 0;
+}
+.maintenance-right ul {
+    font-size: 150%;
+}
+.maintenance-left {
+    width: 40%;
+    background-image : url(../img/informaticien.png);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.maintenance-besoin {
+    font-size: 180%;
+    padding: 2%;
+    margin: 3%;
+    border-radius: 5px;
+    background: #FFFFFF80;
+    width: fit-content;
+}
+.maintenance-devis {
+    margin-bottom: 10%;
+}

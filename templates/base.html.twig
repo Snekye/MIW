@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+
+    {% if info.site_visibilite == "public" %}
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="{{asset('css/common.css')}}"/>
         <link rel="stylesheet" href="{{asset('css/base.css')}}"/>
         {% block stylesheets %}
         {% endblock %}
@@ -13,19 +17,101 @@
     </head>
     <body>
 
-        <section class="menu">
-            <a href="../">Accueil</a>
-            <a href="../news">Actualités</a>
-            <a href="../hiring">Recrutement</a>
-            <a href="../partners">Partenaires</a>
-            <div class="socials">
-                {% for r in reseaux %}
-                <a href="{{r.lien}}"><img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') | imagine_filter('social') }}" alt="{{ r.imageName }}"></a>
-                {% endfor %}
+        <section class="menu -flex-sa">
+            <div>
+                <img src="{{ 'img/logo-maxinfoweb.png' | imagine_filter('logo')}}" >
+            </div>
+
+            <div class="menuflex">
+                <a href="{{ path('home') }}">Accueil</a>
+            </div>
+
+            <div class="menuflex">
+                <a href="{{ path('news') }}">Actualités</a>
+            </div>
+
+            <div class="menuflex">
+                <a href="{{ path('hiring') }}">Recrutement</a>
+            </div>
+
+            <div class="menuflex">
+                <a href="{{ path('partners') }}">Partenaires</a>
+            </div>
+
+            <div class="menuflex">
+                <div class="socials">
+                    {% for r in reseaux %}
+                    <a href="{{r.lien}}"><img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') | imagine_filter('social') }}" alt="{{ r.imageName }}"></a>
+                    {% endfor %}
+                </div>
             </div>
         </section>
 
+        <section class="main">
         {% block body %}{% endblock %}
+        </section>
+
+        <section class="veneznousvoir">
+            <h1 class="-cl-orange">Un magasin d'informatique dans l'oise,</h1>
+            <h1 class="-cl-blue -mrg-btm-3">au service des particuliers à NEUILLY EN THELLE</h1>
+            <div class="vnv-wrapper -flex-sb">
+                <div class="vnv">
+                    <p>Dépannage d’ordinateurs et matériel Informatique dans l’Oise, réparation informatique, vente, 
+                    montage et configuration d’ordinateurs&nbsp: Maxinfoweb, à NEUILLY EN THELLE s’occupe de tout pour vous.
+                    </p>
+                    <p>Nous avons le plaisir de vous recevoir du lundi au vendredi, de 10h à 18h au :</p>
+                    <div class="-cl-blue">
+                        <p>Maxinfoweb - SAS MIW</p>
+                        <p>{{info.agence_adresse_1}}</p>
+                        <p>{{info.agence_adresse_2}}</p>
+                    </div>
+                    <p class="-cl-orange">{{info.agence_tel}}</p>
+                </div>
+                <div class="vnv">
+                    ici y'a une carte genre
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="-flex-se">
+                <div>
+                    <div class="-flex-sa">
+                        {% for r in reseaux %}
+                        <a href="{{r.lien}}"><img class="social-img" src="{{ vich_uploader_asset(r, 'imageFile') | imagine_filter('social') }}" alt="{{ r.imageName }}"></a>
+                        {% endfor %}
+                    </div>
+                    <p>Pour nous suivre sur les réseaux</p>
+                </div>
+
+                <div>
+                    <p>SAS MIW</p>
+                    <p>Agence web et informatique</p>
+                    <p>Tous droits réservés</p>
+                    <p>Mentions légales</p>
+                    <p>Confidentialité</p>
+                </div>
+
+                <div>
+                    <p>Agence:</p>
+                    <p>{{info.agence_adresse_1}}</p>
+                    <p>{{info.agence_adresse_2}}</p>
+                    <p>{{info.agence_tel}}</p>
+                </div>
+
+                <div>
+                    <p>Siège social:</p>
+                    <p>{{info.siege_adresse_1}}</p>
+                    <p>{{info.siege_adresse_2}}</p>
+                    <p>{{info.siege_tel}}</p>
+                </div>
+            </div>
+
+            <p class="-tac">Secteurs d'interventions à Neuilly en Thelle et ses environs, dans l'Oise, le Val d'Oise, l'île de France, et Paris.</p>
+        </footer>
 
     </body>
+
+    {% else %}
+    <h1>Ce site est undisponible.</h1>
+    {% endif %}
 </html>

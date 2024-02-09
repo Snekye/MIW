@@ -1,6 +1,14 @@
+.main {
+    padding: 0 10%;
+}
+.main h2 {
+    font-size: 250%;
+}
+.main p {
+    font-size: 150%;
+}
 .partners {
-    width: 96vw;
-    margin: 2vw;
+    margin: 3% 0;
 
     display: flex;
     justify-content: center;

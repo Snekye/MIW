@@ -1,4 +1,9 @@
 liip_imagine:
+    default_filter_set_settings:
+        format: webp
+    webp:
+        generate: true
+
     resolvers:
         default: 
             web_path: 
@@ -14,26 +19,28 @@ liip_imagine:
 
         social:
             quality: 80
-            format: webp
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
 
         partner:
             quality: 80
-            format: webp
             filters:
                 relative_resize:
                     widen: 400
 
         news:
             quality: 80
-            format: webp
             filters:
                 relative_resize:
                     widen: 400
         news_tn:
             quality: 80
-            format: webp
             filters:
                 relative_resize:
-                    heighten: 50
+                    heighten: 200
+
+        logo:
+            quality: 80
+            filters:
+                relative_resize:
+                    widen: 150

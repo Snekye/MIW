@@ -6,14 +6,73 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Dernière actualité</h2>
+<section class="presentation -flex-sb">
+    <div class="presentation-text -taj">
+        <h1 class="-cl-orange">Agence web spécialisée dans la création de sites Internet</h1></br>
+        <p class="-cl-brown -str">Maxinfoweb, Agence web dans l'Oise (60), est spécialisée dans la 
+        <span class="-cl-orange">création de sites internet sur mesure</span>. 
+        La Web Agency créée en 2004 vous propose ses compétences dans le domaine du la création de sites web et 
+        de l’informatique. Nous étudions avec vous vos besoins afin d’y répondre au mieux.</p>
+        <h2 class="-cl-blue">Création de sites Internet, hébergement & Référencement :</h2>
+        <ul class="-cl-brown">
+            <li>Réalisation de votre logo et de votre identité visuelle,</li>
+            <li>Création de tout support de communication : flyer, dépliant, papier à entête, carte de visite... 
+            en accord avec votre identité visuelle. Pour vous distinguer efficacement de vos concurrents et 
+            augmenter la visibilité de votre entreprise.</li>
+            <li>Création graphique sur mesure de votre site internet,</li>
+            <li>Création de votre site Internet statique ou dynamique,</li>
+            <li>Hébergement de votre site web,</li>
+            <li>L'optimisation du référencement de votre site Internet pour une meilleure visibilité sur le net...</li>
+        </ul>
+    </div>
+    <div>
+        <img src="{{asset('img/ordinateur.png')}}">
+        <h1 class="-tac -cl-orange">Vous avez un projet de création de site Internet ?</p>
+        <button class="-btn-blue -btn-big">Demande de devis gratuit</button>
+    </div>
+</section>
+
+<section class="actu">
+    <h2>Les actus de l'agence :</h2>
     {% if news is not empty %}
         {% set n = news.0 %}
         <div class="component-news">
-            <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
-            <a href="news/{{ n.titreslug }}">Voir</a>
+            <div class="component-news-header -flex-sb">
+                <h2 class="-cl-orange">{{ n.titre }}</h2>
+                <h2 class="-cl-blue -tar">Publié le {{ n.date|date('d-m-Y') }}</h2>
+            </div>
+
+            <div class="-flex-sb">
+                <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('news_tn') }}" alt="{{ n.imageName }}">
+                <div class="component-news-content">
+                    <div class="-cl-brown">{{ n.contenu|striptags|u.truncate(250,'...',false)|raw }}</div>
+                    <a href="{{ path('news-detail', {slug: n.titreslug} ) }}">Voir</a>
+                </div>
+            </div>
         </div>
     {% else %}
     <p>Aucune actualité.</p>
     {% endif %}
+</section>
+
+<section class="maintenance -flex-ce">
+    <div class="maintenance-left -tac">
+        <p class="maintenance-besoin">Besoin d'un informaticien ?</p>
+        <button class="maintenance-devis -white-outline -btn-orange -btn-big">Demande de devis gratuit</button>
+    </div>
+
+    <div class="maintenance-right">
+        <h1 class="-cl-blue">Informatique pour professionnels :</br>Maintenance & dépannage</h2>
+        <ul class=" -cl-brown">
+            <li>Maintenance Informatique pour les professionnels</li>
+            <li>Dépannage</li>
+            <li>Vente de matériel,</li>
+            <li>Infogérance,</li>
+            <li>Installation de votre réseau</li>
+            <li>Vidéosurveillance,</li>
+            <li>Domotique...</li>
+        </ul>
+        <button class="-btn-blue -btn-wide">Nos prestations informatiques</button>
+    </div>
+</section>
 {% endblock %}

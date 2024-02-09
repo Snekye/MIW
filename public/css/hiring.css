@@ -1,3 +1,10 @@
+.main {
+    padding: 0 10%;
+}
+.main h2 {
+    font-size: 250%;
+}
+
 .jobs {
     width: 96vw;
     margin: 2vw;

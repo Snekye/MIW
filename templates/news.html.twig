@@ -2,14 +2,26 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/component/news.css')}}">
+<link rel="stylesheet" href="{{asset('css/news.css')}}">
 {% endblock %}
 
 {% block body %}
+    <h1 class="-cl-orange">Les actualités de l'agence :</h1>
     {% for n in news %}
-        <div class="component-news">
-            <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('news_tn') }}" alt="{{ n.imageName }}">
-            <p>{{ n.date|date('d-m-Y') }} - {{ n.titre }}</p>
-            <a href="news/{{ n.titreslug }}">Voir</a>
+    <div class="component-news">
+        <div class="component-news-header -flex-sb">
+            <h2 class="-cl-blue">{{ n.titre }}</h2>
+            <h2 class="-cl-blue -tar">Publié le {{ n.date|date('d-m-Y') }}</h2>
         </div>
+
+        <div class="-flex-sb">
+            <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('news_tn') }}" alt="{{ n.imageName }}">
+            <div class="component-news-content">
+                <div class="-cl-brown">{{ n.contenu|striptags|u.truncate(250,'...',false)|raw }}</div>
+                <a href="{{ path('news-detail', {slug: n.titreslug} ) }}">Voir</a>
+            </div>
+        </div>
+    </div>
+    <div class="lignerouge"></div>
     {% endfor %}
 {% endblock %}

@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('css/home.css')}}">
+<link rel="stylesheet" href="{{asset('css/partners.css')}}">
 <link rel="stylesheet" href="{{asset('css/component/partenaire.css')}}">
 {% endblock %}
 
 {% block body %}
-    <h2>Partenaires</h2>
+    <h2 class="-cl-orange">Nos partenaires</h2>
+    <p class="-cl-brown">Retrouvez ici certains de nos partenaires.</p>
     <div class="partners">
         {% for p in partners %}
         <div class="component-job">

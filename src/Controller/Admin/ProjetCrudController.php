@@ -9,7 +9,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use App\Form\ImageType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProjetCrudController extends AbstractCrudController
 {
@@ -50,6 +55,9 @@ class ProjetCrudController extends AbstractCrudController
                 ]),
             TextEditorField::new('description_courte'),
             TextEditorField::new('description'),
+            CollectionField::new('images')
+                ->setEntryType(ImageType::class)
+                ->onlyOnForms(),
 
             AssociationField::new('_created')
                 ->hideWhenCreating()

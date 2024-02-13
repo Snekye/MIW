@@ -6,7 +6,9 @@ use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-#[ORM\Entity(repositoryClass: ProjetImageRepository::class)]
+use Symfony\Component\HttpFoundation\File\File;
+
+#[ORM\Entity()]
 #[Vich\Uploadable]
 class ProjetImage
 {
@@ -23,6 +25,9 @@ class ProjetImage
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Projet $projet = null;
 
     public function getId(): ?int
     {
@@ -76,5 +81,17 @@ class ProjetImage
     public function __toString(): string
     {
         return $this->imageName;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): static
+    {
+        $this->projet = $projet;
+
+        return $this;
     }
 }

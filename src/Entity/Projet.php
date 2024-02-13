@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use Cocur\Slugify\Slugify;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -37,9 +38,6 @@ class Projet
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\ManyToMany(targetEntity: ProjetImage::class)]
-    private Collection $images;
-
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'projets')]
     private Collection $tags;
 
@@ -49,6 +47,9 @@ class Projet
 
     #[ORM\OneToOne(cascade: ['persist'])]
     private ?AdminLog $_updated = null;
+
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: ProjetImage::class, cascade: ['persist'])]
+    private Collection $images;
 
     public function __construct()
     {
@@ -142,29 +143,6 @@ class Projet
         return $this;
     }
 
-    /**
-     * @return Collection<int, ProjetImage>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(ProjetImage $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(ProjetImage $image): static
-    {
-        $this->images->removeElement($image);
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, tag>
@@ -213,6 +191,38 @@ class Projet
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, ProjetImage>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(ProjetImage $image): static
+    {
+
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setProjet($this);
+        }
+
+        return $this;
+    }
+    
+    public function removeImage(ProjetImage $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProjet() === $this) {
+                $image->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
     public function __toString(): string

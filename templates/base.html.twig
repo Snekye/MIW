@@ -12,30 +12,66 @@
         {% block stylesheets %}
         {% endblock %}
 
+        <script src="https://kit.fontawesome.com/f0917de996.js" crossorigin="anonymous"></script>
         {% block javascripts %}
         {% endblock %}
     </head>
     <body>
 
-        <section class="menu -flex-sa">
-            <div>
-                <img src="{{ 'img/logo-maxinfoweb.png' | imagine_filter('logo')}}" >
+        <section class="menu -flex-sa -cl-menu">
+            <img class="menulogo" src="{{ 'img/logo-maxinfoweb.png' | imagine_filter('logo')}}" >
+
+            <div class="menuflex">
+                <div> 
+                    <i class="fa-solid fa-house"></i>
+                    <a class="-cl-menu" href="{{ path('home') }}">Accueil</a>
+                </div>
             </div>
 
             <div class="menuflex">
-                <a href="{{ path('home') }}">Accueil</a>
+                <div class="clicklistener">
+                    <i class="fa-solid fa-user-group"></i>
+                    <a class="-cl-menu">Actualités</a>
+                    <div class="submenu">
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('news') }}">Actualités</a>
+                        </div>
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('news') }}">Actualitésok</a>
+                        </div>
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('news') }}">Actualités</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="menuflex">
-                <a href="{{ path('news') }}">Actualités</a>
+                <div class="clicklistener">
+                    <i class="fa-solid fa-user-group"></i>
+                    <a class="-cl-menu">Recrutement</a>
+                    <div class="submenu">
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('hiring') }}">Actualités</a>
+                        </div>
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('hiring') }}">Actualitésok</a>
+                        </div>
+                        <div class="-cl-darkgrey">
+                            <i class="fa-solid fa-user-group"></i>
+                            <a href="{{ path('hiring') }}">Actualités</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="menuflex">
-                <a href="{{ path('hiring') }}">Recrutement</a>
-            </div>
-
-            <div class="menuflex">
-                <a href="{{ path('partners') }}">Partenaires</a>
+                <a class="-cl-menu" href="{{ path('partners') }}">Partenaires</a>
             </div>
 
             <div class="menuflex">
@@ -109,9 +145,12 @@
             <p class="-tac">Secteurs d'interventions à Neuilly en Thelle et ses environs, dans l'Oise, le Val d'Oise, l'île de France, et Paris.</p>
         </footer>
 
+        <script src="{{ asset('js/base.js') }}"></script>
+
     </body>
 
     {% else %}
     <h1>Ce site est undisponible.</h1>
     {% endif %}
+
 </html>

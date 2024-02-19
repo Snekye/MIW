@@ -110,7 +110,7 @@ ea:
     news:
         title:
             index: "News"
-            new: "Add news"
+            new: "Create news"
             edit: "Edit news"
             detail: "News detail"
         entity:

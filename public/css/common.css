@@ -4,11 +4,16 @@
     --cl-brown: #7f6e6b;
     --cl-grey: #565656;
     --cl-lightgrey: #efefef;
+    --cl-darkgrey: #404040;
+    --cl-menu: #e0d1be;
 }
 .-cl-orange {color: var(--cl-orange);}
 .-cl-blue {color: var(--cl-blue);}
 .-cl-brown {color: var(--cl-brown);}
 .-cl-grey {color: var(--cl-grey);}
+.-cl-lightgrey {color: var(--cl-lightgrey);}
+.-cl-darkgrey {color: var(--cl-darkgrey);}
+.-cl-menu {color: var(--cl-menu);}
 
 h1 {
     font-size: 36px;

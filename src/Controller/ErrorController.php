@@ -24,6 +24,9 @@ class ErrorController extends AbstractController
             case 404:
                 $message = "La page demandée n'est pas disponible.";
                 break;
+            case 418:
+                $message = "Je suis une théière.";
+                break;
             case 500:
                 $message = "Une erreur interne est survenue.";
                 break;
@@ -34,7 +37,7 @@ class ErrorController extends AbstractController
                 $message = "Une erreur est survenue.";
         }
         $detail = ($exception && $base["info"]["site_visibilite"] == "debug") ? $exception->getMessage() : null;
-        
+
         return $this->render('error/error.html.twig', [
                 'code' => $code,
                 'message' => $message,

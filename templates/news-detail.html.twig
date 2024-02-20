@@ -14,7 +14,7 @@
     <h2 class="-cl-blue">Publié le {{ n.date|date('d-m-Y') }}</h2>
     <div class="component-news">
         <img class="-fl-l" src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('partner') }}" alt="{{ n.imageName }}">
-        <div class="-cl-brown">{{ n.contenu|raw }}</p>
+        <div class="-cl-brown">{{ n.contenu|raw }}</div>
     </div>
 {% else %}
 <p>Erreur.</p>

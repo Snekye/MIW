@@ -18,7 +18,7 @@ class LoginController extends AbstractController
         return $this->render('bundles/EasyAdminBundle/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'site_key' => '0x4AAAAAAABdC8TXd1fD-L3V'
+            'site_key' =>  $_ENV['TURNSTILE_SITEKEY']
         ]);
     }
 }

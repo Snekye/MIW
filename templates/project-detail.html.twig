@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/project-detail.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="projet">
+    <div class="projecttext">
+        <h1 class="-cl-orange">{{p.titre}}</h1>
+        <h2 class="-cl-blue">{{p.soustitre}}</h1>
+        <div class="-cl-brown">{{p.descriptioncourte | raw}}</div>
+    </div>
+</div>
+
+
+{% endblock %}

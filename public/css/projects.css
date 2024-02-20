@@ -1,0 +1,21 @@
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.project {
+    max-width: 19%;
+    margin: 2% .5%;
+    border-radius: 2px;
+    box-shadow: 1px 1px 11px #b5b5b560;
+}
+.project img {
+    width: 100%;
+}
+.projecttext {
+    padding: 3%;
+}
+h1, h2 {
+    font-size: 24px;
+}

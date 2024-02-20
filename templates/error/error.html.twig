@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="-tac">
+    <h1 class="-cl-blue">{{ code }}</h1>
+    <h2 class="-cl-orange">{{ message }}</h2>
+
+    {% if detail != null %}
+    <p class="-cl-brown">[{{ detail }}]</p>
+    {% endif %}
+    </br>
+</div>
+{% endblock %}

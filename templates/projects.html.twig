@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/projects.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="projets -flex-ce">
+    {% for p in projects %}
+    {% set i = p.images[0] %}
+    <div class="project">
+        <a href="{{ path('projet-detail', {"type":type, "slug":p.titreslug }) }}">
+            <img src="{{ vich_uploader_asset(i, 'imageFile') | imagine_filter('project_tn') }}" alt="{{ i.imageName }}">
+        </a>
+        <div class="projecttext">
+            <h1 class="-cl-orange">{{p.titre}}</h1>
+            <h2 class="-cl-blue">{{p.soustitre}}</h1>
+            <div class="-cl-brown">{{p.descriptioncourte | raw}}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

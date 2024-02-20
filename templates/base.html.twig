@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-    {% if info.site_visibilite == "public" %}
-
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -22,7 +20,7 @@
             <img class="menulogo" src="{{ 'img/logo-maxinfoweb.png' | imagine_filter('logo')}}" >
 
             <div class="menuflex">
-                <div> 
+                <div class="menuwrapper"> 
                     <i class="fa-solid fa-house"></i>
                     <a class="-cl-menu" href="{{ path('home') }}">Accueil</a>
                 </div>
@@ -30,20 +28,35 @@
 
             <div class="menuflex">
                 <div class="clicklistener">
-                    <i class="fa-solid fa-user-group"></i>
-                    <a class="-cl-menu">Actualités</a>
-                    <div class="submenu">
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('news') }}">Actualités</a>
-                        </div>
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('news') }}">Actualitésok</a>
-                        </div>
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('news') }}">Actualités</a>
+                    <div class="menuwrapper">
+                        <i class="fa-solid fa-user-group"></i>
+                        <a class="-cl-menu">Présentation</a>
+                        <i class="fa-solid fa-angle-down"></i>
+                        <div class="submenu">
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-home"></i>
+                                <a href="{{ path('miw-web') }}">L'agence&nbspweb&nbspMaxinfoweb</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-laptop"></i>
+                                <a href="{{ path('miw-informatique') }}">L'agence&nbspMIW&nbspInformatique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="{{ path('miw-telecom') }}">L'agence&nbspMIW&nbspTélécom</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-building"></i>
+                                <a href="{{ path('miw-magasin') }}">Magasin&nbspd'informatique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-user-group"></i>
+                                <a href="{{ path('hiring') }}">Recrutement</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-handshake"></i>
+                                <a href="{{ path('partners') }}">Nos&nbsppartenaires</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,27 +64,36 @@
 
             <div class="menuflex">
                 <div class="clicklistener">
-                    <i class="fa-solid fa-user-group"></i>
-                    <a class="-cl-menu">Recrutement</a>
-                    <div class="submenu">
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('hiring') }}">Actualités</a>
-                        </div>
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('hiring') }}">Actualitésok</a>
-                        </div>
-                        <div class="-cl-darkgrey">
-                            <i class="fa-solid fa-user-group"></i>
-                            <a href="{{ path('hiring') }}">Actualités</a>
+                    <div class="menuwrapper">
+                        <i class="fa-solid fa-folder"></i>
+                        <a class="-cl-menu">Nos projets</a>
+                        <i class="fa-solid fa-angle-down"></i>
+                        <div class="submenu">
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-globe"></i>
+                                <a href="{{ path('projets',{"type":"web"}) }}">Projets&nbspweb</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-brush"></i>
+                                <a href="{{ path('projets',{"type":"print"}) }}">Projets&nbspprint</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="menuflex">
-                <a class="-cl-menu" href="{{ path('partners') }}">Partenaires</a>
+                <div class="menuwrapper"> 
+                    <i class="fa-solid fa-comments"></i>
+                    <a class="-cl-menu" href="{{ path('home') }}">Blog</a>
+                </div>
+            </div>
+
+            <div class="menuflex">
+                <div class="menuwrapper"> 
+                    <i class="fa-solid fa-at"></i>
+                    <a class="-cl-menu" href="{{ path('home') }}">Contact</a>
+                </div>
             </div>
 
             <div class="menuflex">
@@ -104,7 +126,7 @@
                     <p class="-cl-orange">{{info.agence_tel}}</p>
                 </div>
                 <div class="vnv">
-                    ici y'a une carte genre
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.7513103112774!2d2.2824798156873642!3d49.22424327932504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e651ca7077241f%3A0x891a241705fee15b!2s15%20Place%20du%20Mal%20Leclerc%2C%2060530%20Neuilly-en-Thelle!5e0!3m2!1sfr!2sfr!4v1610026795890!5m2!1sfr!2sfr" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
         </section>
@@ -148,9 +170,5 @@
         <script src="{{ asset('js/base.js') }}"></script>
 
     </body>
-
-    {% else %}
-    <h1>Ce site est undisponible.</h1>
-    {% endif %}
 
 </html>

@@ -44,3 +44,9 @@ liip_imagine:
             filters:
                 relative_resize:
                     widen: 120
+        
+        project_tn:
+            quality: 80
+            filters:
+                relative_resize:
+                    heighten: 200

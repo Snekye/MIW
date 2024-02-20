@@ -17,9 +17,11 @@
 
 h1 {
     font-size: 36px;
+}
+h1, h2, h3, h4, h5 {
+    font-weight: normal; 
     margin: 0;
 }
-h1, h2, h3, h4, h5 {font-weight: normal;}
 .-str {font-weight: bold;}
 .-tac {text-align: center;}
 .-taj {text-align: justify;}
@@ -72,6 +74,11 @@ h1, h2, h3, h4, h5 {font-weight: normal;}
     width: 20vw;
     font-size: 24px;
     padding: 3% 1%;
+}
+.-btn-medium {
+    width: 15vw;
+    font-size: 20px;
+    padding: 1% .5%;
 }
 .-btn-wide {
     width: 20vw;

@@ -29,7 +29,7 @@ class ProjectsController extends AbstractController
         {
             throw new HttpException(404, "Slug ou type non existant.");
         }
-        $count = $m->getRepository(Projet::class)->count([]);
+        $count = $m->getRepository(Projet::class)->count(["type" => $type]);
         $lastpage = ceil($count / $this::PROJECT_PPG);
 
         return $this->render('projects.html.twig', [

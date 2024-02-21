@@ -69,12 +69,6 @@ class StaticPagesController extends AbstractController
     }
 
     // Informatique ----------------------------------------------------------------
-    #[Route('/competences', name: 'competences')]
-    public function competences(EntityManagerInterface $m): Response
-    {
-        return $this->render('competences.html.twig', BaseController::getBase($m));
-    }
-
     #[Route('/assistance', name: 'assistance')]
     public function assistance(EntityManagerInterface $m): Response
     {

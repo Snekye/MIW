@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -15,11 +16,15 @@ use App\Controller\BaseController;
 class ErrorController extends AbstractController
 {
     #[Route('/error', name: 'error')]
-    public function error(EntityManagerInterface $m, \Throwable $exception = null): Response
+    public function error(Request $request, EntityManagerInterface $m, \Throwable $exception = null): Response
     {
         $base = BaseController::getBase($m);
 
         $code = $exception instanceof HttpException ? $exception->getStatusCode() : 500;
+        if ($request->getPathInfo() == '/72b5c5eae7c155bb64db1e72e0aea98b') {
+            return $this->error(new Request(),$m,new HttpException('418','Quelque chose à boire ?'));
+        }
+
         switch ($code) {
             case 404:
                 $message = "La page demandée n'est pas disponible.";

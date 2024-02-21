@@ -39,7 +39,7 @@ a {
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 60%;
+    top: 65%;
     background-color: var(--cl-menu);
     padding: .5%;
     border-radius: 3px;

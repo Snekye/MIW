@@ -22,7 +22,7 @@
     background-color: #efefef;
 }
 .maintenance-right {
-    margin: 2% 0;
+    margin: 1% 0;
 }
 .maintenance-right ul {
     font-size: 150%;
@@ -45,5 +45,5 @@
     width: fit-content;
 }
 .maintenance-devis {
-    margin-bottom: 10%;
+    margin-bottom: 15%;
 }

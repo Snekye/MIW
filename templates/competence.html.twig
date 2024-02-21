@@ -1,4 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/competence.css')}}">
+{% endblock %}
+
 {% block body %}
+<section>
+    {% for c in competences %}
+    <div>
+        <img src="{{ vich_uploader_asset(c, 'imageFile') | imagine_filter('competence_tn') }}" alt="{{ c.imageName }}">
+        <p>{{c.titre}}</p>
+    </div>
+    {% endfor %}
+</section>
 {% endblock %}

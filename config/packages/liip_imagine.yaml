@@ -50,3 +50,10 @@ liip_imagine:
             filters:
                 relative_resize:
                     heighten: 200
+
+        competence_tn:
+            quality: 80
+            filters:
+                thumbnail:  
+                    size: [500, 275]
+                    mode: outbound 

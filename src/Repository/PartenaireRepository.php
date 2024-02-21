@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\PresentationRecrutementPoste;
+use App\Entity\Partenaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PresentationRecrutementPoste>
+ * @extends ServiceEntityRepository<Partenaire>
  *
- * @method PresentationRecrutementPoste|null find($id, $lockMode = null, $lockVersion = null)
- * @method PresentationRecrutementPoste|null findOneBy(array $criteria, array $orderBy = null)
- * @method PresentationRecrutementPoste[]    findAll()
- * @method PresentationRecrutementPoste[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Partenaire|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Partenaire|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Partenaire[]    findAll()
+ * @method Partenaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PresentationRecrutementPosteRepository extends ServiceEntityRepository
+class PartenaireRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PresentationRecrutementPoste::class);
+        parent::__construct($registry, Partenaire::class);
     }
 
 //    /**
-//     * @return PresentationRecrutementPoste[] Returns an array of PresentationRecrutementPoste objects
+//     * @return Partenaire[] Returns an array of Partenaire objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class PresentationRecrutementPosteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PresentationRecrutementPoste
+//    public function findOneBySomeField($value): ?Partenaire
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

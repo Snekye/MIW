@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\PresentationPartenaireRepository;
+use App\Repository\PartenaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-#[ORM\Entity(repositoryClass: PresentationPartenaireRepository::class)]
+#[ORM\Entity(repositoryClass: PartenaireRepository::class)]
 #[Vich\Uploadable]
-class PresentationPartenaire
+class Partenaire
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\PresentationRecrutementPosteRepository;
+use App\Repository\RecrutementPosteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PresentationRecrutementPosteRepository::class)]
-class PresentationRecrutementPoste
+#[ORM\Entity(repositoryClass: RecrutementPosteRepository::class)]
+class RecrutementPoste
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

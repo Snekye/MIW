@@ -25,10 +25,10 @@ use App\Entity\BlogTheme;
 use App\Entity\Contact;
 use App\Entity\Competence;
 use App\Entity\InfoConfig;
-use App\Entity\PresentationDepannageTarif;
-use App\Entity\PresentationDepannageTarifDeplacement;
-use App\Entity\PresentationPartenaire;
-use App\Entity\PresentationRecrutementPoste;
+use App\Entity\DepannageTarif;
+use App\Entity\DepannageTarifDeplacement;
+use App\Entity\Partenaire;
+use App\Entity\RecrutementPoste;
 use App\Entity\Projet;
 use App\Entity\Reseau;
 use App\Entity\Tag;
@@ -102,10 +102,10 @@ class DashboardController extends AbstractDashboardController
             MenuItem::subMenu('ea.dashboard.content.list', 'fa fa-paper-plane')->setSubItems([
                 MenuItem::linkToCrud("ea.dashboard.content.news", 'fa fa-newspaper', News::class),
                 MenuItem::linkToCrud("ea.dashboard.content.skills", 'fa fa-bolt', Competence::class),
-                MenuItem::linkToCrud("ea.dashboard.content.service_fees", 'fa fa-wrench', PresentationDepannageTarif::class),
-                MenuItem::linkToCrud("ea.dashboard.content.shift_fees", 'fa fa-truck', PresentationDepannageTarifDeplacement::class),
-                MenuItem::linkToCrud("ea.dashboard.content.partners", 'fa fa-paperclip', PresentationPartenaire::class),
-                MenuItem::linkToCrud("ea.dashboard.content.hiring", 'fa fa-user', PresentationRecrutementPoste::class),
+                MenuItem::linkToCrud("ea.dashboard.content.service_fees", 'fa fa-wrench', DepannageTarif::class),
+                MenuItem::linkToCrud("ea.dashboard.content.shift_fees", 'fa fa-truck', DepannageTarifDeplacement::class),
+                MenuItem::linkToCrud("ea.dashboard.content.partners", 'fa fa-paperclip', Partenaire::class),
+                MenuItem::linkToCrud("ea.dashboard.content.hiring", 'fa fa-user', RecrutementPoste::class),
                 MenuItem::linkToCrud("ea.dashboard.content.projects", 'fa fa-clipboard', Projet::class),
                 MenuItem::linkToCrud("ea.dashboard.content.socials", 'fa-brands fa-facebook', Reseau::class),
                 MenuItem::linkToCrud("ea.dashboard.content.tags", 'fa fa-tags', Tag::class),

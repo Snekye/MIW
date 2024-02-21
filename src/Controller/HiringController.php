@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\PresentationRecrutementPoste;
+use App\Entity\RecrutementPoste;
 use App\Controller\BaseController;
 
 class HiringController extends AbstractController
@@ -17,7 +17,7 @@ class HiringController extends AbstractController
     public function news(EntityManagerInterface $m): Response
     {
         return $this->render('hiring.html.twig', [
-            'jobs' => $m->getRepository(PresentationRecrutementPoste::class)->findAll(),
+            'jobs' => $m->getRepository(RecrutementPoste::class)->findAll(),
         ] + BaseController::getBase($m));
     }
 }

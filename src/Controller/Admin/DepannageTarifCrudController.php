@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\PresentationDepannageTarif;
+use App\Entity\DepannageTarif;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -10,11 +10,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-class PresentationDepannageTarifCrudController extends AbstractCrudController
+class DepannageTarifCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return PresentationDepannageTarif::class;
+        return DepannageTarif::class;
     }
 
     public function configureCrud(Crud $crud): Crud

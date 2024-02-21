@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\PresentationDepannageTarifDeplacementRepository;
+use App\Repository\DepannageTarifDeplacementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PresentationDepannageTarifDeplacementRepository::class)]
-class PresentationDepannageTarifDeplacement
+#[ORM\Entity(repositoryClass: DepannageTarifDeplacementRepository::class)]
+class DepannageTarifDeplacement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

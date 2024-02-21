@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\PresentationDepannageTarif;
+use App\Entity\DepannageTarifDeplacement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PresentationDepannageTarif>
+ * @extends ServiceEntityRepository<DepannageTarifDeplacement>
  *
- * @method PresentationDepannageTarif|null find($id, $lockMode = null, $lockVersion = null)
- * @method PresentationDepannageTarif|null findOneBy(array $criteria, array $orderBy = null)
- * @method PresentationDepannageTarif[]    findAll()
- * @method PresentationDepannageTarif[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DepannageTarifDeplacement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DepannageTarifDeplacement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DepannageTarifDeplacement[]    findAll()
+ * @method DepannageTarifDeplacement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PresentationDepannageTarifRepository extends ServiceEntityRepository
+class DepannageTarifDeplacementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PresentationDepannageTarif::class);
+        parent::__construct($registry, DepannageTarifDeplacement::class);
     }
 
 //    /**
-//     * @return PresentationDepannageTarif[] Returns an array of PresentationDepannageTarif objects
+//     * @return DepannageTarifDeplacement[] Returns an array of DepannageTarifDeplacement objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class PresentationDepannageTarifRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PresentationDepannageTarif
+//    public function findOneBySomeField($value): ?DepannageTarifDeplacement
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

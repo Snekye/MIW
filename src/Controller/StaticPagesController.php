@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\PresentationRecrutementPoste;
+use App\Entity\RecrutementPoste;
 use App\Controller\BaseController;
 
 class StaticPagesController extends AbstractController

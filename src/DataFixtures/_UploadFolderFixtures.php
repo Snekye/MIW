@@ -17,7 +17,7 @@ class _UploadFolderFixtures extends Fixture
         array_map('unlink', glob("public/img/upload/News/*"));
         array_map('unlink', glob("public/img/upload/BlogArticle/*"));
         array_map('unlink', glob("public/img/upload/Competence/*"));
-        array_map('unlink', glob("public/img/upload/PresentationPartenaire/*"));
+        array_map('unlink', glob("public/img/upload/Partenaire/*"));
         array_map('unlink', glob("public/img/upload/Reseau/*"));
 
         //rmdir

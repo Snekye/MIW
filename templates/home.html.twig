@@ -25,15 +25,15 @@
             <li>L'optimisation du référencement de votre site Internet pour une meilleure visibilité sur le net...</li>
         </ul>
     </div>
-    <div>
+    <div class="-tac">
         <img src="{{asset('img/ordinateur.png')}}">
-        <h1 class="-tac -cl-orange">Vous avez un projet de création de site Internet ?</p>
-        <button class="-btn-blue -btn-big">Demande de devis gratuit</button>
+        <h1 class="-tac -cl-orange">Vous avez un projet de création de site Internet ?</h1>
+        <button class="-btn-blue -btn-big -font-lb">Demande de devis gratuit</button>
     </div>
 </section>
 
 <section class="actu">
-    <button class="-btn-blue -btn-medium"><a href="{{path('news')}}">Toutes nos actualités</a></button>
+    <button class="-btn-blue -btn-medium -font-lb"><a href="{{path('news')}}">Toutes nos actualités</a></button>
     <h2>Les actus de l'agence :</h2>
     {% if news is not empty %}
         {% set n = news.0 %}
@@ -59,7 +59,7 @@
 <section class="maintenance -flex-ce">
     <div class="maintenance-left -tac">
         <p class="maintenance-besoin">Besoin d'un informaticien ?</p>
-        <button class="maintenance-devis -white-outline -btn-orange -btn-big">Demande de devis gratuit</button>
+        <button class="maintenance-devis -white-outline -btn-orange -btn-big -font-lb">Demande de devis gratuit</button>
     </div>
 
     <div class="maintenance-right">
@@ -73,7 +73,7 @@
             <li>Vidéosurveillance,</li>
             <li>Domotique...</li>
         </ul>
-        <button class="-btn-blue -btn-wide">Nos prestations informatiques</button>
+        <button class="-btn-blue -btn-wide -font-lb">Nos prestations informatiques</button>
     </div>
 </section>
 {% endblock %}

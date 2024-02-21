@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Oxygen-Regular;
+    src: url(Oxygen/Oxygen-Regular.ttf);
+}
+html {font-family: Oxygen-Regular;}
+@font-face {
+    font-family: Lobster;
+    src: url(Lobster/Lobster-Regular.ttf);
+}
+.-font-lb {font-family: Lobster;}

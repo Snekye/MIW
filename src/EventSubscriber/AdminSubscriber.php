@@ -49,7 +49,7 @@ class AdminSubscriber implements EventSubscriberInterface
             $log = new AdminLog();
             $log->setAction('Create');
             $log->setUserLogin($user);
-            $log->setMessage('['.$user->getLogin().'] à créé le <'. $entity::class.'> ['.$entity.']');
+            $log->setMessage('['.$user->getLogin().'] à créé le <'. substr($entity::class,11).'> ['.$entity.']');
 
             $entity->setCreated($log);
         }
@@ -70,7 +70,7 @@ class AdminSubscriber implements EventSubscriberInterface
             $log = new AdminLog();
             $log->setAction('Update');
             $log->setUserLogin($user);
-            $log->setMessage('['.$user->getLogin().'] à MAJ le <'. $entity::class.'> ['.$entity.']');
+            $log->setMessage('['.$user->getLogin().'] à MAJ le <'. substr($entity::class,11).'> ['.$entity.']');
 
             $entity->setUpdated($log);
         }
@@ -83,7 +83,7 @@ class AdminSubscriber implements EventSubscriberInterface
         $log = new AdminLog();
         $log->setAction('Delete');
         $log->setUserLogin($user);
-        $log->setMessage('['.$user->getLogin().'] à supprimé le <'. $entity::class.'> ['.$entity.']');
+        $log->setMessage('['.$user->getLogin().'] à supprimé le <'. substr($entity::class,11).'> ['.$entity.']');
 
         $this->manager->persist($log);
     }

@@ -19,8 +19,8 @@
     margin: 2vw;
     border: 1px solid black;
 
-    min-width: 25%;
-    max-width:  40%;
+    min-width: 15%;
+    max-width: 25%;
     flex-grow: 1;
 
     text-align: center;

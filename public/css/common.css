@@ -7,6 +7,7 @@
     --cl-darkgrey: #404040;
     --cl-menu: #e0d1be;
 }
+.-cl-black {color: #000000;}
 .-cl-orange {color: var(--cl-orange);}
 .-cl-blue {color: var(--cl-blue);}
 .-cl-brown {color: var(--cl-brown);}
@@ -22,6 +23,7 @@ h1, h2, h3, h4, h5 {
     font-weight: normal; 
     margin: 0;
 }
+.-invis {opacity: 0;}
 .-str {font-weight: bold;}
 .-tac {text-align: center;}
 .-taj {text-align: justify;}
@@ -44,6 +46,14 @@ h1, h2, h3, h4, h5 {
     display: flex;
     justify-content: center;
 }
+.-flex-btm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.-fs-20 { font-size: 20px;}
+.-fs-24 { font-size: 24px;}
+.-fs-32 { font-size: 32px;}
 
 
 

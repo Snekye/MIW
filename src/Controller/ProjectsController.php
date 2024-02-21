@@ -24,17 +24,19 @@ class ProjectsController extends AbstractController
     #[Route('/projets-{type}/{page}', name: 'projets-page')]
     public function projets(EntityManagerInterface $m, int $page, string $type): Response
     {
-        $page-=1;
-
-        $projects = $m->getRepository(Projet::class)->findBy(["type" => $type], [], $this::PROJECT_PPG, $page*$this::PROJECT_PPG); //recherche, filtre, limit, offset
+        $projects = $m->getRepository(Projet::class)->findBy(["type" => $type], [], $this::PROJECT_PPG, ($page-1)*$this::PROJECT_PPG); //recherche, filtre, limit, offset
         if (empty($projects)) 
         {
             throw new HttpException(404, "Slug ou type non existant.");
         }
+        $count = $m->getRepository(Projet::class)->count([]);
+        $lastpage = ceil($count / $this::PROJECT_PPG);
 
         return $this->render('projects.html.twig', [
             'type' => $type,
             'projects' => $projects,
+            'page' => $page,
+            'lastpage' => $lastpage,
         ] + BaseController::getBase($m));
     }
     #[Route('/projets-{type}/detail/{slug}', name: 'projet-detail')]

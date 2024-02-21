@@ -6,7 +6,35 @@
 
 {% block body %}
 
-<div class="projets -flex-ce">
+<div class="projectsmenu -flex-ce">
+        {% if page > 1 %}
+        <a href="{{path('projets-page', {'type': type, 'page': page - 1}) }}">
+            <i class="fa-solid fa-chevron-left -cl-black -fs-24"></i>
+        </a>
+        <div class="-flex-btm"><h2 class="-fs-20 -cl-brown">{{ page - 1 }}</h2></div>
+        {% else %}
+        <a>
+            <i class="fa-solid fa-chevron-left -cl-black -fs-24 -invis"></i>
+        </a>
+        <div class="-flex-btm"><h2 class="-fs-20 -cl-brown -invis">{{ page - 1 }}</h2></div>
+        {% endif %}
+
+        <h1 class="-fs-24">{{ page }}</h1>
+
+        {% if page != lastpage %}
+        <div class="-flex-btm"><h2 class="-fs-20 -cl-brown">{{ page + 1 }}</h2></div>
+        <a href="{{path('projets-page', {'type': type, 'page': page + 1}) }}">
+            <i class="fa-solid fa-chevron-right -cl-black -fs-24"></i>
+        </a>
+        {% else %}
+        <div class="-flex-btm"><h2 class="-fs-20 -cl-brown -invis">{{ page + 1 }}</h2></div>
+        <a>
+            <i class="fa-solid fa-chevron-right -cl-black -fs-24 -invis"></i>
+        </a>
+        {% endif %}
+    </div>
+
+<div class="projects -flex-ce">
     {% for p in projects %}
     {% set i = p.images[0] %}
     <div class="project">

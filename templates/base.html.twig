@@ -75,8 +75,84 @@
                                 <a href="{{ path('projets',{"type":"web"}) }}">Projets&nbspweb</a>
                             </div>
                             <div class="-cl-darkgrey">
-                                <i class="fa-solid fa-brush"></i>
+                                <i class="fa-solid fa-paint-brush"></i>
                                 <a href="{{ path('projets',{"type":"print"}) }}">Projets&nbspprint</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menuflex">
+                <div class="clicklistener">
+                    <div class="menuwrapper">
+                        <i class="fa-solid fa-globe"></i>
+                        <a class="-cl-menu">Web</a>
+                        <i class="fa-solid fa-angle-down"></i>
+                        <div class="submenu">
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-paint-brush"></i>
+                                <a href="{{ path('creation-graphique') }}">Création&nbspgraphique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-folder"></i>
+                                <a href="{{ path('creation-site') }}">Création&nbspde&nbspsites&nbspinternet&nbspsur&nbspmesure</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <a href="{{ path('referencement') }}">Référencement</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-bed"></i>
+                                <a href="{{ path('hebergement') }}">Hébergement&nbsp&&nbspnoms de domaine</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-key"></i>
+                                <a href="{{ path('formules') }}">Formules&nbsp"moins&nbspchères"&nbspclés&nbspen&nbspmain</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menuflex">
+                <div class="clicklistener">
+                    <div class="menuwrapper">
+                        <i class="fa-solid fa-laptop"></i>
+                        <a class="-cl-menu">Informatique</a>
+                        <i class="fa-solid fa-angle-down"></i>
+                        <div class="submenu">
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <a href="{{ path('competences') }}">Nos&nbspcompétences</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-cogs"></i>
+                                <a href="{{ path('assistance') }}">Assistance&nbspà&nbspdistance</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-wrench"></i>
+                                <a href="{{ path('maintenance') }}">Maintenance&nbspinformatique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-user"></i>
+                                <a href="{{ path('location') }}">Louez&nbspvotre&nbspinformaticien</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-unlock-alt"></i>
+                                <a href="{{ path('externalisation') }}">Externalisation&nbspdes&nbspdonnées&nbspet&nbspsécurisation</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                <a href="{{ path('vente-materiel') }}">Vente&nbspde&nbspmatériel&nbspinformatique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-user-md"></i>
+                                <a href="{{ path('infogerance') }}">Infogérance&nbspInformatique</a>
+                            </div>
+                            <div class="-cl-darkgrey">
+                                <i class="fa-solid fa-download"></i>
+                                <a href="{{ path('vente-solutions') }}">Vente&nbspde&nbspsolutions&nbsplogicielles</a>
                             </div>
                         </div>
                     </div>
@@ -146,8 +222,8 @@
                     <p>SAS MIW</p>
                     <p>Agence web et informatique</p>
                     <p>Tous droits réservés</p>
-                    <p>Mentions légales</p>
-                    <p>Confidentialité</p>
+                    <p class="-tdu"><a href="{{ path('mentions') }}">Mentions légales</a></p>
+                    <p class="-tdu"><a href="{{ path('confidentialite') }}">Confidentialité</a></p>
                 </div>
 
                 <div>

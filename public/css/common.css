@@ -26,6 +26,7 @@ h1, h2, h3, h4, h5 {
 }
 .-invis {opacity: 0;}
 .-str {font-weight: bold;}
+.-tdu {text-decoration: underline;}
 .-tac {text-align: center;}
 .-taj {text-align: justify;}
 .-tar {text-align: right;}

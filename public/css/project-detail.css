@@ -1,0 +1,21 @@
+.flex {
+    width: 90%;
+    margin: 2% 5%;
+}
+.flexright > div {
+    padding: 5%;
+}
+.flexright {
+    width: 50%;
+}
+.flexleft {
+    width: 570px;
+}
+.splide__slide {
+    width: 570px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

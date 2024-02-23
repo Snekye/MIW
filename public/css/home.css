@@ -14,9 +14,15 @@
 }
 .actu > h2 {
     font-size: 250%;
+    margin-bottom: 2%;
 }
 .component-news {
     margin-bottom: 2%;
+}
+.component-news-content {
+    font-size: 20px;
+    width: 100%;
+    padding: 0 3%;
 }
 .maintenance {
     background-color: #efefef;

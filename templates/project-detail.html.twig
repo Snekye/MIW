@@ -2,17 +2,59 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/project-detail.css')}}">
+<link rel="stylesheet" href="{{asset('css/component/tags.css')}}">
+<link rel="stylesheet" href="{{asset('bundles-extra/splide-4.1.3/themes/splide-skyblue.min.css')}}">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('bundles-extra/splide-4.1.3/splide.min.js')}}"></script>
+<script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '.splide', {
+        type: 'loop',
+    });
+    splide.mount();
+  } );
+</script>
+
 {% endblock %}
 
 {% block body %}
 
 <div class="projet">
-    <div class="projecttext">
+    <div class="projecttext -tac">
         <h1 class="-cl-orange">{{p.titre}}</h1>
         <h2 class="-cl-blue">{{p.soustitre}}</h1>
-        <div class="-cl-brown">{{p.descriptioncourte | raw}}</div>
+    </div>
+
+    <div class="flex -flex-ce">
+
+        <div class="flexleft">
+            <section class="splide" aria-label="Splide Basic HTML Example">
+                <div class="splide__track">
+                    <div class="splide__list">
+
+                        {% for i in p.images %}
+                        <div class="splide__slide">
+                            <img src="{{ vich_uploader_asset(i, 'imageFile') | imagine_filter('project') }}" alt="{{ i.imageName }}">
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="flexright">
+            <div class="-cl-brown">{{p.description | raw}}</div>
+            <div>
+                {% for t in p.tags %}
+                <span class="tag">{{t.lib}}</span>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </div>
-
 
 {% endblock %}

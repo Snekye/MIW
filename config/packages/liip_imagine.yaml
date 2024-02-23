@@ -51,9 +51,16 @@ liip_imagine:
                 relative_resize:
                     heighten: 200
 
+        project:
+            quality: 80
+            filters:
+                upscale:
+                    min: [570, 350]
+
         competence_tn:
             quality: 80
             filters:
                 thumbnail:  
                     size: [500, 275]
                     mode: outbound 
+                    allow_upscale: true

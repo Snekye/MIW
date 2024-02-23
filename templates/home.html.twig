@@ -2,7 +2,6 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/home.css')}}">
-<link rel="stylesheet" href="{{asset('css/component/news.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -38,14 +37,12 @@
     {% if news is not empty %}
         {% set n = news.0 %}
         <div class="component-news">
-            <div class="component-news-header -flex-sb">
-                <h2 class="-cl-orange">{{ n.titre }}</h2>
-                <h2 class="-cl-blue -tar">Publié le {{ n.date|date('d-m-Y') }}</h2>
-            </div>
-
-            <div class="-flex-sb">
+            <div class="-flex-fs">
                 <img src="{{ vich_uploader_asset(n, 'imageFile') | imagine_filter('news_tn') }}" alt="{{ n.imageName }}">
                 <div class="component-news-content">
+                    <h2 class="-cl-orange -fs-32">{{ n.titre }}</h2>
+                    <h2 class="-cl-blue -fs-20">Publié le {{ n.date|date('d-m-Y') }}</h2>
+                    <br>
                     <div class="-cl-brown">{{ n.contenu|striptags|u.truncate(250,'...',false)|raw }}</div>
                     <a href="{{ path('news-detail', {slug: n.titreslug} ) }}">Voir</a>
                 </div>

@@ -3,6 +3,7 @@
 {% block right %}
 <div class="right">
     <h1><span class="-cl-blue">Ici, on papote</span><span class="-cl-orange"> web et informatique</span></h1>
+    <p class="-cl-brown">{{filter}}</p>
     {% for a in articles %}
     <div class="article -flex-fs">
         <img src="{{ vich_uploader_asset(a, 'imageFile') | imagine_filter('blog_article_tn') }}" alt="{{ a.imageName }}">

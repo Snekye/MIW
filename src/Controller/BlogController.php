@@ -36,21 +36,25 @@ class BlogController extends AbstractController
         
         $qb = $m->getRepository(BlogArticle::class)->createQueryBuilder('a');
         $route = 'blog-page'; // définit la route de redirection pour les boutons page précédente/suivante
+        $filter = null; // permet d'afficher le filtre actuallement utilisé
 
         if (!is_null($tag)) {
             $qb->join('a.tags', 't')
                 ->andWhere(':tag = t.lib')
                 ->setParameter('tag', $tag);
             $route = 'blog-tag-page';
+            $filter = 'Tag: ' . $tag;
         } elseif (!is_null($theme)) {
             $qb->join('a.theme', 'th')
                 ->andWhere(':theme = th.lib')
                 ->setParameter('theme', $theme);
             $route = 'blog-theme-page';
+            $filter = 'Theme: '. $theme;
         } elseif (!is_null($date)) {
             $qb->andWhere('a.date LIKE :date')
                 ->setParameter('date', $date.'-%');
             $route = 'blog-date-page';
+            $filter = 'Date: du 01/'.substr($date,5,2).'/'.substr($date,0,4).' au 31/'.substr($date,5,2).'/'.substr($date,0,4);
         }
 
         $qb->orderBy('a.date', 'DESC');
@@ -91,6 +95,7 @@ class BlogController extends AbstractController
             'theme' => $theme,
             'date' => $date,
             'route' => $route,
+            'filter' => $filter,
         ] + BaseController::getBase($m));
     }
 

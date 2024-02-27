@@ -32,19 +32,25 @@ class BlogController extends AbstractController
         // (changements d'ordres d'opérations, utilisation du doctrine Criteria, etc.) ; c'est donc pourquoi la solution finale
         // consiste à appliquer la pagination manuellement. Cela convidendra très bien pour cette utilisation mais sur une table 
         // de milliers d'éléments ne pas appliquer la pagination en BDD à un gros coût.
+        
+        
         $qb = $m->getRepository(BlogArticle::class)->createQueryBuilder('a');
+        $route = 'blog-page'; // définit la route de redirection pour les boutons page précédente/suivante
 
         if (!is_null($tag)) {
             $qb->join('a.tags', 't')
                 ->andWhere(':tag = t.lib')
                 ->setParameter('tag', $tag);
+            $route = 'blog-tag-page';
         } elseif (!is_null($theme)) {
             $qb->join('a.theme', 'th')
                 ->andWhere(':theme = th.lib')
                 ->setParameter('theme', $theme);
+            $route = 'blog-theme-page';
         } elseif (!is_null($date)) {
             $qb->andWhere('a.date LIKE :date')
                 ->setParameter('date', $date.'-%');
+            $route = 'blog-date-page';
         }
 
         $qb->orderBy('a._created', 'DESC');
@@ -76,6 +82,7 @@ class BlogController extends AbstractController
             'tag' => $tag,
             'theme' => $theme,
             'date' => $date,
+            'route' => $route,
         ] + BaseController::getBase($m));
     }
 

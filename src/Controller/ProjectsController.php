@@ -27,7 +27,7 @@ class ProjectsController extends AbstractController
         $projects = $m->getRepository(Projet::class)->findBy(["type" => $type], [], $this::PROJECT_PPG, ($page-1)*$this::PROJECT_PPG); //recherche, filtre, limit, offset
         if (empty($projects)) 
         {
-            throw new HttpException(404, "Slug ou type non existant.");
+            throw new HttpException(404, "Page ou type non existant.");
         }
         $count = $m->getRepository(Projet::class)->count(["type" => $type]);
         $lastpage = ceil($count / $this::PROJECT_PPG);

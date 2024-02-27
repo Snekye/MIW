@@ -1,0 +1,30 @@
+body {
+    background-color: var(--cl-lightgrey);
+}
+
+.main {
+    width: 80%;
+    margin: 0 10%;
+}
+.competences {
+    flex-wrap: wrap;
+}
+.competence img {
+    height: 330px;
+    width: 600px;
+
+    flex: 0 0 auto;
+}
+.competence {
+    position: relative;
+    margin: 2% 0;
+}
+.competence-text {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    padding: 5%;
+    background-color: #202020D0;
+}

@@ -1,0 +1,31 @@
+{% extends 'blog-base.html.twig' %}
+
+{% block right %}
+<div class="right">
+    <h1><span class="-cl-blue">Ici, on papote</span><span class="-cl-orange"> web et informatique</span></h1>
+    {% for a in articles %}
+    <div class="article -flex-fs">
+        <img src="{{ vich_uploader_asset(a, 'imageFile') | imagine_filter('blog_article_tn') }}" alt="{{ a.imageName }}">
+        <div>
+            <h2 class="-cl-blue">{{ a.titre }}</h1>
+            <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }}</p>
+            <br>
+            <div class="-cl-brown">{{ a.contenu|striptags|u.truncate(250,'...',false)|raw }}</div>
+            <br>
+            <button class="-white-outline -btn-orange -btn-big -font-lb"><a href="{{path('blog-article', {"slug": a.titreslug}) }}">Lire la suite</a></button>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="article -flex-sb">
+        {% if page > 1 %}
+        <a class="-cl-brown -str" href="{{path('blog-page', {'tag': tag, 'theme': theme, 'page': page - 1}) }}">Page précédente</a>
+        {% endif %}
+
+        <div></div> {# Div vide pour l'alignement de 'page suivante' => ne pas supprimer #}
+
+        {% if page != lastpage %}
+        <a class="-cl-brown -str" href="{{path('blog-page', {'tag': tag, 'theme': theme, 'page': page + 1}) }}">Page Suivante</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

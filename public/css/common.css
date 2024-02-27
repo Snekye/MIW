@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5 {
 }
 .-invis {opacity: 0;}
 .-str {font-weight: bold;}
+.-it {font-style: italic;}
 .-tdu {text-decoration: underline;}
 .-tac {text-align: center;}
 .-taj {text-align: justify;}
@@ -58,6 +59,7 @@ h1, h2, h3, h4, h5 {
     flex-direction: column;
     justify-content: flex-end;
 }
+.-fs-18 { font-size: 18px;}
 .-fs-20 { font-size: 20px;}
 .-fs-24 { font-size: 24px;}
 .-fs-32 { font-size: 32px;}
@@ -90,7 +92,7 @@ h1, h2, h3, h4, h5 {
 .-btn-big {
     width: 20vw;
     font-size: 24px;
-    padding: 3% 1%;
+    padding: 12px 5px;
 }
 .-btn-medium {
     width: 15vw;

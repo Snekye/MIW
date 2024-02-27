@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BlogArticleCrudController extends AbstractCrudController
 {
@@ -46,10 +48,18 @@ class BlogArticleCrudController extends AbstractCrudController
                 ->hideWhenUpdating(),
             TextEditorField::new('contenu'),
             AssociationField::new('theme'),
-            ImageField::new('image')
-                ->setUploadDir('public/img/upload/BlogArticle')
-                ->setBasePath('img/upload/BlogArticle')
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]'),
+            TextField::new('imageFile')
+                ->setFormType(VichImageType::class),
+            AssociationField::new('tags')
+                ->setCrudController(TagCrudController::class)
+                ->autocomplete(),
+
+            AssociationField::new('_created','ea.common.created')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
+            AssociationField::new('_updated','ea.common.updated')
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
         ];
     }
 }

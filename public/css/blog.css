@@ -1,0 +1,23 @@
+body {
+    background-color: var(--cl-lightgrey);
+}
+h1 {
+    margin-bottom: 1%;
+}
+.left {
+    width: 25%;
+    padding: 2% 0 2% 10%;
+}
+.right {
+    width: 70%;
+    padding: 2%;
+    background-color: white;
+}
+.article {
+    padding: 4% 0 2% 0;
+    border-top: 1px solid var(--cl-brown);
+}
+.article img {
+    margin: 0 2% 0 0;
+    align-self: start;
+}

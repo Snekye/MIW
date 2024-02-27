@@ -23,44 +23,49 @@ liip_imagine:
                 thumbnail: { size: [50, 50], mode: outbound }
 
         partner:
-            quality: 80
+            quality: 90
             filters:
                 relative_resize:
                     widen: 400
 
         news:
-            quality: 80
+            quality: 90
             filters:
                 relative_resize:
                     widen: 400
         news_tn:
-            quality: 80
+            quality: 90
             filters:
                 relative_resize:
                     heighten: 200
 
         logo:
-            quality: 80
+            quality: 90
             filters:
                 relative_resize:
                     widen: 120
         
         project_tn:
-            quality: 80
+            quality: 90
             filters:
                 relative_resize:
                     heighten: 200
 
         project:
-            quality: 80
+            quality: 90
             filters:
                 upscale:
-                    min: [570, 350]
+                    min: [570, 356]
 
         competence_tn:
-            quality: 80
+            quality: 95
             filters:
-                thumbnail:  
-                    size: [500, 275]
-                    mode: outbound 
-                    allow_upscale: true
+                upscale:
+                    min: [600, 330]
+
+        blog_article_tn:
+            quality: 90
+            filters:
+                relative_resize:
+                    widen: 180
+        

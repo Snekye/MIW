@@ -1,0 +1,10 @@
+{% extends 'blog-base.html.twig' %}
+
+{% block right %}
+<div class="right">
+    <h1 class="-cl-orange">{{ a.titre }}</h1>
+    <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }}</p>
+    <br>
+    <div class="-cl-brown article">{{ a.contenu|raw }}</div>
+</div>
+{% endblock %}

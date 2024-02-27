@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/blog.css')}}">
+{% endblock %}
+
+{% block body %}
+<section class="-flex-sb">
+    <div class="left">
+        <div>
+            <h2 class="-cl-orange">Tous les thèmes :</h2>
+            <ul class="-cl-brown -fs-18">
+            {% for t in themes %}
+                <li><a class="-cl-brown" href="{{path('blog-theme', {"theme": t.lib }) }}">{{ t.lib }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="-cl-orange">Tous les tags :</h2>
+            <div class="-cl-brown -fs-18">
+            {% for t in tags %}
+                <span class="-cl-brown -tdu"><a class="-cl-brown" href="{{path('blog-tag', {"tag": t.lib }) }}">{{ t.lib }}</a></span>
+                 - 
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% block right %}
+    {% endblock %}
+</section>
+{% endblock %}

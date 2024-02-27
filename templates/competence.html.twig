@@ -6,11 +6,16 @@
 
 {% block body %}
 <section>
-    {% for c in competences %}
-    <div>
-        <img src="{{ vich_uploader_asset(c, 'imageFile') | imagine_filter('competence_tn') }}" alt="{{ c.imageName }}">
-        <p>{{c.titre}}</p>
+    <h1 class="-cl-orange">Nos compétences informatiques</h1>
+    <div class="competences -flex-sb">
+        {% for c in competences %}
+        <a class="competence" href="{{path('competence-detail', {slug: c.titreslug})}}">
+            <img src="{{ vich_uploader_asset(c, 'imageFile') | imagine_filter('competence_tn') }}" alt="{{ c.imageName }}">
+            <div class="competence-text -fs-24 -tac">
+                <p>{{c.titre}}</p>
+            </div>
+        </a>
+        {% endfor %}
     </div>
-    {% endfor %}
 </section>
 {% endblock %}

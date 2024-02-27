@@ -8,6 +8,9 @@ h1 {
     width: 25%;
     padding: 2% 0 2% 10%;
 }
+.left > div {
+    margin: 10% 0 0 0;
+}
 .right {
     width: 70%;
     padding: 2%;

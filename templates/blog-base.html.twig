@@ -27,6 +27,15 @@
             {% endfor %}
             </div>
         </div>
+
+        <div>
+            <h2 class="-cl-orange">Par date :</h2>
+            <ul class="-cl-brown -fs-18">
+            {% for d in dates %}
+                <li class="-cl-brown"><a class="-cl-brown" href="{{path('blog-date', {"date": d | date("Y-m")}) }}">{{ d | date("F Y") }}</a></li> 
+            {% endfor %}
+            </ul>
+        </div>
     </div>
 
     {% block right %}

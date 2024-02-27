@@ -25,6 +25,9 @@ h1, h2, h3, h4, h5 {
     font-weight: normal; 
     margin: 0;
 }
+ul {
+    margin: 0;
+}
 .-invis {opacity: 0;}
 .-str {font-weight: bold;}
 .-it {font-style: italic;}

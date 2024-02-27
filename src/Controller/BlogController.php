@@ -16,16 +16,16 @@ use App\Controller\BaseController;
 
 class BlogController extends AbstractController
 {
-    public const ARTICLE_PPG = 5; // nb d'articles par page.
+    public const ARTICLE_PPG = 1; // nb d'articles par page.
 
     #[Route('/blog', name: 'blog')]
     public function blog_home(EntityManagerInterface $m) 
     {
-        return $this->blog($m, null, null, 1);
+        return $this->blog($m, null, null, null, 1);
     }
 
     #[Route('/blog/{page}', name: 'blog-page')]
-    public function blog(EntityManagerInterface $m, string $tag = null, string $theme = null, int $page): Response
+    public function blog(EntityManagerInterface $m, string $date = null, string $tag = null, string $theme = null, int $page): Response
     {
         // Note : ce controller à été chatgptisé. Faire foncionner les filtres et la pagination en même temps 
         // est une tâche digne d'un héros grec et je n'ai eu aucun succès malgré plusieurs méthodes
@@ -42,50 +42,75 @@ class BlogController extends AbstractController
             $qb->join('a.theme', 'th')
                 ->andWhere(':theme = th.lib')
                 ->setParameter('theme', $theme);
+        } elseif (!is_null($date)) {
+            $qb->andWhere('a.date LIKE :date')
+                ->setParameter('date', $date.'-%');
         }
 
         $qb->orderBy('a._created', 'DESC');
         $articles_temp = $qb->getQuery()->getResult();
         $lastpage = ceil(count($articles_temp) / $this::ARTICLE_PPG);
 
+        //pagination manuelle
         $articles = array_slice($articles_temp, ($page - 1) * $this::ARTICLE_PPG, $this::ARTICLE_PPG);
 
         if (empty($articles)) {
             throw new HttpException(404, "Page ou type non existant.");
         }
 
+        $dates = array_reduce(
+        $m->createQuery(
+            'SELECT DISTINCT a.date as d
+            FROM App\Entity\BlogArticle a'
+            )->getResult(),
+
+            'array_merge',[]);
 
         return $this->render('blog.html.twig', [
-            'articles' => $paginatedArticles,
+            'articles' => $articles,
             'themes' => $m->getRepository(BlogTheme::class)->findAll(),
             'tags' => $m->getRepository(Tag::class)->findAll(),
+            'dates' => $dates,
             'page' => $page,
             'lastpage' => $lastpage,
             'tag' => $tag,
             'theme' => $theme,
+            'date' => $date,
         ] + BaseController::getBase($m));
     }
 
 
+    #[Route('/blog/date/{date}', name: 'blog-date')]
+    public function blog_date_home(EntityManagerInterface $m, string $date): Response
+    {
+        return $this->blog($m, $date, null, null, 1);
+    }
     #[Route('/blog/tag/{tag}', name: 'blog-tag')]
     public function blog_tag_home(EntityManagerInterface $m, string $tag): Response
     {
-        return $this->blog($m, $tag, null, 1);
+        return $this->blog($m, null, $tag, null, 1);
     }
     #[Route('/blog/theme/{theme}', name: 'blog-theme')]
     public function blog_them_home(EntityManagerInterface $m, string $theme): Response
     {
-        return $this->blog($m, null, $theme, 1);
+        return $this->blog($m, null, null, $theme, 1);
+    }
+    
+
+    #[Route('/blog/date/{date}/{page}', name: 'blog-date-page')]
+    public function blog_date(EntityManagerInterface $m, string $date, int $page): Response
+    {
+        return $this->blog($m, $date, null, null, $page);
     }
     #[Route('/blog/tag/{tag}/{page}', name: 'blog-tag-page')]
     public function blog_tag(EntityManagerInterface $m, string $tag, int $page): Response
     {
-        return $this->blog($m, $tag, null, $page);
+        return $this->blog($m, null, $tag, null, $page);
     }
     #[Route('/blog/theme/{theme}/{page}', name: 'blog-theme-page')]
     public function blog_theme(EntityManagerInterface $m, string $theme, int $page): Response
     {
-        return $this->blog($m, null, $theme, $page);
+        return $this->blog($m, null, null, $theme, $page);
     }
 
 

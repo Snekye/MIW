@@ -8,10 +8,16 @@
         <img src="{{ vich_uploader_asset(a, 'imageFile') | imagine_filter('blog_article_tn') }}" alt="{{ a.imageName }}">
         <div>
             <h2 class="-cl-blue">{{ a.titre }}</h1>
-            <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }}</p>
+            <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }} | {{a.theme.lib}}</p>
             <br>
             <div class="-cl-brown">{{ a.contenu|striptags|u.truncate(250,'...',false)|raw }}</div>
             <br>
+            <span>-</span>
+            {% for t in a.tags %}
+                <span class="-cl-brown -tdu">{{ t.lib }}</span>
+                 - 
+            {% endfor %}
+            <br><br>
             <button class="-white-outline -btn-orange -btn-big -font-lb"><a href="{{path('blog-article', {"slug": a.titreslug}) }}">Lire la suite</a></button>
         </div>
     </div>

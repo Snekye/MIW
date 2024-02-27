@@ -3,8 +3,12 @@
 {% block right %}
 <div class="right">
     <h1 class="-cl-orange">{{ a.titre }}</h1>
-    <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }}</p>
+    <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }} | {{a.theme.lib}}</p>
     <br>
     <div class="-cl-brown article">{{ a.contenu|raw }}</div>
+
+    {% for t in a.tags %}
+        <span class="tag">{{t.lib}}</span>
+    {% endfor %}
 </div>
 {% endblock %}

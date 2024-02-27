@@ -16,7 +16,7 @@ use App\Controller\BaseController;
 
 class BlogController extends AbstractController
 {
-    public const ARTICLE_PPG = 1; // nb d'articles par page.
+    public const ARTICLE_PPG = 5; // nb d'articles par page.
 
     #[Route('/blog', name: 'blog')]
     public function blog_home(EntityManagerInterface $m) 
@@ -27,41 +27,36 @@ class BlogController extends AbstractController
     #[Route('/blog/{page}', name: 'blog-page')]
     public function blog(EntityManagerInterface $m, string $tag = null, string $theme = null, int $page): Response
     {
-        $q = $m->getRepository(BlogArticle::class)->createQueryBuilder('a');
-
-        // if (!is_null($tag) && !is_null($theme)) {
-        //     $queryBuilder->where(':tag MEMBER OF a.tags OR a.theme = :theme')
-        //         ->setParameter('tag', $tag)
-        //         ->setParameter('theme', $theme);
-        // } elseif (!is_null($tag)) {
+        // Note : ce controller à été chatgptisé. Faire foncionner les filtres et la pagination en même temps 
+        // est une tâche digne d'un héros grec et je n'ai eu aucun succès malgré plusieurs méthodes
+        // (changements d'ordres d'opérations, utilisation du doctrine Criteria, etc.) ; c'est donc pourquoi la solution finale
+        // consiste à appliquer la pagination manuellement. Cela convidendra très bien pour cette utilisation mais sur une table 
+        // de milliers d'éléments ne pas appliquer la pagination en BDD à un gros coût.
+        $qb = $m->getRepository(BlogArticle::class)->createQueryBuilder('a');
 
         if (!is_null($tag)) {
-            $q  ->where(':tag MEMBER OF a.tags')
+            $qb->join('a.tags', 't')
+                ->andWhere(':tag = t.lib')
                 ->setParameter('tag', $tag);
-            $count = $m->getRepository(BlogArticle::class)->count(["tag" => $tag]);
         } elseif (!is_null($theme)) {
-            $q  ->where('a.theme = :theme')
+            $qb->join('a.theme', 'th')
+                ->andWhere(':theme = th.lib')
                 ->setParameter('theme', $theme);
-            $count = $m->getRepository(BlogArticle::class)->count(["theme" => $theme]);
-        }
-        else {
-            $count = $m->getRepository(BlogArticle::class)->count([]);
         }
 
-        $q->orderBy('a._created','DESC');
-        $q->setFirstResult(($page-1)*$this::ARTICLE_PPG);
-        $q->setMaxResults($this::ARTICLE_PPG);
+        $qb->orderBy('a._created', 'DESC');
+        $articles_temp = $qb->getQuery()->getResult();
+        $lastpage = ceil(count($articles_temp) / $this::ARTICLE_PPG);
 
-        $articles = $q->getQuery()->getResult();
+        $articles = array_slice($articles_temp, ($page - 1) * $this::ARTICLE_PPG, $this::ARTICLE_PPG);
 
-        if (empty($articles)) 
-        {
+        if (empty($articles)) {
             throw new HttpException(404, "Page ou type non existant.");
         }
-        $lastpage = ceil($count / $this::ARTICLE_PPG);
+
 
         return $this->render('blog.html.twig', [
-            'articles' => $articles,
+            'articles' => $paginatedArticles,
             'themes' => $m->getRepository(BlogTheme::class)->findAll(),
             'tags' => $m->getRepository(Tag::class)->findAll(),
             'page' => $page,
@@ -70,16 +65,30 @@ class BlogController extends AbstractController
             'theme' => $theme,
         ] + BaseController::getBase($m));
     }
+
+
     #[Route('/blog/tag/{tag}', name: 'blog-tag')]
-    public function blog_tag(EntityManagerInterface $m, string $tag): Response
+    public function blog_tag_home(EntityManagerInterface $m, string $tag): Response
     {
-        return $this->blog($m, $tag, null);
+        return $this->blog($m, $tag, null, 1);
     }
     #[Route('/blog/theme/{theme}', name: 'blog-theme')]
-    public function blog_theme(EntityManagerInterface $m, string $theme): Response
+    public function blog_them_home(EntityManagerInterface $m, string $theme): Response
     {
-        return $this->blog($m, null, $theme);
+        return $this->blog($m, null, $theme, 1);
     }
+    #[Route('/blog/tag/{tag}/{page}', name: 'blog-tag-page')]
+    public function blog_tag(EntityManagerInterface $m, string $tag, int $page): Response
+    {
+        return $this->blog($m, $tag, null, $page);
+    }
+    #[Route('/blog/theme/{theme}/{page}', name: 'blog-theme-page')]
+    public function blog_theme(EntityManagerInterface $m, string $theme, int $page): Response
+    {
+        return $this->blog($m, null, $theme, $page);
+    }
+
+
     #[Route('/blog/article/{slug}', name: 'blog-article')]
     public function blog_article(EntityManagerInterface $m, string $slug): Response
     {

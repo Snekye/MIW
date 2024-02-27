@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/blog.css')}}">
+<link rel="stylesheet" href="{{asset('css/component/tags.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -19,6 +20,7 @@
         <div>
             <h2 class="-cl-orange">Tous les tags :</h2>
             <div class="-cl-brown -fs-18">
+            <span>-</span>
             {% for t in tags %}
                 <span class="-cl-brown -tdu"><a class="-cl-brown" href="{{path('blog-tag', {"tag": t.lib }) }}">{{ t.lib }}</a></span>
                  - 

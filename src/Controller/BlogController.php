@@ -16,7 +16,7 @@ use App\Controller\BaseController;
 
 class BlogController extends AbstractController
 {
-    public const ARTICLE_PPG = 1; // nb d'articles par page.
+    public const ARTICLE_PPG = 5; // nb d'articles par page.
 
     #[Route('/blog', name: 'blog')]
     public function blog_home(EntityManagerInterface $m) 
@@ -53,7 +53,7 @@ class BlogController extends AbstractController
             $route = 'blog-date-page';
         }
 
-        $qb->orderBy('a._created', 'DESC');
+        $qb->orderBy('a.date', 'DESC');
         $articles_temp = $qb->getQuery()->getResult();
         $lastpage = ceil(count($articles_temp) / $this::ARTICLE_PPG);
 
@@ -64,13 +64,21 @@ class BlogController extends AbstractController
             throw new HttpException(404, "Page ou type non existant.");
         }
 
-        $dates = array_reduce(
-        $m->createQuery(
+        //On sort les dates de leurs arrays et on les filtres pour obtenir des mois uniques
+        $dates_temp = $m->createQuery(
             'SELECT DISTINCT a.date as d
-            FROM App\Entity\BlogArticle a'
-            )->getResult(),
-
-            'array_merge',[]);
+            FROM App\Entity\BlogArticle a
+            ORDER BY a.date DESC'
+        )->getResult();
+        $dates = [];
+        $dates_checker = [];
+        foreach ($dates_temp as $d) {
+            if (!isset($dates_checker[$d['d']->format('Y-m')]))
+            {
+                $dates_checker[] = $d['d']->format('Y-m');
+                $dates[] = $d['d'];
+            }
+        }
 
         return $this->render('blog.html.twig', [
             'articles' => $articles,
@@ -86,7 +94,7 @@ class BlogController extends AbstractController
         ] + BaseController::getBase($m));
     }
 
-
+    //Routes filtres ----------------------------------------------------------------
     #[Route('/blog/date/{date}', name: 'blog-date')]
     public function blog_date_home(EntityManagerInterface $m, string $date): Response
     {
@@ -103,7 +111,7 @@ class BlogController extends AbstractController
         return $this->blog($m, null, null, $theme, 1);
     }
     
-
+    // Routes filtres + dates ----------------------------------------------------------------
     #[Route('/blog/date/{date}/{page}', name: 'blog-date-page')]
     public function blog_date(EntityManagerInterface $m, string $date, int $page): Response
     {
@@ -120,7 +128,7 @@ class BlogController extends AbstractController
         return $this->blog($m, null, null, $theme, $page);
     }
 
-
+    // Route détail -------------------------------------------------------------------------
     #[Route('/blog/article/{slug}', name: 'blog-article')]
     public function blog_article(EntityManagerInterface $m, string $slug): Response
     {

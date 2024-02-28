@@ -20,6 +20,7 @@ a {
     background-color: var(--cl-darkgrey);
 
     font-size: 120%;
+    border-bottom: 1px solid white;
 }
 .menulogo {
     margin: .3%;

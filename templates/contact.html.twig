@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/contact.css')}}">
+<link rel="stylesheet" href="{{asset('css/component/form.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.7499390695148!2d2.2825192158001038!3d49.224269282828566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64995de5f8431%3A0x1744009350aabd69!2sMaxinfoweb!5e0!3m2!1sfr!2sfr!4v1631104475684!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<div class="-flex-ce">
+    <div class="left">
+        <h1 class="-cl-orange">Nous contacter - SAS MIW</h1>
+        <p class="-cl-brown">N'hésitez pas à nous contacter pour toute demande de devis, candidature, demande de stage...</p>
+        
+        {{ form_start(form, {'attr' : {'class': '-flex-btm'}}) }}
+            {{ form_widget(form.nom, {'attr': {'placeholder': "Nom" }}) }}
+            {{ form_widget(form.prenom, {'attr': {'placeholder': "Prénom" }}) }}
+            {{ form_widget(form.entreprise, {'attr': {'placeholder': "Entreprise" }}) }}
+            {{ form_widget(form.ville, {'attr': {'placeholder': "Ville" }}) }}
+            {{ form_widget(form.email, {'attr': {'placeholder': "Email" }}) }}
+            {{ form_widget(form.tel, {'attr': {'placeholder': "Téléphone" }}) }}
+            {{ form_widget(form.contenu, {'attr': {'placeholder': "Dites nous tout!", 'rows': 8 }}) }}
+
+            {{form_row(form.Envoyer, {'attr' : {'class': '-btn-orange -btn-big -font-lb'}}) }}
+        {{ form_end(form) }}
+
+        {{msg}}
+    </div>
+    <div class="right -cl-white -fs-24">
+        <h2 class="-cl-blue">Nos coordonnées : </h2>
+        <div>
+            <h2>Horaires :</p>
+            <p>{{ info.horaires }}</p>
+        </div>
+        <div>
+            <h2>Agence :</p>
+            <p>{{ info.agence_adresse_1 }}</p>
+            <p>{{ info.agence_adresse_2 }}</p>
+            <p class="-cl-orange">{{ info.agence_tel }}</p>
+        </div>
+        <div>
+            <h2>Siège social :</p>
+            <p>{{ info.siege_adresse_1 }}</p>
+            <p>{{ info.siege_adresse_2 }}</p>
+            <p class="-cl-orange">{{ info.siege_tel }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block vnv %}{% endblock %}

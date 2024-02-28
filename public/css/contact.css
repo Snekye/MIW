@@ -1,0 +1,16 @@
+body {
+    background-color: var(--cl-lightgrey);
+}
+
+.left, .right {
+    width: 40%;
+    margin: 0 1%;
+}
+.right {
+    padding: 2%;
+    background-color: var(--cl-darkgrey);
+}
+.right > div {
+    padding: 2% 0;
+    border-top: 1px solid;
+}

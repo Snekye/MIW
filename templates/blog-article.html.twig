@@ -5,10 +5,31 @@
     <h1 class="-cl-orange">{{ a.titre }}</h1>
     <p class="-str -it -cl-brown">Posté par {{ a.created.userlogin.login}} | {{ a.created.date | date("d/m/Y") }} | {{a.theme.lib}}</p>
     <br>
-    <div class="-cl-brown article">{{ a.contenu|raw }}</div>
+    
+    <div class="-cl-brown">{{ a.contenu|raw }}</div>
 
+    <div>
     {% for t in a.tags %}
-        <span class="tag">{{t.lib}}</span>
+        <span class="-cl-blue -tdu -it"><a class="-cl-blue" href="{{path('blog-tag', {"tag": t.lib }) }}">#{{ t.lib }}</a></span>
+            - 
     {% endfor %}
+    </div>
+
+    <div>
+    {# commentaires #}
+    </div>
+
+    <div>
+    <h2 class="-cl-blue">Laisser un commentaire :</h2>
+     {{ form_start(form) }}
+        {{ form_widget(form.nom, {'attr': {'placeholder': "Nom" }}) }}
+        {{ form_widget(form.email, {'attr': {'placeholder': "Email (n'appraitra pas en commentaire)" }}) }}
+        {{ form_widget(form.contenu, {'attr': {'placeholder': "Votre commentaire", 'rows': 8 }}) }}
+
+        {{form_row(form.Envoyer, {'attr' : {'class': '-btn-orange -btn-big -font-lb'}}) }}
+    {{ form_end(form) }}
+    </div>
+
+    {{msg}}
 </div>
 {% endblock %}

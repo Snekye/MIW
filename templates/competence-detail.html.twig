@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block body %}
-<section>
-    <div>
-        <
+<section class="-flex-sb">
+    <div class="left -flex-btm">
+        <img src={{asset('img/ordinateur.png')}}>
+        <h2 class="-cl-orange -tac -fs-32">Vous avez un projet ?</h2>
+        <button class="-btn-blue -btn-big -font-lb">Demande de devis gratuit</button>
     </div>
-
-    <div class="contenu">{{ c.contenu | raw }}</div>
+    <div class="right">
+        <h1 class="-cl-orange">{{ c.titre }}</h1>
+        <div class="contenu">{{ c.contenu | raw }}</div>
+    </div>
 </section>
 {% endblock %}

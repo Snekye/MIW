@@ -1,0 +1,15 @@
+form input, form textarea {
+    width: 100%;
+    font-size: 24px;
+    padding: 1%;
+    margin: 2% 0 0 0;
+    border-radius: 5px;
+    border: 1px solid var(--cl-input);
+    resize: none;
+}
+form input::placeholder, form textarea::placeholder {
+    color: var(--cl-input);
+}
+form button {
+    margin: 5% 0;
+}

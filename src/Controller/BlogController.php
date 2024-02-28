@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -10,9 +11,11 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\BlogArticle;
+use App\Entity\BlogCommentaire;
 use App\Entity\BlogTheme;
 use App\Entity\Tag;
 use App\Controller\BaseController;
+use App\Form\CommentType;
 
 class BlogController extends AbstractController
 {
@@ -68,27 +71,11 @@ class BlogController extends AbstractController
             throw new HttpException(404, "Page ou type non existant.");
         }
 
-        //On sort les dates de leurs arrays et on les filtres pour obtenir des mois uniques
-        $dates_temp = $m->createQuery(
-            'SELECT DISTINCT a.date as d
-            FROM App\Entity\BlogArticle a
-            ORDER BY a.date DESC'
-        )->getResult();
-        $dates = [];
-        $dates_checker = [];
-        foreach ($dates_temp as $d) {
-            if (!isset($dates_checker[$d['d']->format('Y-m')]))
-            {
-                $dates_checker[] = $d['d']->format('Y-m');
-                $dates[] = $d['d'];
-            }
-        }
-
         return $this->render('blog.html.twig', [
             'articles' => $articles,
             'themes' => $m->getRepository(BlogTheme::class)->findAll(),
             'tags' => $m->getRepository(Tag::class)->findAll(),
-            'dates' => $dates,
+            'dates' => $this::getDates($m),
             'page' => $page,
             'lastpage' => $lastpage,
             'tag' => $tag,
@@ -135,18 +122,66 @@ class BlogController extends AbstractController
 
     // Route détail -------------------------------------------------------------------------
     #[Route('/blog/article/{slug}', name: 'blog-article')]
-    public function blog_article(EntityManagerInterface $m, string $slug): Response
+    public function blog_article(Request $r, EntityManagerInterface $m, string $slug): Response
     {
         $a = $m->getRepository(BlogArticle::class)->findOneBy(["titre_slug" => $slug]);
         if (empty($a)) 
         {
             throw new HttpException(404, "Slug non existant.");
         }
+        $comments = $m->getRepository(BlogCommentaire::class)->findAll(["article_id" => $a->getId()]);
+
+        // commentaires
+
+        $comment = new BlogCommentaire();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($r);
+
+        $msg = null;
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $comment->setArticle($a);
+
+                $m->persist($comment);
+                $m->flush();
+
+                $msg = 'Success!';
+            }
+            else {
+                $msg = 'Error!';
+            }
+        }
+
 
         return $this->render('blog-article.html.twig', [
             'a' => $a,
+            'comments' => $comments,
             'themes' => $m->getRepository(BlogTheme::class)->findAll(),
             'tags' => $m->getRepository(Tag::class)->findAll(),
+            'dates' => $this::getDates($m),
+            'form' => $form,
+            'msg' => $msg,
         ] + BaseController::getBase($m));
+    }
+
+    // ----------------------------------------------------------------
+    public function getDates(EntityManagerInterface $m) {
+        //On sort les dates de leurs arrays et on les filtres pour obtenir des mois uniques
+        $dates_temp = $m->createQuery(
+            'SELECT DISTINCT a.date as d
+            FROM App\Entity\BlogArticle a
+            ORDER BY a.date DESC'
+        )->getResult();
+        $dates = [];
+        $dates_checker = [];
+        foreach ($dates_temp as $d) {
+            if (!isset($dates_checker[$d['d']->format('Y-m')]))
+            {
+                $dates_checker[] = $d['d']->format('Y-m');
+                $dates[] = $d['d'];
+            }
+        }
+        return $dates;
     }
 }

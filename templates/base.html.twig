@@ -170,7 +170,7 @@
             <div class="menuflex">
                 <div class="menuwrapper"> 
                     <i class="fa-solid fa-at"></i>
-                    <a class="-cl-menu" href="{{ path('home') }}">Contact</a>
+                    <a class="-cl-menu" href="{{ path('contact') }}">Contact</a>
                 </div>
             </div>
 
@@ -187,6 +187,7 @@
         {% block body %}{% endblock %}
         </section>
 
+        {% block vnv %}
         <section class="veneznousvoir">
             <h1 class="-cl-orange">Un magasin d'informatique dans l'oise,</h1>
             <h1 class="-cl-blue -mrg-btm-3">au service des particuliers à NEUILLY EN THELLE</h1>
@@ -208,6 +209,8 @@
                 </div>
             </div>
         </section>
+        {% endblock %}
+        
         <footer class="footer">
             <div class="-flex-se">
                 <div>

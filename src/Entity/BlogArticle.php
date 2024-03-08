@@ -71,7 +71,6 @@ class BlogArticle
 
     public function __construct()
     {
-        $this->user_login = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->blogCommentaires = new ArrayCollection();
         $this->users = new ArrayCollection();
@@ -126,30 +125,6 @@ class BlogArticle
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, AdminUser>
-     */
-    public function getUserLogin(): Collection
-    {
-        return $this->user_login;
-    }
-
-    public function addUserLogin(AdminUser $userLogin): static
-    {
-        if (!$this->user_login->contains($userLogin)) {
-            $this->user_login->add($userLogin);
-        }
-
-        return $this;
-    }
-
-    public function removeUserLogin(AdminUser $userLogin): static
-    {
-        $this->user_login->removeElement($userLogin);
 
         return $this;
     }

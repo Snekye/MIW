@@ -34,6 +34,7 @@
         "symfony/twig-bundle": "6.4.*",
         "symfony/web-profiler-bundle": "7.0.*",
         "symfony/yaml": "6.4.*",
+        "tinymce/tinymce": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/string-extra": "^3.8",
         "twig/twig": "^2.12|^3.0",

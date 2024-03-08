@@ -22,7 +22,7 @@ class ErrorController extends AbstractController
 
         $code = $exception instanceof HttpException ? $exception->getStatusCode() : 500;
         if ($request->getPathInfo() == '/72b5c5eae7c155bb64db1e72e0aea98b') {
-            return $this->error(new Request(),$m,new HttpException('418','Quelque chose à boire ?'));
+            return $this->error(new Request(),$m,new HttpException(418,'Quelque chose à boire ?'));
         }
 
         switch ($code) {

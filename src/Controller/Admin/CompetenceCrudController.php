@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+use App\Admin\Field\TinyMCEField;
+
 class CompetenceCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -40,7 +42,7 @@ class CompetenceCrudController extends AbstractCrudController
             TextField::new('titre_slug')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            TextEditorField::new('contenu'),
+            TinyMCEField::new('contenu'),
             TextField::new('imageFile')
                 ->setFormType(VichImageType::class),
             AssociationField::new('_created')

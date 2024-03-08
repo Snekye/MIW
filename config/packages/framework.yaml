@@ -23,6 +23,11 @@ framework:
         default_path: '%kernel.project_dir%/translations'
         fallbacks:
             - 'en'
+    
+    assets:
+        packages:
+            bundles-assets:
+                base_path: '%kernel.project_dir%/vendor/tinymce/tinymce/'
 
 when@test:
     framework:

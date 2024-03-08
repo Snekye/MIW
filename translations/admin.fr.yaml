@@ -120,4 +120,8 @@ ea:
             date: "Date"
             title: "Titre"
             titleslug: "Titre slug"
-            content: "Contenu"        
+            content: "Contenu"
+
+vich_uploader:
+    form_label:
+        delete_confirm: "Supprimer l'image"

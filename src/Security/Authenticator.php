@@ -23,7 +23,10 @@ use App\Entity\AdminAccessLog;
 
 class Authenticator extends AbstractLoginFormAuthenticator
 {
-    public function __construct(private HttpClientInterface $client, ObjectManager $manager) 
+    private HttpClientInterface $http;
+    private ObjectManager $manager;
+
+    public function __construct(HttpClientInterface $client, ObjectManager $manager) 
     {
         $this->http = $client;
         $this->manager = $manager;

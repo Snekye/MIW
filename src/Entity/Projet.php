@@ -145,7 +145,7 @@ class Projet
 
 
     /**
-     * @return Collection<int, tag>
+     * @return Collection<int, Tag>
      */
     public function getTags(): Collection
     {

@@ -129,7 +129,6 @@ class BlogController extends AbstractController
         {
             throw new HttpException(404, "Slug non existant.");
         }
-        $comments = $m->getRepository(BlogCommentaire::class)->findAll(["article_id" => $a->getId()]);
 
         // commentaires
 
@@ -156,7 +155,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog-article.html.twig', [
             'a' => $a,
-            'comments' => $comments,
             'themes' => $m->getRepository(BlogTheme::class)->findAll(),
             'tags' => $m->getRepository(Tag::class)->findAll(),
             'dates' => $this::getDates($m),

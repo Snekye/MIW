@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
+use App\Admin\Field\TinyMCEField;
+
 class BlogCommentaireCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -37,7 +39,7 @@ class BlogCommentaireCrudController extends AbstractCrudController
         return [
             TextField::new('nom'),
             TextField::new('email'),
-            TextEditorField::new('contenu'),
+            TinyMCEField::new('contenu'),
             AssociationField::new('article'),
         ];
     }
@@ -45,6 +47,7 @@ class BlogCommentaireCrudController extends AbstractCrudController
     {
         return $actions
             ->remove(Crud::PAGE_INDEX,Action::NEW)
+            ->remove(Crud::PAGE_INDEX,Action::EDIT)
         ;
     }
 }

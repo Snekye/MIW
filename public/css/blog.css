@@ -5,7 +5,7 @@ h1 {
     margin-bottom: 1%;
 }
 .left {
-    width: 25%;
+    width: 30%;
     padding: 2% 0 2% 10%;
 }
 .left > div {
@@ -23,4 +23,10 @@ h1 {
 .article img {
     margin: 0 2% 0 0;
     align-self: start;
+}
+.commentaire {
+    margin: 2%;
+    padding: 2%;
+    border-radius: 5px;
+    background-color: var(--cl-lightgrey); 
 }

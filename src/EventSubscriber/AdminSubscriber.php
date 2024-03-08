@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Persistence\ObjectManager;
 
@@ -24,9 +25,9 @@ class AdminSubscriber implements EventSubscriberInterface
             BeforeEntityDeletedEvent::class => ['deleteLog']
         ];
     }
-    private $hasher;
-    private $tokenStorage;
-    private $manager;
+    private PasswordHasherInterface $hasher;
+    private TokenStorageInterface $tokenStorage;
+    private ObjectManager $manager;
 
     public function __construct(PasswordHasherFactoryInterface $factory, TokenStorageInterface $tokenStorage, ObjectManager $manager) 
     {
@@ -35,7 +36,7 @@ class AdminSubscriber implements EventSubscriberInterface
         $this->manager = $manager;
     }
 
-    public function createLog(BeforeEntityPersistedEvent $event)
+    public function createLog(BeforeEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
 
@@ -54,15 +55,14 @@ class AdminSubscriber implements EventSubscriberInterface
             $entity->setCreated($log);
         }
     }
-    public function updateLog(BeforeEntityUpdatedEvent $event)
+    public function updateLog(BeforeEntityUpdatedEvent $event): void
     {
         $entity = $event->getEntityInstance();
         
         if ($entity::class === AdminUser::class) { 
             $entity = $this::hashPassword($entity); 
         }
-
-        $entity = $event->getEntityInstance();
+        
         if (method_exists($entity::class,'setUpdated')) 
         {
             $user = $this->tokenStorage->getToken()->getUser();
@@ -75,7 +75,7 @@ class AdminSubscriber implements EventSubscriberInterface
             $entity->setUpdated($log);
         }
     }
-    public function deleteLog(BeforeEntityDeletedEvent $event)
+    public function deleteLog(BeforeEntityDeletedEvent $event): void
     {
         $entity = $event->getEntityInstance();
         $user = $this->tokenStorage->getToken()->getUser();
@@ -88,7 +88,8 @@ class AdminSubscriber implements EventSubscriberInterface
         $this->manager->persist($log);
     }
 
-    public function hashPassword(AdminUser $adminUser) {
+    public function hashPassword(AdminUser $adminUser): AdminUser 
+    {
         $adminUser->setPassword($this->hasher->hash($adminUser->getPassword()));
         return $adminUser;
     }

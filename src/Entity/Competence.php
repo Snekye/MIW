@@ -102,18 +102,9 @@ class Competence
         return $this;
     }
 
-    public function getImage(): string
-    {
-        return $this->image;
-    }
+    
+    
 
-    public function setImage(string $image): static
-    {
-        $this->image = new Image();
-        $this->image->setLien($image);
-
-        return $this;
-    }
 
     public function getCreated(): ?AdminLog
     {
@@ -141,7 +132,7 @@ class Competence
 
 
 
-public function setImageFile(?File $imageFile = null): void
+    public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 

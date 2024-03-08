@@ -15,6 +15,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+use App\Admin\Field\TinyMCEField;
+
 class NewsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -53,7 +55,7 @@ class NewsCrudController extends AbstractCrudController
             TextField::new('titre_slug','ea.news.label.titleslug')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
-            TextEditorField::new('contenu','ea.news.label.content'),
+            TinyMCEField::new('contenu','ea.news.label.content'),
             TextField::new('imageFile')
                 ->setFormType(VichImageType::class),
                 
@@ -65,5 +67,4 @@ class NewsCrudController extends AbstractCrudController
                 ->hideWhenUpdating(),
         ];
     }
-    
 }

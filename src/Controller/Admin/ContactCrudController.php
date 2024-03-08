@@ -16,6 +16,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+use App\Admin\Field\TinyMCEField;
+
 class ContactCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -52,7 +54,7 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('ville','ea.contact.label.city'),
             TextField::new('email','ea.contact.label.email'),
             TextField::new('tel','ea.contact.label.phone'),
-            TextEditorField::new('contenu','ea.contact.label.content'),
+            TinyMCEField::new('contenu','ea.contact.label.content'),
             BooleanField::new('_read','ea.contact.label.read'),
         ];
     }

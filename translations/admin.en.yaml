@@ -122,4 +122,9 @@ ea:
             titleslug: "Title slug"
             content: "Content"
 
+vich_uploader:
+    form_label:
+        delete_confirm: "Delete image"
+
+
     

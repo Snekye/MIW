@@ -100,18 +100,6 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNiveau(): ?int
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(int $niveau): static
-    {
-        $this->niveau = $niveau;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, AdminLog>
      */
@@ -154,7 +142,6 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->accesslogs->contains($accesslog)) {
             $this->accesslogs->add($accesslog);
-            $accesslog->setUserLogin($this);
         }
 
         return $this;
@@ -163,10 +150,6 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAccesslog(AdminAccessLog $accesslog): static
     {
         if ($this->accesslogs->removeElement($accesslog)) {
-            // set the owning side to null (unless already changed)
-            if ($accesslog->getUserLogin() === $this) {
-                $accesslog->setUserLogin(null);
-            }
         }
 
         return $this;
@@ -184,7 +167,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->blogArticles->contains($blogArticle)) {
             $this->blogArticles->add($blogArticle);
-            $blogArticle->addUserLogin($this);
+            $blogArticle->addUser($this);
         }
 
         return $this;
@@ -193,7 +176,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeBlogArticle(BlogArticle $blogArticle): static
     {
         if ($this->blogArticles->removeElement($blogArticle)) {
-            $blogArticle->removeUserLogin($this);
+            $blogArticle->removeUser($this);
         }
 
         return $this;

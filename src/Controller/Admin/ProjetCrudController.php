@@ -16,6 +16,8 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use App\Form\ImageType;
 use Doctrine\ORM\EntityManagerInterface;
 
+use App\Admin\Field\TinyMCEField;
+
 class ProjetCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -53,8 +55,8 @@ class ProjetCrudController extends AbstractCrudController
                     "Projet web" => "web",
                     "Projet print" => "print",
                 ]),
-            TextEditorField::new('description_courte'),
-            TextEditorField::new('description'),
+            TinyMCEField::new('description_courte'),
+            TinyMCEField::new('description'),
             CollectionField::new('images')
                 ->setEntryType(ImageType::class)
                 ->onlyOnForms(),

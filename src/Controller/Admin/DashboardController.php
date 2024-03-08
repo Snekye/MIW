@@ -127,7 +127,7 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('ea.dashboard.profile', 'fa fa-id-card', AdminUser::class)
                     ->setController(AdminUserProfileController::class)
                     ->setAction('edit')
-                    ->setEntityId($user->getId()),
+                    ->setEntityId($user->getUserIdentifier()),
             ]);
     }
 }
